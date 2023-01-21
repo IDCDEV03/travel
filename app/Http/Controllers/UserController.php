@@ -174,9 +174,8 @@ class UserController extends Controller
         'booking_status' => '2',
         'updated_at' => Carbon::now()
       ]);
-    return redirect()->route('booking_status')->with('cancel', "ยกเลิกการของเรียบร้อยแล้ว");
+    return redirect()->route('booking_status')->with('cancel', "ยกเลิกการจองเรียบร้อยแล้ว");
   }
-
 
   public function user_profile()
   {
