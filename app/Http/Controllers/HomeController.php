@@ -9,6 +9,26 @@ use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
+
+    public function home()
+    {
+        return view('home.index');
+    }
+
+    public function about_us()
+    {
+        return view('home.about-us');
+    }
+
+    public function contact()
+    {
+        return view('home.contact');
+    }
+    public function service()
+    {
+        return view('home.service');
+    }
+
     public function index() 
     {            
         return view('userPages.home');

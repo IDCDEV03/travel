@@ -12,9 +12,7 @@ use Illuminate\Support\Facades\DB;
 
 $controller_path = 'App\Http\Controllers';
 
-Route::get('/', function () {
-    return redirect()->route('login.show');
-})->name('/');
+Route::get('/', $controller_path . '\HomeController@home')->name('/');
 
 //Route Admin
 Route::get('/admin/list_package', $controller_path . '\AdminController@index')->name('list_package');
@@ -78,6 +76,12 @@ Route::get('/user/profile', $controller_path . '\UserController@user_profile')->
 Route::POST('/user/update_profile/{id}', $controller_path . '\UserController@user_profile_update')->name('user_profile_update');
 Route::get('/user/update_password', $controller_path . '\UserController@user_password')->name('user_password');
 Route::POST('/user/change_password', $controller_path . '\UserController@update_password')->name('update_password');
+
+
+//HOME_FRONT-END
+Route::get('/about-us', $controller_path . '\HomeController@about_us')->name('about_us.show');
+Route::get('/contact', $controller_path . '\HomeController@contact')->name('contact.show');
+Route::get('/service', $controller_path . '\HomeController@service')->name('service.show');
 
 //Route Register&Login
 Route::group(['namespace' => 'App\Http\Controllers'], function()
