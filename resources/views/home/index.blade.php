@@ -214,7 +214,6 @@
                             <div class="holiday_small_boxed">
                                 <a href="top-destinations-details.html">
                                     <img src="{{asset('assets_home/img/holiday-img/holiday-4.jpg')}}" alt="img">
-                                  
                                 </a>
                             </div>
                         </div>
