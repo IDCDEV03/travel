@@ -29,25 +29,20 @@
                         href="{{ url('userpages/book_package/' . Auth::id()) }}">
                         <div class="d-flex w-100 justify-content-between">
                             <h5 class="mb-1">สั่งจองแพ็คเกจทัวร์</h5>
-                        </div>
-                        <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus
-                            varius blandit.</p><small>Donec id elit non mi porta.</small>
-                    </a><a href="{{ route('booking_status') }}" class="list-group-item list-group-item-action flex-column align-items-start"
+                        </div>                      
+                    </a>
+                    <a href="{{ route('booking_status') }}" class="list-group-item list-group-item-action flex-column align-items-start"
                         href="javascript:void(0)">
                         <div class="d-flex w-100 justify-content-between">
                             <h5 class="mb-1">ตรวจสอบสถานะการจอง</h5>
-                      
                         </div>
-                        <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus
-                            varius blandit.</p><small class="text-muted">Donec id elit non mi porta.</small>
-                    </a><a class="list-group-item list-group-item-action flex-column align-items-start"
-                        href="javascript:void(0)">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">แจ้งชำระค่าบริการ</h5>
-                        </div>
-                        <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus
-                            varius blandit.</p><small class="text-muted">Donec id elit non mi porta.</small>
-                    </a></div>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start"
+                    href="javascript:void(0)">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">แก้ไขข้อมูลส่วนตัว</h5>
+                    </div>
+                </a>
             </div>
         </div>
     </div>

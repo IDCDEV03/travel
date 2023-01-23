@@ -53,6 +53,12 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label class="col-form-label pt-0">เบอร์โทรศัพท์</label>
+                                    <input class="form-control" name="user_phone" type="text" required
+                                        placeholder="ระบุเฉพาะตัวเลขเท่านั้น">
+                                </div>
+
+                                <div class="form-group">
                                     <label class="col-form-label">Password</label>
                                     <input class="form-control" type="password" name="password" required=""
                                         placeholder="รหัสผ่าน 6 ตัวอีกษรขึ้นไป" value="<?php echo e(old('password')); ?>">
