@@ -1,40 +1,15 @@
 <div class="page-header">
     <div class="header-wrapper row m-0">        
         <div class="header-logo-wrapper col-auto p-0">
-            <div class="logo-wrapper"><a href="<?php echo e(route('/')); ?>"><img class="img-fluid"
-                        src="<?php echo e(asset('assets/images/logo/logo.png')); ?>" alt=""></a></div>
+            <div class="logo-wrapper"><a href="<?php echo e(route('admin_index')); ?>"><img class="img-fluid"  src="<?php echo e(asset('assets/images/logo/logo.png')); ?>" alt="" ></a></div>
             <div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="align-center"></i>
             </div>
         </div>
         <div class="left-header col horizontal-wrapper ps-0">
             <ul class="horizontal-menu">
                 <li class="mega-menu outside">
-                    <a class="nav-link" href="#!"><i data-feather="layers"></i><span>Dashboard</span></a>
-                    <div class="mega-menu-container nav-submenu menu-to-be-close header-mega">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col mega-box">
-                                    <div class="mobile-title d-none">
-                                        <h5>Mega menu</h5>
-                                        <i data-feather="x"></i>
-                                    </div>
-                                    <div class="link-section icon">
-                                        <div>
-                                            <h6>Error Page</h6>
-                                        </div>
-                                        <ul>
-                                            <li><a href="<?php echo e(route('error-400')); ?>">Error page 400</a></li>
-                                            <li><a href="<?php echo e(route('error-401')); ?>">Error page 401</a></li>
-                                            <li><a href="<?php echo e(route('error-403')); ?>">Error page 403</a></li>
-                                            <li><a href="<?php echo e(route('error-404')); ?>">Error page 404</a></li>
-                                            <li><a href="<?php echo e(route('error-500')); ?>">Error page 500</a></li>
-                                            <li><a href="<?php echo e(route('error-503')); ?>">Error page 503</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <a class="nav-link" href="<?php echo e(route('admin_index')); ?>">
+                        <i data-feather="home"></i><span>หน้าหลักผู้ดูแลระบบ</span></a>             
                 </li>
             </ul>
         </div>
@@ -47,16 +22,16 @@
                             data-feather="maximize"></i></a></li>
                 <li class="profile-nav onhover-dropdown p-0 me-0">
                     <div class="media profile-media">
-                        <img class="b-r-10" src="<?php echo e(asset('assets/images/dashboard/profile.jpg')); ?>" alt="">
+                        
                         <div class="media-body">
                             <span><?php echo e(Auth::user()->member_name); ?></span>
                             <p class="mb-0 font-roboto">Admin <i class="middle fa fa-angle-down"></i></p>
                         </div>
                     </div>
                     <ul class="profile-dropdown onhover-show-div">
-                        <li><a href="#"><i data-feather="user"></i><span>Account </span></a></li>                 
+                                
                         <li><a href="#"><i data-feather="settings"></i><span>Settings</span></a></li>
-                        <li><a href="#"><i data-feather="log-in"> </i><span>Log Out</span></a></li>
+                        <li><a href="<?php echo e(route('logout.perform')); ?>"><i data-feather="log-in"> </i><span>Log Out</span></a></li>
                     </ul>
                 </li>
             </ul>

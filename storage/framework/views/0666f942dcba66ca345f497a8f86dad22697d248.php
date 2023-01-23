@@ -1,8 +1,8 @@
 <div class="sidebar-wrapper">
     <div>
         <div class="logo-wrapper">
-            <a href="<?php echo e(route('/')); ?>"><img class="img-fluid for-light" src="<?php echo e(asset('assets/images/logo/logo.png')); ?>"
-                    alt=""><img class="img-fluid for-dark" src="<?php echo e(asset('assets/images/logo/logo_dark.png')); ?>"
+            <a href="<?php echo e(route('admin_index')); ?>"><img class="img-fluid for-light" src="<?php echo e(asset('assets/images/logo/logo.png')); ?>" width="150px"
+                    alt=""><img class="img-fluid for-dark" src="<?php echo e(asset('assets/images/logo/logo_dark.png')); ?>" width="150px"
                     alt=""></a>
             <div class="back-btn"><i class="fa fa-angle-left"></i></div>
             <div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="grid"> </i></div>
@@ -14,7 +14,7 @@
             <div id="sidebar-menu">
                 <ul class="sidebar-links" id="simple-bar">
                     <li class="back-btn">
-                        <a href="<?php echo e(route('/')); ?>"><img class="img-fluid"
+                        <a href="<?php echo e(route('admin_index')); ?>"><img class="img-fluid"
                                 src="<?php echo e(asset('assets/images/logo/logo-icon.png')); ?>" alt=""></a>
                         <div class="mobile-back text-end"><span>Back</span><i class="fa fa-angle-right ps-2"
                                 aria-hidden="true"></i></div>
@@ -47,15 +47,9 @@
                             style="display: <?php echo e(request()->route()->getPrefix() == '/page-layouts'? 'block;': 'none;'); ?>">
                             <li><a href="<?php echo e(route('list_package')); ?>"
                                     class="<?php echo e(Route::currentRouteName() == 'box-layout' ? 'active' : ''); ?>">แพ็คเกจทัวร์</a>
-                            </li>
-                            <li><a href="<?php echo e(route('list_car')); ?>"
-                                    class="<?php echo e(Route::currentRouteName() == 'box-layout' ? 'active' : ''); ?>">ข้อมูลการจองรถ</a>
-                            </li>
+                            </li>            
                             <li>
                                 <a href="<?php echo e(route('bank')); ?>">ข้อมูลธนาคาร</a>
-                            </li>
-                            <li>
-                                <a href="">การแจ้งชำระเงิน</a>
                             </li>
                         </ul>
                     </li>
@@ -74,9 +68,7 @@
                             <li><a href="<?php echo e(route('admin.user_data')); ?>">ข้อมูลสมาชิก</a></li>
                             <li><a href="<?php echo e(route('booking_chk')); ?>"> ข้อมูลคำสั่งซื้อ</a></li>
                             <li><a href=""> รายงาน</a></li>
-                            <li>
-                                <a href="">เว็บบอร์ด</a>
-                            </li>
+                           
                         </ul>
                     </li>
 
