@@ -95,7 +95,7 @@
                 <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                     <div class="contact_boxed">
                         <h3>เพิ่มเพื่อนกับเราใน LINE</h3>
-                        <img src="<?php echo e(asset('assets_home/img/tour-guides/guide-2.png')); ?>" alt="img">
+                        <img src="<?php echo e(asset('assets_home/img/line.jpg')); ?>" width="350px" alt="img">
                     </div>
                 </div>
                              
