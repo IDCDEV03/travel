@@ -41,8 +41,9 @@
     <div class="tab-content" id="pills-clrtabContentsuccess">
         <div class="tab-pane fade show active" id="pills-clrhomesuccess" role="tabpanel"
             aria-labelledby="pills-clrhome-tabsuccess">
+      
             <p>
-            <form class="form theme-form">
+            <form class="form theme-form" method="POST" action="{{ route('admin.data_update', ['id' => request()->id]) }}">
                 @csrf
 
                 <div class="row">
@@ -90,7 +91,7 @@
             <div class="tab-pane fade" id="pills-clrprofilesuccess" role="tabpanel"
                 aria-labelledby="pills-clrprofile-tabsuccess">
                 <p>
-                    <form class="form theme-form" method="POST" action="#">
+                    <form class="form theme-form" method="POST" action="{{route('admin.update_password')}}">
                         @csrf
                     <div class="row">
                         <div class="col">

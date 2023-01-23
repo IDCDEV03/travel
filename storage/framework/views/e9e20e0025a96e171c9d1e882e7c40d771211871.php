@@ -19,7 +19,15 @@
 
                 <div class="card">                       
              
-                    <div class="card-body">                       
+                    <div class="card-body"> 
+                        
+                                                    
+            <?php if(session('success')): ?>
+            <div class="alert alert-success" role="alert">
+                <b><?php echo e(session('success')); ?></b>
+            </div>
+          <?php endif; ?>
+
                         <a href="<?php echo e(route('admin_setting_update', ['id' => Auth::user()->id])); ?>" class="btn btn-pill btn-outline-primary-2x" type="button"> แก้ไขข้อมูลผู้ดูแลระบบ </a>
  
                     </div>

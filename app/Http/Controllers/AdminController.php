@@ -8,12 +8,14 @@ use App\Models\member_booking_package;
 use App\Models\package_img;
 use App\Models\package_tour;
 use App\Models\ListCar;
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Illuminate\Console\View\Components\Alert as ComponentsAlert;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -472,4 +474,38 @@ class AdminController extends Controller
     ->get();
     return view('admin.setting_update',compact('admin_data'));
   }
+
+  public function data_update(Request $request, $id)
+  {
+    DB::table('users')
+      ->where('id', '=', $id)
+      ->update([
+        'username' => $request->username,
+        'member_name' => $request->member_name,
+        'email' => $request->email,
+        'updated_at' => Carbon::now()
+      ]);
+      return redirect()->route('admin_setting')->with('success', "แก้ไขข้อมูลเรียบร้อยแล้ว");
+  }
+
+  public function admin_update_password (Request $request)
+  {
+    $request->validate([
+      'old_password' => 'required',
+      'new_password' => 'required|confirmed',
+    ]);
+
+    #Match The Old Password
+    if (!Hash::check($request->old_password, auth()->user()->password)) {
+      return back()->with("error", "รหัสผ่านเก่าไม่ถูกต้อง!");
+    }
+
+    User::whereId(auth()->user()->id)->update([
+      'password' => Hash::make($request->new_password)
+    ]);
+    return redirect()->route('admin_setting')->with('success', "เปลี่ยนรหัสผ่านเรียบร้อยแล้ว");
+  }
+ 
+
+
 }
