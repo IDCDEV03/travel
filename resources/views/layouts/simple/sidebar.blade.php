@@ -74,7 +74,7 @@
 					<li class="sidebar-list">
 					<a href="{{ route('admin_setting') }}" class="sidebar-link sidebar-title">
 						<i data-feather="settings"></i>
-					ข้อมูลตั้งต้น</a>
+					ตั้งค่าข้อมูล</a>
 					</li>
 
                 </ul>

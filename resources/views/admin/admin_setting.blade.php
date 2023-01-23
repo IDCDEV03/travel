@@ -17,16 +17,10 @@
         <div class="row">
             <div class="col-sm-12">
 
-                <div class="card">   
-                    
-                    
-                    <div class="card-header">
-                        <h5>เกี่ยวกับแพ็คเกจทัวร์</h5>
-                    </div>
-
-                    <div class="card-body">
-                       
-                        <button class="btn btn-pill btn-outline-primary-2x" type="button" >ตั้งค่าเงื่อนไขทัวร์</button>
+                <div class="card">                       
+             
+                    <div class="card-body">                       
+                        <a href="{{ route('admin_setting_update', ['id' => Auth::user()->id]) }}" class="btn btn-pill btn-outline-primary-2x" type="button"> แก้ไขข้อมูลผู้ดูแลระบบ </a>
  
                     </div>
                 </div>

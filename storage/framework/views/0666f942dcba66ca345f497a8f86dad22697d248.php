@@ -7,7 +7,7 @@
             <div class="back-btn"><i class="fa fa-angle-left"></i></div>
             <div class="toggle-sidebar"><i class="status_toggle middle sidebar-toggle" data-feather="grid"> </i></div>
         </div>
-        <div class="logo-icon-wrapper"><a href="<?php echo e(route('/')); ?>"><img class="img-fluid"
+        <div class="logo-icon-wrapper"><a href="<?php echo e(route('admin_index')); ?>"><img class="img-fluid"
                     src="<?php echo e(asset('assets/images/logo/logo-icon.png')); ?>" alt=""></a></div>
         <nav class="sidebar-main">
             <div class="left-arrow" id="left-arrow"><i data-feather="arrow-left"></i></div>
@@ -75,7 +75,7 @@
 					<li class="sidebar-list">
 					<a href="<?php echo e(route('admin_setting')); ?>" class="sidebar-link sidebar-title">
 						<i data-feather="settings"></i>
-					ข้อมูลตั้งต้น</a>
+					ตั้งค่าข้อมูล</a>
 					</li>
 
                 </ul>

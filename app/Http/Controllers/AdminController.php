@@ -40,8 +40,8 @@ class AdminController extends Controller
   public function booking_chk()
   {
     $package_tour = DB::table('package_tours')
-    ->join('member_booking_packages', 'package_tours.package_id', '=','member_booking_packages.package_id')
-    ->get();
+      ->join('member_booking_packages', 'package_tours.package_id', '=', 'member_booking_packages.package_id')
+      ->get();
     return view('admin.booking_chk', compact('package_tour'));
   }
 
@@ -49,7 +49,7 @@ class AdminController extends Controller
   {
     $booking_user = DB::table('member_booking_packages')
       ->leftjoin('package_tours', 'member_booking_packages.package_id', '=', 'package_tours.package_id')
-      ->leftjoin('booking_quotations','member_booking_packages.booking_id', '=', 'booking_quotations.booking_id')      
+      ->leftjoin('booking_quotations', 'member_booking_packages.booking_id', '=', 'booking_quotations.booking_id')
       ->where('member_booking_packages.booking_id', '=', $id)
       ->get();
 
@@ -333,10 +333,10 @@ class AdminController extends Controller
       DB::table('member_booking_packages')
         ->where('booking_id', '=', $request->booking_id)
         ->update([
-        'booking_status' => '1',
-        'updated_at' => Carbon::now()      
-      ]);
-  
+          'booking_status' => '1',
+          'updated_at' => Carbon::now()
+        ]);
+
       return redirect()->route('booking_chk')->with('success', "ส่งใบเสนอราคาเรียบร้อยแล้ว");
     }
   }
@@ -413,11 +413,11 @@ class AdminController extends Controller
   public function payment_chk($id)
   {
     $user_payment = DB::table('user_payments')
-    ->leftjoin('booking_quotations','user_payments.quotation_id', '=', 'booking_quotations.quotation_id') 
-    ->leftjoin('package_tours', 'booking_quotations.package_id', '=','package_tours.package_id')
-    ->leftjoin('member_booking_packages','booking_quotations.booking_id', '=', 'member_booking_packages.booking_id')  
-    ->where('booking_quotations.booking_id','=',$id)
-    ->get() ;    
+      ->leftjoin('booking_quotations', 'user_payments.quotation_id', '=', 'booking_quotations.quotation_id')
+      ->leftjoin('package_tours', 'booking_quotations.package_id', '=', 'package_tours.package_id')
+      ->leftjoin('member_booking_packages', 'booking_quotations.booking_id', '=', 'member_booking_packages.booking_id')
+      ->where('booking_quotations.booking_id', '=', $id)
+      ->get();
     return view('admin.payment_chk', compact('user_payment'));
   }
 
@@ -429,40 +429,47 @@ class AdminController extends Controller
         'payment_status' => '2',
         'updated_at' => Carbon::now()
       ]);
-      DB::table('booking_quotations')
+    DB::table('booking_quotations')
       ->where('quotation_id', '=', $id)
       ->update([
         'quotation_status' => '2',
         'updated_at' => Carbon::now()
       ]);
-      DB::table('member_booking_packages')
+    DB::table('member_booking_packages')
       ->where('booking_id', '=', $bkid)
       ->update([
         'booking_status' => '5',
         'updated_at' => Carbon::now()
       ]);
-      return redirect()->route('booking_chk')->with('success', "ตรวจสอบยอดชำระเรียบร้อยแล้ว");
+    return redirect()->route('booking_chk')->with('success', "ตรวจสอบยอดชำระเรียบร้อยแล้ว");
   }
 
-public function user_data()
-{
-  $user_data = DB::table('users')
-  ->where('is_admin','=','0')
-  ->get();
-  return view('admin.user_data', compact('user_data'));
-}
+  public function user_data()
+  {
+    $user_data = DB::table('users')
+      ->where('is_admin', '=', '0')
+      ->get();
+    return view('admin.user_data', compact('user_data'));
+  }
 
-public function user_data_booking($id)
-{
-  $user_data_booking = DB::table('member_booking_packages')
-  ->join('package_tours','member_booking_packages.package_id','=','package_tours.package_id')
-  ->where('member_id','=',$id)
-  ->get();
+  public function user_data_booking($id)
+  {
+    $user_data_booking = DB::table('member_booking_packages')
+      ->join('package_tours', 'member_booking_packages.package_id', '=', 'package_tours.package_id')
+      ->where('member_id', '=', $id)
+      ->get();
 
-  $user_profile = DB::table('users')
-  ->where('id','=',$id)
-  ->get();
-  return view('admin.user_detail', compact('user_data_booking','user_profile'));
-}
+    $user_profile = DB::table('users')
+      ->where('id', '=', $id)
+      ->get();
+    return view('admin.user_detail', compact('user_data_booking', 'user_profile'));
+  }
 
+  public function setting_update($id)
+  {
+    $admin_data =DB::table('users')
+    ->where('id','=',$id)
+    ->get();
+    return view('admin.setting_update',compact('admin_data'));
+  }
 }

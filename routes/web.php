@@ -44,6 +44,7 @@ Route::post('/admin/update_img/{id}', $controller_path . '\AdminController@updat
 
 //admin_setting
 Route::get('/admin/setting', $controller_path . '\AdminController@admin_setting')->name('admin_setting');
+Route::get('/admin/setting_update/{id}', $controller_path .'\AdminController@setting_update')->name('admin_setting_update');
 
 //admin_ตรวจสอบยอดโอนชำระ
 Route::get('/admin/payment_chk/{id}', $controller_path . '\AdminController@payment_chk')->name('admin.payment_chk');
