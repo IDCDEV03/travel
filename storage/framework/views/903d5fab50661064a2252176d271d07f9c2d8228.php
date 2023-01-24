@@ -23,7 +23,14 @@
                     </div>
                 <?php endif; ?>
 
-                <div class="list-group"><a class="list-group-item list-group-item-action flex-column align-items-start "
+                <div class="list-group">
+                    <a class="list-group-item list-group-item-action flex-column align-items-start "
+                        href="<?php echo e(route('user.all_packages')); ?>">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">รายการแพ็คเกจทัวร์</h5>
+                        </div>                      
+                    </a>
+                    <a class="list-group-item list-group-item-action flex-column align-items-start "
                         href="<?php echo e(url('userpages/book_package/' . Auth::id())); ?>">
                         <div class="d-flex w-100 justify-content-between">
                             <h5 class="mb-1">สั่งจองแพ็คเกจทัวร์</h5>

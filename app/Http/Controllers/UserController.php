@@ -30,6 +30,17 @@ class UserController extends Controller
     return view('userpages.book_package', compact('package_all', 'users'));
   }
 
+  public function private_package($id)
+  {
+    $users = DB::table('users')
+      ->where('id', '=', $id)
+      ->get();
+    $package_all = DB::table('package_tours')
+      ->where('package_status', '=', '1')
+      ->get();
+    return view('userpages.private_package', compact('package_all', 'users'));
+  }
+
   public function insert_booking(Request $request)
   {
 
@@ -237,4 +248,14 @@ class UserController extends Controller
     ]);
     return back()->with("status", "เปลี่ยนรหัสผ่านเรียบร้อยแล้ว!");
   }
+
+  public function all_packages()
+  {
+    $all_packages = DB::table('package_tours')
+    ->where('package_status','=','1')
+    ->orderBy('created_at', 'desc')
+    ->get();
+    return view('userpages.all_packages', compact('all_packages'));
+  }
+
 }

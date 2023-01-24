@@ -63,6 +63,8 @@ Route::get('/admin/userbooking/{id}', $controller_path . '\AdminController@user_
 
 //User
 Route::get('/userpages/book_package/{id}', $controller_path . '\UserController@book_package')->name('book_package');
+Route::get('/user/private_package/{id}', $controller_path . '\UserController@private_package')->name('private_package');
+
 Route::post('/user/insert_booking', $controller_path . '\UserController@insert_booking')->name('insert_booking');
 Route::get('/userpages/booking_status', $controller_path . '\UserController@booking_status')->name('booking_status');
 
@@ -72,6 +74,8 @@ Route::get('/user/quotation/{id}', $controller_path . '\UserController@user_quot
 Route::get('/user/payment/{id}', $controller_path . '\UserController@user_payment')->name('user_payment');
 
 Route::post('/user/add_payment', $controller_path . '\UserController@add_payment')->name('user_payment');
+//User_ลิสต์แพ็คเกจ
+Route::get('/user/all_packages', $controller_path . '\UserController@all_packages')->name('user.all_packages');
 
 //user_invoice
 Route::get('/user/invoice/{id}', $controller_path . '\UserController@user_invoice')->name('user_invoice');
