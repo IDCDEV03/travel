@@ -15,6 +15,13 @@
             <div>
                <div><a class="logo" href="<?php echo e(route('index')); ?>"><img class="img-fluid for-light" src="<?php echo e(asset('assets/images/logo/login.png')); ?>" alt="looginpage"><img class="img-fluid for-dark" src="<?php echo e(asset('assets/images/logo/logo_dark.png')); ?>" alt="looginpage"></a></div>
                <div class="login-main">
+
+                  <?php if(session('error')): ?>
+                  <div class="alert alert-error" role="alert">
+                      <b><?php echo e(session('error')); ?></b>
+                  </div>
+                   <?php endif; ?>
+
                   <!--form_begin--->
                   <form class="theme-form" method="POST" action="<?php echo e(route('login.perform')); ?>">
                      <?php echo e(csrf_field()); ?>

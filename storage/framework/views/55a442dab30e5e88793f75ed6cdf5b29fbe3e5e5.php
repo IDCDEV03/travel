@@ -73,7 +73,7 @@
                             </span>
                             <?php elseif($row->booking_status == '5'): ?>
                             <span class="badge bg-success f-w-100">
-                                ตรวจสอบการชำระเงินเรียบร้อย
+                                ดำเนินการเรียบร้อย
                             </span>
                             <?php endif; ?>
                                              

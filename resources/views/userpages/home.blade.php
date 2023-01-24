@@ -37,7 +37,7 @@
                             <h5 class="mb-1">ตรวจสอบสถานะการจอง</h5>
                         </div>
                     </a>
-                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start"
+                    <a href="{{route('user_profile')}}" class="list-group-item list-group-item-action flex-column align-items-start"
                     href="javascript:void(0)">
                     <div class="d-flex w-100 justify-content-between">
                         <h5 class="mb-1">แก้ไขข้อมูลส่วนตัว</h5>

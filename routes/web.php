@@ -9,11 +9,15 @@ use Illuminate\Foundation\Application;
 use Illuminate\Routing\Route as RoutingRoute;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 $controller_path = 'App\Http\Controllers';
 
+
 Route::get('/', $controller_path . '\HomeController@home')->name('/');
 
+Route::group(['middleware' => ['is_admin']], function() {
+$controller_path = 'App\Http\Controllers';
 //Route Admin
 Route::get('/admin/list_package', $controller_path . '\AdminController@index')->name('list_package');
 Route::get('/admin/add_package', $controller_path . '\AdminController@add_package')->name('add_package');
@@ -55,7 +59,7 @@ Route::get('/admin/update_payment/{id}/{bkid}', $controller_path . '\AdminContro
 //admin_userdata
 Route::get('/admin/userdata', $controller_path . '\AdminController@user_data')->name('admin.user_data');
 Route::get('/admin/userbooking/{id}', $controller_path . '\AdminController@user_data_booking')->name('admin.user_data_booking');
-
+});
 
 //User
 Route::get('/userpages/book_package/{id}', $controller_path . '\UserController@book_package')->name('book_package');

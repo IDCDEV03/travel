@@ -33,8 +33,8 @@
                     </div>
                     <ul class="profile-dropdown onhover-show-div">
                             
-                        <li><a href="{{route('user_profile')}}"><i data-feather="settings"></i><span>Settings</span></a></li>
-                        <li><a href="{{route('logout.perform')}}"><i data-feather="log-in"> </i><span>Log Out</span></a></li>
+                        <li><a href="{{route('user_profile')}}"><i data-feather="settings"></i><span>ตั้งค่า</span></a></li>
+                        <li><a href="{{route('logout.perform')}}"><i data-feather="log-out"> </i><span>ออกจากระบบ</span></a></li>
                     </ul>
                 </li>
             </ul>

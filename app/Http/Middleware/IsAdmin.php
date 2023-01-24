@@ -20,7 +20,6 @@ class IsAdmin
         {
             return $next($request);
         }
-
-        return redirect('home')->with('error', 'เฉพาะผู้ดูแลระบบเท่านั้น');
+        return redirect()->route('login.show')->with('error', 'เฉพาะผู้ดูแลระบบเท่านั้น');
     }
 }

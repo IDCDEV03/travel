@@ -15,6 +15,13 @@
             <div>
                <div><a class="logo" href="{{ route('index') }}"><img class="img-fluid for-light" src="{{asset('assets/images/logo/login.png')}}" alt="looginpage"><img class="img-fluid for-dark" src="{{asset('assets/images/logo/logo_dark.png')}}" alt="looginpage"></a></div>
                <div class="login-main">
+
+                  @if (session('error'))
+                  <div class="alert alert-error" role="alert">
+                      <b>{{ session('error') }}</b>
+                  </div>
+                   @endif
+
                   <!--form_begin--->
                   <form class="theme-form" method="POST" action="{{ route('login.perform') }}">
                      {{ csrf_field() }}

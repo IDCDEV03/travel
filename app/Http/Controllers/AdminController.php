@@ -43,6 +43,7 @@ class AdminController extends Controller
   {
     $package_tour = DB::table('package_tours')
       ->join('member_booking_packages', 'package_tours.package_id', '=', 'member_booking_packages.package_id')
+      ->orderBy('member_booking_packages.created_at', 'desc')
       ->get();
     return view('admin.booking_chk', compact('package_tour'));
   }
