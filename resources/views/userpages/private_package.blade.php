@@ -31,7 +31,7 @@
                 </div>
               </div>
             </div>
-@foreach ($users as $row)
+    @foreach ($users as $row)
               <div class="row">
                 <div class="col">
                   <div class="mb-3">
@@ -44,7 +44,7 @@
                   </div>
                 </div>
               </div>
-@endforeach
+    @endforeach
               <div class="row">
                 <div class="col">
                   <div class="mb-3">
@@ -134,7 +134,7 @@
             <input class="btn btn-light" type="reset" value="ยกเลิก">
           </div>
         </form>
-      </div>
+     
 		
 	
 	</div>

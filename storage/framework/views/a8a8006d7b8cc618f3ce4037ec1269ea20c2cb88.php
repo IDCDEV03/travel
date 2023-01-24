@@ -29,7 +29,7 @@
                 </div>
               </div>
             </div>
-<?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+    <?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
               <div class="row">
                 <div class="col">
                   <div class="mb-3">
@@ -42,7 +42,7 @@
                   </div>
                 </div>
               </div>
-<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
               <div class="row">
                 <div class="col">
                   <div class="mb-3">
@@ -132,7 +132,7 @@
             <input class="btn btn-light" type="reset" value="ยกเลิก">
           </div>
         </form>
-      </div>
+     
 		
 	
 	</div>

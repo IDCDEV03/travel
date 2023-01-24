@@ -132,7 +132,7 @@
             <input class="btn btn-light" type="reset" value="ยกเลิก">
           </div>
         </form>
-      </div>
+    
 		
 	
 	</div>
