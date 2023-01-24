@@ -50,7 +50,17 @@ class UserController extends Controller
       'booking_status' => '0',
       'created_at' => Carbon::now()
     ]);
+
+    $this->booking_mail($request->member_id);
+
     return redirect()->route('userPages.home')->with('success', "บันทึกข้อมูลการสั่งจองเรียบร้อยแล้ว กรุณารอเจ้าหน้าที่ตรวจสอบ");
+  }
+
+  public function booking_mail ($id)
+  {
+    $user_email = User::find($id);  
+    $email = $user_email->email; 
+    Mail::to($email)->send(new BookingConfirm($user_email));
   }
 
   public function booking_status()
@@ -60,6 +70,7 @@ class UserController extends Controller
     $list_booking = DB::table('member_booking_packages')
       ->join('package_tours', 'member_booking_packages.package_id', '=', 'package_tours.package_id')
       ->where('member_booking_packages.member_id', '=', $user_id)
+      ->orderBy('member_booking_packages.created_at', 'desc')
       ->get();
     return view('userpages.booking_status', compact('list_booking'));
   }

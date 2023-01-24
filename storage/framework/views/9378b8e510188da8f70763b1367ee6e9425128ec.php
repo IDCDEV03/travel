@@ -38,7 +38,7 @@
                     </label>
                     <input class="form-control" type="email" 
                     placeholder="กรุณาระบุอีเมลสำหรับการติดต่อรับใบเสนอราคา"
-                    name="member_email" value="<?php echo e($row->email); ?>" required>
+                    name="member_email" value="<?php echo e($row->email); ?>" readonly>
                   </div>
                 </div>
               </div>

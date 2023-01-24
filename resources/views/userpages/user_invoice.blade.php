@@ -27,7 +27,7 @@ div {
 }
 
 .fs-15 {
-  font-size: 15px;
+  font-size: 16px;
 }
 .fs-18 {
   font-size: 18px;
@@ -89,9 +89,9 @@ div {
                             <tr>                          
                               <td>
                                 <img class="media-object img-60"
-                            src="{{ asset('assets/images/other-images/logo.png') }}"
-                            alt="">
-                             <span class="fs-20"><strong>ห้างหุ้นส่วนจำกัด ธัญวรัตม์ ทราเวล </strong> </span>
+                            src="{{ asset('assets/images/logo/logo.png') }}"
+                            alt="" width="120px"><br>
+                             <span class="fs-15"><strong>ห้างหุ้นส่วนจำกัด เอส แอนด์ พี อินเตอร์เนชั่นแนลเซอร์วิส</strong> </span>
                               </td>
                               <td>
                                 <h3>ใบจองแพ็คเกจ </h3>
@@ -102,9 +102,9 @@ div {
                             <tr>                        
                               <td>
                                 <span>
-                                 โทร. 081-2616178</span>
+                                 โทร. 093-545-9009</span>
                               <br>
-                             <p> ที่อยู่ : 444/11 หมู่ที่ 6 ซอยบ้านเดื่อ ต.หมากแข้ง <br>อ.เมือง จ.อุดรธานี 41000
+                             <p> ที่อยู่ : 8/4 ม.1 ถ.หน้าสนามบินนานาชาติอุดรธานี <br>อ.เมือง จ.อุดรธานี 41000
                           </p>  
                               </td>  
                               <td>
@@ -139,7 +139,7 @@ div {
                                 <h4 class="media-heading">{{ auth()->user()->member_name }}</h4>
                                 <p>
                                     {{$item->member_email}} 
-                                    <br><span>555-555-5555</span></p>
+                                    <br><span>081-555-555</span></p>
                               </div>
                             </div>
                           </div>                      

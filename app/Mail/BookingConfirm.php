@@ -28,6 +28,8 @@ class BookingConfirm extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        return $this->subject('ได้รับข้อมูลการสั่งจองเรียบร้อยแล้ว')
+        ->view('userpages.booking_mail');
+    
     }
 }

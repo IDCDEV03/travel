@@ -37,15 +37,15 @@
             <div class="col-sm-6">
                 <div class="media">
                     <div class="media-left"><img class="media-object img-60"
-                            src="<?php echo e(asset('assets/images/other-images/logo.png')); ?>"
+                            src="<?php echo e(asset('assets/images/logo/logo.png')); ?>"
                             alt=""></div>
                     <div class="media-body m-l-20 text-right">
-                        <h4 class="media-heading">ห้างหุ้นส่วนจำกัด ธัญวรัตม์ ทราเวล</h4>
-                        <p>hello@Cuba.in<br>
+                        <h4 class="media-heading">ห้างหุ้นส่วนจำกัด เอส แอนด์ พี อินเตอร์เนชั่นแนลเซอร์วิส</h4>
+                        <p>sp.tour.ud@gmail.com<br>
                             <span><i class="fa fa-phone-square"></i>
-                                081-2616178</span>
+                                093-545-9009</span>
                             <br>
-                            <i class="fa fa-briefcase"></i> ที่อยู่ : 444/11 หมู่ที่ 6 ซอยบ้านเดื่อ ต.หมากแข้ง อ.เมือง จ.อุดรธานี 41000
+                            <i class="fa fa-briefcase"></i> ที่อยู่ : 8/4 ม.1 ถ.หน้าสนามบินนานาชาติอุดรธานี อ.เมือง จ.อุดรธานี 41000
                         </p>
                     </div>
                 </div>
@@ -87,7 +87,7 @@ echo $end;
             <h4 class="media-heading"><?php echo e(auth()->user()->member_name); ?></h4>
             <p>
                 <?php echo e($item->member_email); ?> 
-                <br><span>555-555-5555</span></p>
+                <br><span>081-555-555</span></p>
         </div>
     </div>
 </div>
