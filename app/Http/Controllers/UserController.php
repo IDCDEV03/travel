@@ -19,13 +19,13 @@ use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
-  public function book_package($id)
+  public function book_package($id,$pkid)
   {
     $users = DB::table('users')
       ->where('id', '=', $id)
       ->get();
     $package_all = DB::table('package_tours')
-      ->where('package_status', '=', '1')
+      ->where('package_id', '=', $pkid)
       ->get();
     return view('userpages.book_package', compact('package_all', 'users'));
   }
@@ -52,7 +52,7 @@ class UserController extends Controller
       'member_id' => $request->member_id,
       'member_name' => $request->member_name,
       'member_email' => $request->member_email,
-      'package_id' => $request->package_name,
+      'package_id' => $request->package_id,
       'number_of_travel' => $request->number_of_travel,
       'date_start' => $request->date_start,
       'date_end' => $request->date_end,

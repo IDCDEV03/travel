@@ -11,6 +11,14 @@
 
 @section('content')
 <div class="container-fluid">
+  @foreach ($package_all as $item)
+  <div class="card">
+    <div class="card-body">
+      <h4>{{ $item->package_name }}</h4>
+   {!! $item->package_detail !!}
+    </div>
+  </div>
+@endforeach
 	
 	<div class="card">
         <div class="card-header">
@@ -45,33 +53,19 @@
                 </div>
               </div>
 @endforeach
+@foreach ($package_all as $item)
               <div class="row">
                 <div class="col">
                   <div class="mb-3">
                     <label class="form-label">แพ็คเกจที่ต้องการจอง
                       <span class="text-danger">*</span> 
                     </label>
-                    <select class="js-example-basic-single col-sm-12 " name="package_name">
-                      <option value="" disabled selected>เลือกแพ็คเกจที่ท่านสนใจ</option>
-                      <optgroup label="ในประเทศ">                        
-                        @foreach ($package_all as $item)
-                        @if($item->package_type == '1')
-                        <option value="{{ $item->package_id }}">{{ $item->package_name }}</option>
-                        @endif
-                        @endforeach
-                      </optgroup>
-                      <optgroup label="ต่างประเทศ">
-                        @foreach ($package_all as $item)
-                        @if($item->package_type == '2')
-                        <option value="{{ $item->package_id }}">{{ $item->package_name }}</option>
-                        @endif
-                        @endforeach
-                      </optgroup>
-                    </select>
+                    <input type="hidden" value="{{request()->pkid}}" name="package_id">
+                    <input class="form-control" value="{{ $item->package_name }}" readonly>
                   </div>
                 </div>
               </div>
-
+@endforeach
 
               <div class="row">
                 <div class="col">

@@ -62,7 +62,8 @@ Route::get('/admin/userbooking/{id}', $controller_path . '\AdminController@user_
 });
 
 //User
-Route::get('/userpages/book_package/{id}', $controller_path . '\UserController@book_package')->name('book_package');
+Route::get('/userpages/book_package/{id}/package/{pkid}', $controller_path . '\UserController@book_package')->name('book_package');
+
 Route::get('/user/private_package/{id}', $controller_path . '\UserController@private_package')->name('private_package');
 
 Route::post('/user/insert_booking', $controller_path . '\UserController@insert_booking')->name('insert_booking');

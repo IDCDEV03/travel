@@ -70,7 +70,8 @@
                                              <br>
                                                 <div class="product-qnty">
                                                     <div class="addcart-btn">
-                                                <a class="btn btn-primary" type="button">สั่งจองแพ็คเกจนี้</a>
+                                                <a
+                                                href="<?php echo e(route('book_package',['id'=>Auth::user()->id,'pkid'=>$row->package_id])); ?>" class="btn btn-primary" type="button">สั่งจองแพ็คเกจนี้</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -83,7 +84,11 @@
                         </div>
 
                         <div class="product-details">                         
-                            <h4><?php echo e($row->package_name); ?></h4>
+                            <a href="#" data-bs-toggle="modal"
+                            data-bs-target="#Modal_<?php echo e($row->package_id); ?>">
+                            <h4>
+                                <?php echo e($row->package_name); ?></h4>
+                            </a>
                             <p><?php echo e($row->package_total_day); ?> / <?php echo e($row->package_place); ?></p>
                             <div class="product-price"><?php echo e(number_format($row->package_price)); ?>.-
                                 

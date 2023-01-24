@@ -72,7 +72,8 @@
                                              <br>
                                                 <div class="product-qnty">
                                                     <div class="addcart-btn">
-                                                <a class="btn btn-primary" type="button">สั่งจองแพ็คเกจนี้</a>
+                                                <a
+                                                href="{{route('book_package',['id'=>Auth::user()->id,'pkid'=>$row->package_id]);}}" class="btn btn-primary" type="button">สั่งจองแพ็คเกจนี้</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -85,7 +86,11 @@
                         </div>
 
                         <div class="product-details">                         
-                            <h4>{{$row->package_name}}</h4>
+                            <a href="#" data-bs-toggle="modal"
+                            data-bs-target="#Modal_{{$row->package_id}}">
+                            <h4>
+                                {{$row->package_name}}</h4>
+                            </a>
                             <p>{{$row->package_total_day}} / {{$row->package_place}}</p>
                             <div class="product-price">{{number_format($row->package_price)}}.-
                                 

@@ -9,6 +9,15 @@
 
 <?php $__env->startSection('content'); ?>
 <div class="container-fluid">
+  <?php $__currentLoopData = $package_all; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+  <div class="card">
+    <div class="card-body">
+      <h4><?php echo e($item->package_name); ?></h4>
+   <?php echo $item->package_detail; ?>
+
+    </div>
+  </div>
+<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 	
 	<div class="card">
         <div class="card-header">
@@ -43,33 +52,19 @@
                 </div>
               </div>
 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+<?php $__currentLoopData = $package_all; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
               <div class="row">
                 <div class="col">
                   <div class="mb-3">
                     <label class="form-label">แพ็คเกจที่ต้องการจอง
                       <span class="text-danger">*</span> 
                     </label>
-                    <select class="js-example-basic-single col-sm-12 " name="package_name">
-                      <option value="" disabled selected>เลือกแพ็คเกจที่ท่านสนใจ</option>
-                      <optgroup label="ในประเทศ">                        
-                        <?php $__currentLoopData = $package_all; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <?php if($item->package_type == '1'): ?>
-                        <option value="<?php echo e($item->package_id); ?>"><?php echo e($item->package_name); ?></option>
-                        <?php endif; ?>
-                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                      </optgroup>
-                      <optgroup label="ต่างประเทศ">
-                        <?php $__currentLoopData = $package_all; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <?php if($item->package_type == '2'): ?>
-                        <option value="<?php echo e($item->package_id); ?>"><?php echo e($item->package_name); ?></option>
-                        <?php endif; ?>
-                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                      </optgroup>
-                    </select>
+                    <input type="hidden" value="<?php echo e(request()->pkid); ?>" name="package_id">
+                    <input class="form-control" value="<?php echo e($item->package_name); ?>" readonly>
                   </div>
                 </div>
               </div>
-
+<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
               <div class="row">
                 <div class="col">
