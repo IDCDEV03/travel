@@ -40,6 +40,9 @@
 							<div class="according-menu"><i class="fa fa-angle-<?php echo e(request()->route()->getPrefix() == '/page-layouts' ? 'down' : 'right'); ?>"></i></div>
 						</a>
 	                    <ul class="sidebar-submenu" style="display: <?php echo e(request()->route()->getPrefix() == '/page-layouts' ? 'block;' : 'none;'); ?>">
+							<li>
+								<a href="<?php echo e(route('user.all_packages')); ?>" >รายการแพ็คเกจทัวร์</a>
+							</li>  
                           <li><a href="<?php echo e(url('userpages/book_package/'.Auth::user()->id)); ?>" class="<?php echo e(Route::currentRouteName() == 'box-layout' ? 'active' : ''); ?>">สั่งจองแพ็คเกจทัวร์</a></li>  
 						  
 						  <li><a href="<?php echo e(route('booking_status')); ?>" class="<?php echo e(Route::currentRouteName() == 'box-layout' ? 'active' : ''); ?>">ตรวจสอบสถานะการจอง</a></li>   

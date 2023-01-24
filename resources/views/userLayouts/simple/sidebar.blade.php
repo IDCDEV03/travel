@@ -39,6 +39,9 @@
 							<div class="according-menu"><i class="fa fa-angle-{{ request()->route()->getPrefix() == '/page-layouts' ? 'down' : 'right' }}"></i></div>
 						</a>
 	                    <ul class="sidebar-submenu" style="display: {{ request()->route()->getPrefix() == '/page-layouts' ? 'block;' : 'none;' }}">
+							<li>
+								<a href="{{ route('user.all_packages')}}" >รายการแพ็คเกจทัวร์</a>
+							</li>  
                           <li><a href="{{ url('userpages/book_package/'.Auth::user()->id) }}" class="{{ Route::currentRouteName() == 'box-layout' ? 'active' : '' }}">สั่งจองแพ็คเกจทัวร์</a></li>  
 						  
 						  <li><a href="{{ route('booking_status') }}" class="{{ Route::currentRouteName() == 'box-layout' ? 'active' : '' }}">ตรวจสอบสถานะการจอง</a></li>   

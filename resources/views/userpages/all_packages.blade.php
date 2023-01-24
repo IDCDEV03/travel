@@ -72,7 +72,7 @@
                                              <br>
                                                 <div class="product-qnty">
                                                     <div class="addcart-btn">
-                                                <button class="btn btn-primary" type="button">สั่งจองแพ็คเกจนี้</button>
+                                                <a class="btn btn-primary" type="button">สั่งจองแพ็คเกจนี้</a>
                                                     </div>
                                                 </div>
                                             </div>

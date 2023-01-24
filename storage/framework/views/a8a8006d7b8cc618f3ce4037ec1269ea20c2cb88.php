@@ -12,7 +12,7 @@
 	
 	<div class="card">
         <div class="card-header">
-          <h5>สั่งจองแพ็คเกจทัวร์</h5>
+          <h5>สั่งจองแพ็คเกจทัวร์ส่วนตัว</h5>
         </div>
 
         <form class="form needs-validation" method="POST" action="<?php echo e(route('insert_booking')); ?>">
