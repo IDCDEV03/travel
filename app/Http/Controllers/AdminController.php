@@ -320,10 +320,7 @@ class AdminController extends Controller
       ]);
       $package_file->move($upload_location, $package_file_name);
       return redirect()->route('booking_chk')->with('success', "ส่งใบเสนอราคาเรียบร้อยแล้ว");
-     // $user_id = DB::table('member_booking_packages')
-     // ->where('booking_id', '=', $request->booking_id)
-     // ->get();
-     // $this->send_quotation($user_id->member_id);
+      $this->send_quotation($request->email);
     } else {
 
       DB::table('booking_quotations')->insert([
@@ -344,22 +341,16 @@ class AdminController extends Controller
           'booking_status' => '1',
           'updated_at' => Carbon::now()
         ]);
-
-      return redirect()->route('booking_chk')->with('success', "ส่งใบเสนอราคาเรียบร้อยแล้ว");
-     // $user_id = DB::table('member_booking_packages')
-     // ->where('booking_id', '=', $request->booking_id)
-     // ->get();
-     // $this->send_quotation($user_id->member_id);
+      $this->send_quotation($request->email);
+      return redirect()->route('booking_chk')->with('success', "ส่งใบเสนอราคาเรียบร้อยแล้ว");      
     }
-   
-  }
+   }
 
-  //public function send_quotation($id)
-  //{
-  //  $user_email = User::find($id);  
-  //  $email = $user_email->email; 
-  //  Mail::to($email)->send(new QuotationSend($user_email));
-  //}
+  public function send_quotation($id)
+  {
+    $email = $id;
+    Mail::to($email)->send(new QuotationSend($id));
+  }
 
   public function list_car()
   {

@@ -121,7 +121,7 @@
                                 <?php echo csrf_field(); ?>
                                 <input type="hidden" name="booking_id" value="<?php echo e(request()->id); ?>">
                                 <input type="hidden" name="package_id" value="<?php echo e($item->package_id); ?>">
-
+                                <input type="hidden" name="email" value="<?php echo e($item->member_email); ?>">
 
                                 <div class="mb-3 row">
                                     <label class="col-sm-3 col-form-label pt-0">แพ็คเกจที่สั่งจอง</label>
