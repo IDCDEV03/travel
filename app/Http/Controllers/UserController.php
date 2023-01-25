@@ -74,6 +74,8 @@ class UserController extends Controller
     Mail::to($email)->send(new BookingConfirm($user_email));
   }
 
+  
+
   public function booking_status()
   {
     $user_id = Auth::user()->id;

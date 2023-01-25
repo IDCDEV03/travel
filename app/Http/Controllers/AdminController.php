@@ -16,6 +16,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use App\Mail\QuotationSend;
+use Illuminate\Support\Facades\Mail;
 
 class AdminController extends Controller
 {
@@ -41,8 +43,8 @@ class AdminController extends Controller
 
   public function booking_chk()
   {
-    $package_tour = DB::table('package_tours')
-      ->join('member_booking_packages', 'package_tours.package_id', '=', 'member_booking_packages.package_id')
+    $package_tour = DB::table('member_booking_packages')
+      ->join('package_tours', 'member_booking_packages.package_id', '=', 'package_tours.package_id')
       ->orderBy('member_booking_packages.created_at', 'desc')
       ->get();
     return view('admin.booking_chk', compact('package_tour'));
@@ -51,8 +53,7 @@ class AdminController extends Controller
   public function booking_cf($id)
   {
     $booking_user = DB::table('member_booking_packages')
-      ->leftjoin('package_tours', 'member_booking_packages.package_id', '=', 'package_tours.package_id')
-      ->leftjoin('booking_quotations', 'member_booking_packages.booking_id', '=', 'booking_quotations.booking_id')
+      ->join('package_tours', 'member_booking_packages.package_id', '=', 'package_tours.package_id')
       ->where('member_booking_packages.booking_id', '=', $id)
       ->get();
 
@@ -319,6 +320,10 @@ class AdminController extends Controller
       ]);
       $package_file->move($upload_location, $package_file_name);
       return redirect()->route('booking_chk')->with('success', "ส่งใบเสนอราคาเรียบร้อยแล้ว");
+     // $user_id = DB::table('member_booking_packages')
+     // ->where('booking_id', '=', $request->booking_id)
+     // ->get();
+     // $this->send_quotation($user_id->member_id);
     } else {
 
       DB::table('booking_quotations')->insert([
@@ -341,8 +346,20 @@ class AdminController extends Controller
         ]);
 
       return redirect()->route('booking_chk')->with('success', "ส่งใบเสนอราคาเรียบร้อยแล้ว");
+     // $user_id = DB::table('member_booking_packages')
+     // ->where('booking_id', '=', $request->booking_id)
+     // ->get();
+     // $this->send_quotation($user_id->member_id);
     }
+   
   }
+
+  //public function send_quotation($id)
+  //{
+  //  $user_email = User::find($id);  
+  //  $email = $user_email->email; 
+  //  Mail::to($email)->send(new QuotationSend($user_email));
+  //}
 
   public function list_car()
   {

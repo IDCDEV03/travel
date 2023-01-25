@@ -31,6 +31,7 @@
                         </div>
                         <div class="product-price">
                             ผู้สั่งจอง : {{ $item->member_name }}
+                           
                         </div>
                         <hr>
                         <div>
@@ -110,7 +111,7 @@
                 @if ($item->booking_status == '0')
                     <div class="card">
                         <div class="card-header b-t-secondary">
-                            <h5>ส่งใบเสนอราคา</h5>
+                            <h5>ส่งใบเสนอราคา </h5>
                         </div>
                         <div class="card-body">
                             <form class="needs-validation" action="{{ route('admin.quotation', ['id' => request()->id]) }}"

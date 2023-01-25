@@ -32,6 +32,7 @@
                         <div class="product-price">
                             ผู้สั่งจอง : <?php echo e($item->member_name); ?>
 
+                           
                         </div>
                         <hr>
                         <div>
@@ -112,7 +113,7 @@
                 <?php if($item->booking_status == '0'): ?>
                     <div class="card">
                         <div class="card-header b-t-secondary">
-                            <h5>ส่งใบเสนอราคา</h5>
+                            <h5>ส่งใบเสนอราคา </h5>
                         </div>
                         <div class="card-body">
                             <form class="needs-validation" action="<?php echo e(route('admin.quotation', ['id' => request()->id])); ?>"
