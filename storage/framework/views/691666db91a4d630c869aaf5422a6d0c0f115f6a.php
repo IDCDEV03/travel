@@ -25,11 +25,7 @@
             </div>
 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>   
             <div class="card-body">
-                <div align="right">
-                <a href="#" class="btn btn-secondary" type="button">
-                    <i class="fa fa-refresh"></i> รีเซตรหัสผ่าน</a>
-                </div>
-<hr>
+               
                 <table class="cell-border hover" id="basic-1">
                     <thead>
                         <tr>
@@ -59,7 +55,6 @@
                                     </td>
                                 <td><?php echo e($row->number_of_travel); ?></td>
                                 <td>
-
                                     <?php if($row->booking_status == '0'): ?>
                                     <span class="badge bg-secondary">รอตรวจสอบ</span>
                                     <?php elseif($row->booking_status == '1'): ?>
@@ -79,7 +74,6 @@
                                        ดำเนินการเรียบร้อยแล้ว
                                     </span>
                                     <?php endif; ?>
-
                                 </td>            
                             </tr>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

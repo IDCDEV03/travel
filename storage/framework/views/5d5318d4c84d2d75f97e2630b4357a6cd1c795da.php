@@ -107,7 +107,7 @@
 
 
 
-
+        </div>
         </div>
         <script type="text/javascript">
             var session_layout = '<?php echo e(session()->get('layout')); ?>';

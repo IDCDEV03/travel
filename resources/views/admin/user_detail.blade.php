@@ -25,11 +25,7 @@
             </div>
 @endforeach   
             <div class="card-body">
-                <div align="right">
-                <a href="#" class="btn btn-secondary" type="button">
-                    <i class="fa fa-refresh"></i> รีเซตรหัสผ่าน</a>
-                </div>
-<hr>
+               
                 <table class="cell-border hover" id="basic-1">
                     <thead>
                         <tr>
