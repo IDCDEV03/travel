@@ -59,6 +59,10 @@ Route::get('/admin/update_payment/{id}/{bkid}', $controller_path . '\AdminContro
 //admin_userdata
 Route::get('/admin/userdata', $controller_path . '\AdminController@user_data')->name('admin.user_data');
 Route::get('/admin/userbooking/{id}', $controller_path . '\AdminController@user_data_booking')->name('admin.user_data_booking');
+
+//admin_invoice
+Route::get('/admin/invoice/{id}', $controller_path . '\AdminController@admin_invoice')->name('admin.invoice');
+
 });
 
 //User

@@ -514,6 +514,17 @@ class AdminController extends Controller
     ]);
     return redirect()->route('admin_setting')->with('success', "เปลี่ยนรหัสผ่านเรียบร้อยแล้ว");
   }
+
+  public function admin_invoice($id)
+  {
+    $invoice = DB::table('booking_quotations')
+      ->join('member_booking_packages', 'booking_quotations.booking_id', '=', 'member_booking_packages.booking_id')
+      ->join('package_tours', 'booking_quotations.package_id', '=', 'package_tours.package_id')
+      ->join('users','member_booking_packages.member_id','=','users.id')
+      ->where('booking_quotations.booking_id', '=', $id)
+      ->get();
+    return view('admin.invoice', compact('invoice'));
+  }
  
 
 
