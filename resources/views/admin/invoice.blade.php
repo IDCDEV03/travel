@@ -64,7 +64,7 @@ div {
     <div id="non-printable">
         <div class="card">
             <div class="card-body">
-                <a href="{{ route('user_quotation', ['id' => request()->id]) }}" class="btn btn-secondary">ย้อนกลับ</a>
+                <a href="{{ URL::previous() }}" class="btn btn-secondary">ย้อนกลับ</a>
                 <button class="btn btn-primary" onclick="window.print()">พิมพ์</button>
             </div>
         </div>
