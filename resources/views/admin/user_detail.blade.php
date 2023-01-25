@@ -59,7 +59,6 @@
                                     </td>
                                 <td>{{ $row->number_of_travel }}</td>
                                 <td>
-
                                     @if ($row->booking_status == '0')
                                     <span class="badge bg-secondary">รอตรวจสอบ</span>
                                     @elseif ($row->booking_status == '1')
@@ -76,10 +75,9 @@
                                     </span>
                                     @elseif ($row->booking_status == '5')
                                     <span class="badge bg-success">
-                                       ตรวจสอบการชำระเงินเรียบร้อย
+                                       ดำเนินการเรียบร้อยแล้ว
                                     </span>
                                     @endif
-
                                 </td>            
                             </tr>
                         @endforeach

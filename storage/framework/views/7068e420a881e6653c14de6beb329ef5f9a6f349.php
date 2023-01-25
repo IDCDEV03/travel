@@ -1,24 +1,24 @@
-@extends('userLayouts.simple.master')
 
-@section('title', 'Default')
 
-@section('css')
-@endsection
+<?php $__env->startSection('title', 'Default'); ?>
 
-@section('style')
-@endsection
+<?php $__env->startSection('css'); ?>
+<?php $__env->stopSection(); ?>
 
-@section('breadcrumb-title')
+<?php $__env->startSection('style'); ?>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('breadcrumb-title'); ?>
     <h3>แจ้งการชำระเงิน</h3>
-@endsection
+<?php $__env->stopSection(); ?>
 
 
-@section('content')
+<?php $__env->startSection('content'); ?>
     <div class="container-fluid">
         <div class="row">
         <div class="col-sm-12">
       
-                @foreach ($payment as $item)
+                <?php $__currentLoopData = $payment; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
                   <div class="card">
             <div class="card-body">
@@ -33,12 +33,12 @@
                 <div class="card">
                     <div class="card-body">
                 <div class="row">
-                    <div class="col-md-6 "><span>ใบเสนอราคาที่ #{{$item->quotation_id}}</span></div>
+                    <div class="col-md-6 "><span>ใบเสนอราคาที่ #<?php echo e($item->quotation_id); ?></span></div>
                     <div class="col-md-6 "><span>จำนวนเงินมัดจำที่ต้องชำระ: 
-                        @php
+                        <?php
                         $deposit_price = number_format($item->price_deposit);
                         echo $deposit_price;
-                    @endphp    
+                    ?>    
                     บาท
                     </span></div>
                 </div>
@@ -52,20 +52,27 @@
                        <span>กรอกข้อมูลการโอนเงินของท่าน พร้อมแนบรูปหลักฐาน</span>
                     </div>
                     <div class="card-body">
-                <form class="needs-validation" novalidate="" action="{{ route('user_payment') }}"
+                <form class="needs-validation" novalidate="" action="<?php echo e(route('user_payment')); ?>"
                  method="POST" enctype="multipart/form-data">
-                 @csrf
-                    <input type="hidden" value="{{Auth::user()->id}}" name="user_id">
-                    <input type="hidden" value="{{$item->quotation_id}}" name="quotation_id">
-                    <input type="hidden" value="{{$item->booking_id}}" name="booking_id">
+                 <?php echo csrf_field(); ?>
+                    <input type="hidden" value="<?php echo e(Auth::user()->id); ?>" name="user_id">
+                    <input type="hidden" value="<?php echo e($item->quotation_id); ?>" name="quotation_id">
+                    <input type="hidden" value="<?php echo e($item->booking_id); ?>" name="booking_id">
                     <div class="row g-3">                
                       <div class="col-md-12">
                         <label class="form-label">จำนวนเงินที่โอน</label>
                         <input class="form-control" type="text" name="payment_price">
-                        @error('payment_price')
+                        <?php $__errorArgs = ['payment_price'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
                         <span class="text-danger my-2">
-                            << {{ $message }} >> </span>
-                    @enderror
+                            << <?php echo e($message); ?> >> </span>
+                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                       </div>                 
                     </div>
                     <br>
@@ -78,10 +85,17 @@
                             <input class="form-check-input" id="radioinline1" type="radio" name="payment_bank" value="ธนาคารกรุงไทย">
                             <label class="form-check-label mb-0 " for="radioinline1">ธนาคารออมสิน</label>
                           </div>                         
-                          @error('payment_bank')
+                          <?php $__errorArgs = ['payment_bank'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
                           <span class="text-danger my-2">
-                              << {{ $message }} >> </span>
-                      @enderror                  
+                              << <?php echo e($message); ?> >> </span>
+                      <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>                  
                         </div>
                     </div>
                     <hr>
@@ -92,10 +106,17 @@
                             <div class="col-sm-9">
                               <input class="form-control" type="file" name="payment_slip" accept="image/*">
                             </div>
-                            @error('payment_slip')
+                            <?php $__errorArgs = ['payment_slip'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
                             <span class="text-danger my-2">
-                                << {{ $message }} >> </span>
-                        @enderror
+                                << <?php echo e($message); ?> >> </span>
+                        <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
                           </div>
                         </div>
                     </div>
@@ -111,13 +132,15 @@
     </div>
     </div>
     </div>
-@endforeach
+<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
     <script type="text/javascript">
-        var session_layout = '{{ session()->get('layout') }}';
+        var session_layout = '<?php echo e(session()->get('layout')); ?>';
     </script>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('script')
-    <script src="{{ asset('assets/js/notify/bootstrap-notify.min.js') }}"></script>
-    <script src="{{ asset('assets/js/dashboard/default.js') }}"></script>
-@endsection
+<?php $__env->startSection('script'); ?>
+    <script src="<?php echo e(asset('assets/js/notify/bootstrap-notify.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/js/dashboard/default.js')); ?>"></script>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('userLayouts.simple.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\travel\resources\views/userpages/user_payment.blade.php ENDPATH**/ ?>

@@ -76,7 +76,7 @@
                                     </span>
                                     <?php elseif($row->booking_status == '5'): ?>
                                     <span class="badge bg-success">
-                                       ตรวจสอบการชำระเงินเรียบร้อย
+                                       ดำเนินการเรียบร้อยแล้ว
                                     </span>
                                     <?php endif; ?>
 

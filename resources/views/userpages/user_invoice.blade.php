@@ -118,7 +118,7 @@ div {
                               </span><br> ใช้ได้ถึง:
                               <span>
                                   @php
-      $end = Carbon::parse($item->created_at)->addDays(7)->format('d/m/Y');
+      $end = Carbon::parse($item->created_at)->addDays(15)->format('d/m/Y');
       echo $end;
       @endphp
       
@@ -139,7 +139,7 @@ div {
                                 <h4 class="media-heading">{{ auth()->user()->member_name }}</h4>
                                 <p>
                                     {{$item->member_email}} 
-                                    <br><span>081-555-555</span></p>
+                                    <br><span>{{$item->user_phone}}</span></p>
                               </div>
                             </div>
                           </div>                      
@@ -203,7 +203,7 @@ div {
                                             <p class="m-0">งวดที่ 2</p>
                                         </td>
                                         <td>
-                                            <label>ชำระส่วนที่เหลือ</label>
+                                            <label>ชำระส่วนที่เหลือ (ก่อนวันเดินทาง 3 วัน)</label>
                                         </td>
                                         <td>
                                             <p class="itemtext">
@@ -236,16 +236,29 @@ div {
                           <div class="row">
                             <div class="col-md-8">
                               <div>
-                                @if($item->quotation_status == '2')
-                   <span class="txt-success">
-                    <strong>หมายเหตุ : ดำเนินการชำระมัดจำงวดที่ 1 แล้ว 
-                    </strong>
-                    </span>
-                    @endif
+                                <p class="legal"><strong>การชำระเงิน</strong>
+                                  <ul>
+                                      <li>โอนชำระผ่านบัญชี</li>
+                                      <li>ธนาคารออมสิน
+                                          <p>
+                                          เลขที่บัญชี : 0202-8621-4901 <br>
+                                          ชื่อบัญชี : นางสาวสวลี ศรีกุลวงษ์
+                                      <br>
+                                      สาขา : สาขาเทสโก้โลตัส นาดี อุดรธานี
+                                  </p>
+                                      </li>
+                                  </ul>
+                                  </p>
+                              
                               </div>
                             </div>
                             <div class="col-md-4">
-                        
+                              @if($item->quotation_status == '2')
+                              <span class="txt-success">
+                               <strong>หมายเหตุ : ดำเนินการชำระมัดจำงวดที่ 1 แล้ว 
+                               </strong>
+                               </span>
+                               @endif
                             </div>
                           </div>
                         </div>

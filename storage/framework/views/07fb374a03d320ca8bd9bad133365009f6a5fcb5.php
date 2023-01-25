@@ -66,7 +66,7 @@
                         </span><br> ใช้ได้ถึง:
                         <span>
                             <?php
-$end = Carbon::parse($item->created_at)->addDays(7)->format('d/m/Y');
+$end = Carbon::parse($item->created_at)->addDays(15)->format('d/m/Y');
 echo $end;
 ?>
 
@@ -87,7 +87,7 @@ echo $end;
             <h4 class="media-heading"><?php echo e(auth()->user()->member_name); ?></h4>
             <p>
                 <?php echo e($item->member_email); ?> 
-                <br><span>081-555-555</span></p>
+                <br><span><?php echo e($item->user_phone); ?></span></p>
         </div>
     </div>
 </div>
@@ -156,7 +156,7 @@ echo $end;
                     <p class="m-0">งวดที่ 2</p>
                 </td>
                 <td>
-                    <label>ชำระส่วนที่เหลือ</label>
+                    <label>ชำระส่วนที่เหลือ (ก่อนวันเดินทาง 3 วัน)</label>
                 </td>
                 <td>
                     <p class="itemtext">
@@ -192,7 +192,14 @@ echo $end;
                         <p class="legal"><strong>การชำระเงิน</strong>
                         <ul>
                             <li>โอนชำระผ่านบัญชี</li>
-                            <li>ธนาคารกรุงไทย</li>
+                            <li>ธนาคารออมสิน
+                                <p>
+                                เลขที่บัญชี : 0202-8621-4901 <br>
+                                ชื่อบัญชี : นางสาวสวลี ศรีกุลวงษ์
+                            <br>
+                            สาขา : สาขาเทสโก้โลตัส นาดี อุดรธานี
+                                </p>
+                            </li>
                         </ul>
                         </p>
                     </div>

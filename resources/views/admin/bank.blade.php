@@ -17,12 +17,6 @@
         <div class="row">
             <div class="col-sm-12">
 
-                @if (session('success'))
-                    <div class="alert alert-success" role="alert">
-                        <b>{{ session('success') }}</b>
-                    </div>
-                @endif
-
                 <div class="card">             
                     <div class="card-body">
                         <div class="table-responsive">
@@ -36,13 +30,12 @@
                                         <th>ตั้งค่า</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                
+                                <tbody>                                
                                         <tr>
-                                            <td class="align-middle"><img src="../assets/images/bank/ktb.png" width="64px" height="64px" alt=""></td>
-                                            <td>ธนาคารกรุงไทย</td>
-                                            <td>3</td>
-                                            <td>4</td>
+                                            <td class="align-middle"><img src="../assets/images/bank/gsb.jpg" width="64px" height="64px" alt=""></td>
+                                            <td>ธนาคารออมสิน</td>
+                                            <td>0202-8621-4901</td>
+                                            <td>สาขาเทสโก้โลตัส นาดี อุดรธานี</td>
                                             <td>
                                             
                                                     <a href="#" class="btn btn-info" >
@@ -51,33 +44,6 @@
                                                 
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td><img src="../assets/images/bank/kbank.png" width="64px" height="64px" alt=""></td>
-                                            <td>ธนาคารกสิกรไทย</td>
-                                            <td>3</td>
-                                            <td>4</td>
-                                            <td>
-                                            
-                                                    <a href="#" class="btn btn-info" >
-                                                        <i class="fa fa-edit"></i></a>
-                                                    <a href="#" class="btn btn-danger" ><i class="fa fa-trash-o"></i></a>
-                                                
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><img src="../assets/images/bank/scb.png" width="64px" height="64px" alt=""></td>
-                                            <td>ธนาคารไทยพาณิชย์</td>
-                                            <td>3</td>
-                                            <td>4</td>
-                                            <td>
-                                            
-                                                    <a href="#" class="btn btn-info" >
-                                                        <i class="fa fa-edit"></i></a>
-                                                    <a href="#" class="btn btn-danger" ><i class="fa fa-trash-o"></i></a>
-                                                
-                                            </td>
-                                        </tr>
-                                   
                                 </tbody>
                             </table>
                         </div>

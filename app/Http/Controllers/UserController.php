@@ -107,6 +107,7 @@ class UserController extends Controller
         '=',
         'package_tours.package_id'
       )
+      ->join('users','member_booking_packages.member_id','=','users.id')
       ->where('member_booking_packages.booking_id', '=', $id)
       ->get();
     return view('userpages.booking_quotation', compact('user_quotation'));
@@ -180,6 +181,7 @@ class UserController extends Controller
     $invoice = DB::table('booking_quotations')
       ->join('member_booking_packages', 'booking_quotations.booking_id', '=', 'member_booking_packages.booking_id')
       ->join('package_tours', 'booking_quotations.package_id', '=', 'package_tours.package_id')
+      ->join('users','member_booking_packages.member_id','=','users.id')
       ->where('booking_quotations.booking_id', '=', $id)
       ->get();
     return view('userpages.user_invoice', compact('invoice'));
