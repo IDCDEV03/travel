@@ -10,11 +10,11 @@
                                 <a href="#!"><i class="fab fa-facebook"></i></a>
                             </li>
                             <li>
-                            <a href="#!"><i class="fab fa-line"></i> K.Mori</a></li>
-                            <li><a href="#!">โทร.
+                           <i class="fab fa-line"></i> K.Mori</li>
+                            <li>โทร.
                             <span>
-                            093-545-9009, 082-493-2644</span></a></li>
-                            <li><a href="#!"><span>sp.tour.ud@gmail.com</span></a></li>
+                            093-545-9009, 082-493-2644</span></li>
+                            <li><span>sp.tour.ud@gmail.com</span></li>
                         </ul>
                     </div>
                     <div class="col-lg-6 col-md-6">
@@ -95,7 +95,7 @@
                         <div class="option-inner">
                             <div class="others-options d-flex align-items-center">
                                 <div class="option-item">
-                                    <a href="#" class="search-box"><i class="fas fa-search"></i></a>
+                                    <a href="<?php echo e(route('login.show')); ?>" class="btn  btn_navber">เข้าสู่ระบบ</a>
                                 </div>
                                 <div class="option-item">
                                     <a href="<?php echo e(route('register.show')); ?>" class="btn  btn_navber">สมัครสมาชิก</a>
