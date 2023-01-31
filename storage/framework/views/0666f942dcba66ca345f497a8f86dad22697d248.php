@@ -67,6 +67,7 @@
                             style="display: <?php echo e(request()->route()->getPrefix() == '/page-layouts'? 'block;': 'none;'); ?>">
                             <li><a href="<?php echo e(route('admin.user_data')); ?>">ข้อมูลสมาชิก</a></li>
                             <li><a href="<?php echo e(route('booking_chk')); ?>"> ข้อมูลคำสั่งซื้อ</a></li>
+                            <li><a href="<?php echo e(route('admin.list_invoice')); ?>">รายการใบสั่งจอง</a></li>
                             <li><a href=""> รายงาน</a></li>
                            
                         </ul>

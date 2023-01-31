@@ -27,7 +27,11 @@ class AdminController extends Controller
     $userbooking = DB::table('member_booking_packages')
       ->where('booking_status', '=', 0)
       ->get();
-    return view('admin.index', compact('userbooking'));
+
+    $user_payment = DB::table('member_booking_packages')
+    ->where('booking_status', '=', '4')
+    ->get();
+    return view('admin.index', compact('userbooking','user_payment'));
   }
 
   public function index()
@@ -39,6 +43,16 @@ class AdminController extends Controller
   public function admin_setting()
   {
     return view('admin.admin_setting');
+  }
+
+  public function list_invoice()
+  {
+    $list_invoice = DB::table('member_booking_packages')
+    ->join('package_tours','package_tours.package_id','=','member_booking_packages.package_id')
+    ->join('booking_quotations','booking_quotations.booking_id','=','member_booking_packages.booking_id')
+    ->where('member_booking_packages.booking_status','=','5')
+    ->get();
+    return view('admin.list_invoice',compact('list_invoice'));
   }
 
   public function booking_chk()
@@ -526,6 +540,17 @@ class AdminController extends Controller
     return view('admin.invoice', compact('invoice'));
   }
  
+  public function admin_user_delete($id)
+  {
+    DB::table('users')
+    ->where('id', '=', $id)
+    ->delete();
 
+    DB::table('member_booking_packages')
+    ->where('id', '=' , $id)
+    ->delete();
+
+    return redirect()->back()->with('success', "ลบข้อมูลเรียบร้อยแล้ว");
+  }
 
 }

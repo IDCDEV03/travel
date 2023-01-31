@@ -31,6 +31,6 @@ class RegisterController extends Controller
 
         auth()->login($user);
 
-        return redirect('/home')->with('success', "Account successfully registered.");
+        return redirect('/home')->with('success', "สมัครสมาชิกใหม่เรียบร้อยแล้ว");
     }
 }

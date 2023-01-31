@@ -82,7 +82,7 @@ unset($__errorArgs, $__bag); ?>
                     <div class="col">
                         <div class="m-t-15 m-checkbox-inline custom-radio-ml">
                           <div class="form-check form-check-inline radio radio-primary">
-                            <input class="form-check-input" id="radioinline1" type="radio" name="payment_bank" value="ธนาคารกรุงไทย">
+                            <input class="form-check-input" id="radioinline1" type="radio" name="payment_bank" value="ธนาคารออมสิน">
                             <label class="form-check-label mb-0 " for="radioinline1">ธนาคารออมสิน</label>
                           </div>                         
                           <?php $__errorArgs = ['payment_bank'];

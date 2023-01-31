@@ -31,6 +31,13 @@
         <div class="alert alert-danger dark" role="alert"><strong>ไม่มีคำสั่งซื้อใหม่</strong></div>
         @endif
 
+        @if (count($user_payment) >= 1)
+        <div class="alert alert-info dark" role="alert"><strong>มีการแจ้งโอนยอดชำระ รอการตรวจสอบ</strong>
+            <a href="{{ route('booking_chk') }}" class="btn btn-pill btn-outline-light-2x"><i data-feather="chevrons-right"></i> คลิกเพื่อตรวจสอบยอดโอนชำระ</a> 
+        </div>
+        @else
+        @endif
+
         <div class="row project-cards">
            
             <div class="row">

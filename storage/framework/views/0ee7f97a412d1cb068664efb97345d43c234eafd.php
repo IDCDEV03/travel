@@ -20,6 +20,12 @@
                 <div class="card">   
                     <div class="card-body">
                        
+                        <?php if(session('success')): ?>
+                    <div class="alert alert-danger" role="alert">
+                        <b><?php echo e(session('success')); ?></b>
+                    </div>
+                <?php endif; ?>
+
                         <table class="cell-border hover" id="basic-1">
                             <thead>
                                 <tr>
@@ -43,9 +49,8 @@
                                         <td>
                                         
                                                 <a href="<?php echo e(route('admin.user_data_booking', ['id' => $row->id])); ?>" class="btn btn-primary" >
-                                                    <i class="fa fa-edit"></i></a>
-                                                <a href="#" class="btn btn-danger" ><i class="fa fa-trash-o"></i></a>
-                                            
+                                               <i class="fa fa-edit"></i></a>
+                                                <a href="<?php echo e(route('admin.user_delete', ['id' => $row->id])); ?>" class="btn btn-danger" onclick="return confirm('ต้องการลบ ใช่หรือไม่?');"><i class="fa fa-trash-o"></i></a>
                                         </td>
                                     </tr>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
