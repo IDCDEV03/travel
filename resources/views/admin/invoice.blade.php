@@ -89,9 +89,9 @@ div {
                             <tr>                          
                               <td>
                                 <img class="media-object img-60"
-                            src="{{ asset('assets/images/logo/logo.png') }}"
-                            alt="" width="120px"><br>
-                             <span class="fs-15"><strong>ห้างหุ้นส่วนจำกัด เอส แอนด์ พี อินเตอร์เนชั่นแนลเซอร์วิส</strong> </span>
+                            src="{{ asset('assets/images/logo/logo-big.png') }}"
+                            alt="" width="200px"><br>
+                             <span class="fs-18"><strong>เอส แอนด์ พี อินเตอร์ทัวร์</strong> </span>
                               </td>
                               <td>
                                 <h3>ใบจองแพ็คเกจ </h3>

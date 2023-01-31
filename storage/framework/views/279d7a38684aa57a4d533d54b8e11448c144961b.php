@@ -126,7 +126,7 @@
                     <div class="about_two_left">
                         <div class="about_two_left_top">
                             <h5>About us</h5>
-                            <h2>ห้างหุ้นส่วนจำกัด เอส แอนด์ พี อินเตอร์เนชั่นแนลเซอร์วิส</h2>
+                            <h2>เอส แอนด์ พี อินเตอร์ทัวร์</h2>
                             <p>
                             ใบอนุญาตประกอบธุรกิจนำเที่ยว เลขที่ 51/00895
                             </p>
@@ -256,7 +256,7 @@
                 </div>
                 <div class="co-lg-6 col-md-6 col-sm-12 col-12">
                     <div class="copyright_right">
-                        <img src="<?php echo e(asset('assets_home/img/common/cards.png')); ?>" width="100px" alt="img">
+                        <img src="<?php echo e(asset('assets_home/img/logo-mini.png')); ?>" width="100px" alt="img">
                     </div>
                 </div>
             </div>

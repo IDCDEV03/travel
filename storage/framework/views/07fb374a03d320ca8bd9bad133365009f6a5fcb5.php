@@ -40,7 +40,7 @@
                             src="<?php echo e(asset('assets/images/logo/logo.png')); ?>"
                             alt=""></div>
                     <div class="media-body m-l-20 text-right">
-                        <h4 class="media-heading">ห้างหุ้นส่วนจำกัด เอส แอนด์ พี อินเตอร์เนชั่นแนลเซอร์วิส</h4>
+                        <h4 class="media-heading">เอส แอนด์ พี อินเตอร์ทัวร์</h4>
                         <p>sp.tour.ud@gmail.com<br>
                             <span><i class="fa fa-phone-square"></i>
                                 093-545-9009</span>

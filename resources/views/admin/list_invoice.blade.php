@@ -34,19 +34,21 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        @php
+                                    @php
                                          $i = '1';   
                                         @endphp
                                         @foreach($list_invoice as $row)
+                                    <tr>
+                                        
                                         <td>{{ $i++; }}</td>      
                                         <td>{{$row->code_tour}}</td>    
                                         <td>{{$row->package_name}}</td>               
                                         <td>{{$row->member_name}}</td>
                                         <td class="txt-success">ดำเนินการเรียบร้อย</td>
                                         <td><a href="{{ route('admin.invoice', ['id' => $row->booking_id]) }}" class="btn btn-info">ใบสั่งจอง</a></td>
-                                        @endforeach
+                                    
                                     </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

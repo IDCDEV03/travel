@@ -34,19 +34,21 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <?php
+                                    <?php
                                          $i = '1';   
                                         ?>
                                         <?php $__currentLoopData = $list_invoice; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <tr>
+                                        
                                         <td><?php echo e($i++); ?></td>      
                                         <td><?php echo e($row->code_tour); ?></td>    
                                         <td><?php echo e($row->package_name); ?></td>               
                                         <td><?php echo e($row->member_name); ?></td>
                                         <td class="txt-success">ดำเนินการเรียบร้อย</td>
                                         <td><a href="<?php echo e(route('admin.invoice', ['id' => $row->booking_id])); ?>" class="btn btn-info">ใบสั่งจอง</a></td>
-                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    
                                     </tr>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </tbody>
                             </table>
                         </div>
