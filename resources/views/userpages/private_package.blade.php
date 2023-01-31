@@ -16,7 +16,6 @@
         <div class="card-header">
           <h5>สั่งจองแพ็คเกจทัวร์ส่วนตัว</h5>
         </div>
-
         <form class="form needs-validation" method="POST" action="{{ route('insert_booking') }}">
           @csrf
           <div class="card-body">
@@ -71,8 +70,7 @@
                   </div>
                 </div>
               </div>
-
-
+              
               <div class="row">
                 <div class="col">
                   <div class="mb-3">
