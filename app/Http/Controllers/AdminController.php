@@ -333,6 +333,14 @@ class AdminController extends Controller
         'created_at' => Carbon::now()
       ]);
       $package_file->move($upload_location, $package_file_name);
+      
+      DB::table('member_booking_packages')
+      ->where('booking_id', '=', $request->booking_id)
+      ->update([
+        'booking_status' => '1',
+        'updated_at' => Carbon::now()
+      ]);
+ 
       return redirect()->route('booking_chk')->with('success', "ส่งใบเสนอราคาเรียบร้อยแล้ว");
       $this->send_quotation($request->email);
     } else {
