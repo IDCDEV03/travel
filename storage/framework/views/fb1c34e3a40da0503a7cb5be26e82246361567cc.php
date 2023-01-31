@@ -2,7 +2,7 @@
 	  <div class="container-fluid">
 		    <div class="row">
 			      <div class="col-md-12 footer-copyright text-center">
-			        	<p class="mb-0">Copyright <?php echo e(date('Y')); ?> © ID Drives  </p>
+			        	<p class="mb-0">Copyright <?php echo e(date('Y')); ?> © S&P Inter Tour  </p>
 			      </div>
 		    </div>
 	  </div>
