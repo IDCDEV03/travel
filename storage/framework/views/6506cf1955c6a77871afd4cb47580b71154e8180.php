@@ -11,22 +11,17 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('breadcrumb-title'); ?>
-    <h3>รายการสั่งจองแพ็คเกจ</h3>
 <?php $__env->stopSection(); ?>
 
 
 <?php $__env->startSection('content'); ?>
     <div class="container-fluid">
-
-     
-
         <div class="card">
+            <div class="card-header bg-success">
+                <h5 class="text-white">รายการสั่งจองกรุ๊ปทัวร์ส่วนตัว (Private Group) </h5>
+              </div>
             <div class="card-body">
-           
-                <div class="text-right " style="width: 18rem;">
-                <a href="<?php echo e(route('booking_private')); ?>" type="button" class="btn btn-primary ">ตรวจสอบการจองกรุ๊ปส่วนตัว</a>
-            </div>
-                <br>
+
                 <?php if(session('success')): ?>
                     <div class="alert alert-success" role="alert">
                         <b><?php echo e(session('success')); ?></b>
@@ -36,7 +31,7 @@
                     <b><?php echo e(session('cancel')); ?></b>
                 </div>
                 <?php endif; ?>
-                
+
                 <div class="table-responsive">
                 <table class="cell-border hover" id="basic-1">
                     <thead>
@@ -51,10 +46,10 @@
                     </thead>
                     <tbody>
                         <?php ($i = 1); ?>
-                        <?php $__currentLoopData = $list_booking; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <?php $__currentLoopData = $booking_private; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <tr>
                                 <td><?php echo e($i++); ?></td>
-                                <td><?php echo e($row->package_name); ?></td>
+                                <td><?php echo e($row->place_name); ?></td>
                                 <td>
                                     <ul>
                                         <li><i class="fa fa-caret-right txt-primary m-r-10"></i>
@@ -90,18 +85,18 @@
 
                                 </td>
                                 <td>
-                          <a href="<?php echo e(url('/user/booking_detail/'.$row->booking_id)); ?>"> <i class="fa fa-edit"></i> รายละเอียด</a>
+                          <a href="<?php echo e(url('/user/booking_detail_private/'.$row->booking_id)); ?>"> <i class="fa fa-edit"></i> รายละเอียด</a>
                                 </td>
                             </tr>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </tbody>
                 </table>
-            </div>
+                </div>
                 
             </div>
         </div>
     </div>
-  
+ 
     <script type="text/javascript">
         var session_layout = '<?php echo e(session()->get('layout')); ?>';
     </script>
@@ -114,4 +109,4 @@
     <script src="<?php echo e(asset('assets/js/dashboard/default.js')); ?>"></script>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('userLayouts.simple.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\travel\resources\views/userpages/booking_status.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('userLayouts.simple.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\travel\resources\views/userpages/booking_private.blade.php ENDPATH**/ ?>

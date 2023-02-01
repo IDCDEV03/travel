@@ -262,4 +262,57 @@ class UserController extends Controller
     return view('userpages.all_packages', compact('all_packages'));
   }
 
+  public function insert_booking_private(Request $request)
+  {
+
+    $ิbooking_id = Str::random(12);
+
+    //บันทึกข้อมูล
+    DB::table('member_booking_privates')
+     ->insert([
+      'booking_id' => $ิbooking_id,
+      'member_id' => $request->member_id,
+      'member_name' => $request->member_name,
+      'member_email' => $request->member_email,
+      'place_name' => $request->place_name,
+      'number_of_travel' => $request->number_of_travel,
+      'date_start' => $request->date_start,
+      'date_end' => $request->date_end,
+      'member_detail' => $request->member_detail,
+      'member_contact' => $request->member_contact,
+      'booking_status' => '0',
+      'created_at' => Carbon::now()
+    ]);
+
+     return redirect()->route('booking_status')->with('success', "บันทึกข้อมูลการสั่งจองเรียบร้อยแล้ว กรุณารอเจ้าหน้าที่ตรวจสอบ");
+  }
+
+  public function booking_private()
+  {
+    $user_id = Auth::user()->id;
+
+    $booking_private = DB::table('member_booking_privates')
+      ->where('member_id', '=', $user_id)
+      ->orderBy('created_at', 'desc')
+      ->get();
+    return view('userpages.booking_private', compact('booking_private'));
+  }
+
+  public function booking_detail_private($id)
+  {
+    $booking_detail = DB::table('member_booking_privates')    
+      ->where('booking_id', '=', $id)
+      ->get();
+    return view('userpages.booking_detail_private', compact('booking_detail'));
+  }
+  
+  public function private_quotation($id)
+  {
+    $user_quotation = DB::table('member_booking_privates')
+      ->join('booking_quotation_privates', 'member_booking_packages.booking_id', '=', 'booking_quotations_privates.booking_id')
+      ->where('member_booking_privates.booking_id', '=', $id)
+      ->get();
+    return view('userpages.booking_quotation_private', compact('user_quotation'));
+  }
+
 }

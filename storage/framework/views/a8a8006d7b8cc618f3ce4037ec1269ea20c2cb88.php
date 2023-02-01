@@ -14,7 +14,7 @@
         <div class="card-header">
           <h5>สั่งจองแพ็คเกจทัวร์ส่วนตัว</h5>
         </div>
-        <form class="form needs-validation" method="POST" action="<?php echo e(route('insert_booking')); ?>">
+        <form class="form needs-validation" method="POST" action="<?php echo e(route('insert_booking_private')); ?>">
           <?php echo csrf_field(); ?>
           <div class="card-body">
             <div class="row">
@@ -45,26 +45,10 @@
               <div class="row">
                 <div class="col">
                   <div class="mb-3">
-                    <label class="form-label">แพ็คเกจที่ต้องการจอง
+                    <label class="form-label">สถานที่ที่ต้องการไป 
                       <span class="text-danger">*</span> 
                     </label>
-                    <select class="js-example-basic-single col-sm-12 " name="package_name">
-                      <option value="" disabled selected>เลือกแพ็คเกจที่ท่านสนใจ</option>
-                      <optgroup label="ในประเทศ">                        
-                        <?php $__currentLoopData = $package_all; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <?php if($item->package_type == '1'): ?>
-                        <option value="<?php echo e($item->package_id); ?>"><?php echo e($item->package_name); ?></option>
-                        <?php endif; ?>
-                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                      </optgroup>
-                      <optgroup label="ต่างประเทศ">
-                        <?php $__currentLoopData = $package_all; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <?php if($item->package_type == '2'): ?>
-                        <option value="<?php echo e($item->package_id); ?>"><?php echo e($item->package_name); ?></option>
-                        <?php endif; ?>
-                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                      </optgroup>
-                    </select>
+                    <input class="form-control" type="text" name="place_name" placeholder="ระบุสถานที่ เช่น จังหวัด เมือง ประเทศ" required>
                   </div>
                 </div>
               </div>
@@ -105,8 +89,8 @@
               <div class="row">
                 <div class="col">
                   <div class="mb-3">
-                    <label class="form-label">รายละเอียด/ความต้องการอื่นๆเพิ่มเติม</label>
-                    <textarea class="form-control" name="member_detail" row="4"></textarea>
+                    <label class="form-label">รายละเอียด/ความต้องการอื่นๆ เช่น พาหนะ ที่พัก ร้านอาหาร</label>
+                    <textarea class="form-control" name="member_detail" row="5"></textarea>
                   </div>
                 </div>
               </div>

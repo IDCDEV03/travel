@@ -61,7 +61,11 @@ class AdminController extends Controller
       ->join('package_tours', 'member_booking_packages.package_id', '=', 'package_tours.package_id')
       ->orderBy('member_booking_packages.created_at', 'desc')
       ->get();
-    return view('admin.booking_chk', compact('package_tour'));
+
+      $private_tour = DB::table('member_booking_privates')
+      ->orderBy('member_booking_privates.created_at', 'desc')
+      ->get();
+    return view('admin.booking_chk', compact('package_tour','private_tour'));
   }
 
   public function booking_cf($id)
@@ -72,6 +76,14 @@ class AdminController extends Controller
       ->get();
 
     return view('admin.booking_cf', compact('booking_user'));
+  }
+
+  public function booking_cf_private($id)
+  {
+    $booking_private = DB::table('member_booking_privates')
+       ->where('booking_id', '=', $id)
+      ->get();
+    return view('admin.booking_cf_private', compact('booking_private'));
   }
 
   public function edit_pk($id)

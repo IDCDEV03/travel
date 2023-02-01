@@ -11,22 +11,17 @@
 @endsection
 
 @section('breadcrumb-title')
-    <h3>รายการสั่งจองแพ็คเกจ</h3>
 @endsection
 
 
 @section('content')
     <div class="container-fluid">
-
-     
-
         <div class="card">
+            <div class="card-header bg-success">
+                <h5 class="text-white">รายการสั่งจองกรุ๊ปทัวร์ส่วนตัว (Private Group) </h5>
+              </div>
             <div class="card-body">
-           
-                <div class="text-right " style="width: 18rem;">
-                <a href="{{ route('booking_private') }}" type="button" class="btn btn-primary ">ตรวจสอบการจองกรุ๊ปส่วนตัว</a>
-            </div>
-                <br>
+
                 @if (session('success'))
                     <div class="alert alert-success" role="alert">
                         <b>{{ session('success') }}</b>
@@ -36,7 +31,7 @@
                     <b>{{ session('cancel') }}</b>
                 </div>
                 @endif
-                
+
                 <div class="table-responsive">
                 <table class="cell-border hover" id="basic-1">
                     <thead>
@@ -51,10 +46,10 @@
                     </thead>
                     <tbody>
                         @php($i = 1)
-                        @foreach ($list_booking as $row)
+                        @foreach ($booking_private as $row)
                             <tr>
                                 <td>{{ $i++ }}</td>
-                                <td>{{ $row->package_name }}</td>
+                                <td>{{ $row->place_name }}</td>
                                 <td>
                                     <ul>
                                         <li><i class="fa fa-caret-right txt-primary m-r-10"></i>
@@ -90,18 +85,18 @@
 
                                 </td>
                                 <td>
-                          <a href="{{url('/user/booking_detail/'.$row->booking_id)}}"> <i class="fa fa-edit"></i> รายละเอียด</a>
+                          <a href="{{url('/user/booking_detail_private/'.$row->booking_id)}}"> <i class="fa fa-edit"></i> รายละเอียด</a>
                                 </td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
-            </div>
+                </div>
                 
             </div>
         </div>
     </div>
-  
+ 
     <script type="text/javascript">
         var session_layout = '{{ session()->get('layout') }}';
     </script>

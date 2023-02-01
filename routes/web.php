@@ -32,6 +32,9 @@ Route::get('/admin/bank', $controller_path . '\AdminController@bank')->name('ban
 Route::get('/admin/index', $controller_path . '\AdminController@home')->name('admin_index');
 Route::get('/admin/booking_chk', $controller_path . '\AdminController@booking_chk')->name('booking_chk');
 Route::get('/admin/booking_cf/{id}', $controller_path . '\AdminController@booking_cf')->name('booking_cf');
+//booking_private
+Route::get('/admin/booking_cf_private/{id}', $controller_path . '\AdminController@booking_cf_private')->name('booking_cf_private');
+
 Route::post('/admin/save_package', $controller_path . '\AdminController@save_package')->name('save_package');
 Route::get('/admin/package_detail/{id}', $controller_path . '\AdminController@package_detail')->name('package_detail');
 Route::get('/admin/edit_pk/{id}', $controller_path . '\AdminController@edit_pk')->name('edit_pk');
@@ -78,11 +81,21 @@ Route::get('/userpages/book_package/{id}/package/{pkid}', $controller_path . '\U
 Route::get('/user/private_package/{id}', $controller_path . '\UserController@private_package')->name('private_package');
 
 Route::post('/user/insert_booking', $controller_path . '\UserController@insert_booking')->name('insert_booking');
+
+Route::post('/user/insert_booking_private', $controller_path . '\UserController@insert_booking_private')->name('insert_booking_private');
+
 Route::get('/userpages/booking_status', $controller_path . '\UserController@booking_status')->name('booking_status');
+
+Route::get('/user/booking_private', $controller_path . '\UserController@booking_private')->name('booking_private');
+
+Route::get('/user/booking_detail_private/{id}', $controller_path . '\UserController@booking_detail_private')->name('booking_detail_private');
 
 Route::get('/user/booking_detail/{id}', $controller_path . '\UserController@booking_detail')->name('booking_detail');
 
+Route::get('/user/quotation_private/{id}', $controller_path . '\UserController@private_quotation')->name('private_quotation');
+
 Route::get('/user/quotation/{id}', $controller_path . '\UserController@user_quotation')->name('user_quotation');
+
 Route::get('/user/payment/{id}', $controller_path . '\UserController@user_payment')->name('user_payment');
 
 Route::post('/user/add_payment', $controller_path . '\UserController@add_payment')->name('user_payment');
