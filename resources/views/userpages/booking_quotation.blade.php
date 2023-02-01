@@ -210,7 +210,7 @@ echo $end;
                                 <div id="non-printable">
                                     <div class="col-sm-12 text-center mt-3">
                                     @if($item->quotation_status == '0')
-                                    <a href="{{url('/user/payment/'.$item->quotation_id)}}" class="btn btn-secondary">แจ้งชำระเงิน</a>
+                                    <a href="{{url('/user/payment/'.$item->quotation_id.'/normal')}}" class="btn btn-secondary">แจ้งชำระเงิน</a>
                                     @endif
                                     <a href="{{url('/user/invoice/'.$item->booking_id)}}" class="btn btn btn-primary me-2" type="button"
                                     >พิมพ์</a>
