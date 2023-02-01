@@ -43,6 +43,8 @@ Route::post('/admin/update_package/{id}', $controller_path . '\AdminController@u
 
 //adminส่งใบเสนอราคา
 Route::post('/admin/add_quotation/{id}', $controller_path . '\AdminController@add_quotation')->name('admin.quotation');
+//adminส่งใบเสนอราคา_ไพรเวท
+Route::post('/admin/add_quotation_private/{id}', $controller_path . '\AdminController@add_quotation_private')->name('admin.quotation_private');
 
 //ลบรูปภาพ
 Route::get('/admin/package_img_delete/{id}', $controller_path . '\AdminController@package_img_delete')->name('admin.package_img_delete');

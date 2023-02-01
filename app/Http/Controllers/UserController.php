@@ -309,7 +309,8 @@ class UserController extends Controller
   public function private_quotation($id)
   {
     $user_quotation = DB::table('member_booking_privates')
-      ->join('booking_quotation_privates', 'member_booking_packages.booking_id', '=', 'booking_quotations_privates.booking_id')
+      ->join('booking_quotation_privates', 'member_booking_privates.booking_id', '=', 'booking_quotation_privates.booking_id')
+      ->join('users','member_booking_privates.member_id','=','users.id')
       ->where('member_booking_privates.booking_id', '=', $id)
       ->get();
     return view('userpages.booking_quotation_private', compact('user_quotation'));

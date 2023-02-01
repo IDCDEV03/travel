@@ -106,9 +106,7 @@
                             ตรวจสอบการชำระเงินเรียบร้อยแล้ว
                         </span></h5>
                         <?php endif; ?>
-
                     </div>
-
                 </div>
                 <?php if($item->booking_status == '0'): ?>
                     <div class="card">
@@ -116,11 +114,12 @@
                             <h5>ส่งใบเสนอราคา </h5>
                         </div>
                         <div class="card-body">
-                            <form class="needs-validation" action="<?php echo e(route('admin.quotation', ['id' => request()->id])); ?>"
+                            <form class="needs-validation" action="<?php echo e(route('admin.quotation_private', ['id' => request()->id])); ?>"
                                 method="POST" enctype="multipart/form-data">
                                 <?php echo csrf_field(); ?>
                                 <input type="hidden" name="booking_id" value="<?php echo e(request()->id); ?>">
                                 <input type="hidden" name="email" value="<?php echo e($item->member_email); ?>">
+                                <input type="hidden" name="package_name" value="<?php echo e($item->place_name); ?>">
 
                                 <div class="mb-3 row">
                                     <label class="col-sm-3 col-form-label pt-0">แพ็คเกจที่สั่งจอง</label>

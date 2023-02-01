@@ -104,9 +104,7 @@
                             ตรวจสอบการชำระเงินเรียบร้อยแล้ว
                         </span></h5>
                         @endif
-
                     </div>
-
                 </div>
                 @if ($item->booking_status == '0')
                     <div class="card">
@@ -114,11 +112,12 @@
                             <h5>ส่งใบเสนอราคา </h5>
                         </div>
                         <div class="card-body">
-                            <form class="needs-validation" action="{{ route('admin.quotation', ['id' => request()->id]) }}"
+                            <form class="needs-validation" action="{{ route('admin.quotation_private', ['id' => request()->id]) }}"
                                 method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" name="booking_id" value="{{ request()->id }}">
                                 <input type="hidden" name="email" value="{{ $item->member_email }}">
+                                <input type="hidden" name="package_name" value="{{ $item->place_name }}">
 
                                 <div class="mb-3 row">
                                     <label class="col-sm-3 col-form-label pt-0">แพ็คเกจที่สั่งจอง</label>

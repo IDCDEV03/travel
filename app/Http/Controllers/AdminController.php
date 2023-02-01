@@ -386,6 +386,68 @@ class AdminController extends Controller
     Mail::to($email)->send(new QuotationSend($id));
   }
 
+  public function add_quotation_private(Request $request, $id)
+  {
+    $quotation_id = date("ymd-hs");
+    $package_file = $request->file('package_file');
+
+    if ($package_file) {
+      //generate รูปภาพ
+      $name_gen = hexdec(uniqid());
+      //ดึงนามสกุลไฟล์ภาพ
+      $pk_ext = strtolower($package_file->getClientOriginalExtension());
+      $package_file_name = $name_gen . '.' . $pk_ext;
+
+      //อัพโหลดและบันทึกข้อมูล
+      $upload_location = 'public/package_file/';
+      $full_path = $upload_location . $package_file_name;
+
+      DB::table('booking_quotation_privates')->insert([
+        'booking_id' => $request->booking_id,
+        'quotation_id' => $quotation_id,
+        'package_name' => $request->package_name,
+        'total_price' => $request->total_price,
+        'price_deposit' => $request->price_deposit,
+        'package_file' => $full_path,
+        'quotation_detail' => $request->quotation_detail,
+        'quotation_status' => '0',
+        'created_at' => Carbon::now()
+      ]);
+      $package_file->move($upload_location, $package_file_name);
+      
+      DB::table('member_booking_packages')
+      ->where('booking_id', '=', $request->booking_id)
+      ->update([
+        'booking_status' => '1',
+        'updated_at' => Carbon::now()
+      ]);
+ 
+      return redirect()->route('booking_chk')->with('success', "ส่งใบเสนอราคาเรียบร้อยแล้ว");
+     } else {
+
+      DB::table('booking_quotation_privates')->insert([
+        'booking_id' => $request->booking_id,
+        'quotation_id' => $quotation_id,
+        'package_name' => $request->package_name,
+        'total_price' => $request->total_price,
+        'price_deposit' => $request->price_deposit,
+        'package_file' => 'none',
+        'quotation_detail' => $request->quotation_detail,
+        'quotation_status' => '0',
+        'created_at' => Carbon::now()
+      ]);
+
+      DB::table('member_booking_privates')
+        ->where('booking_id', '=', $request->booking_id)
+        ->update([
+          'booking_status' => '1',
+          'updated_at' => Carbon::now()
+        ]);
+ 
+      return redirect()->route('booking_chk')->with('success', "ส่งใบเสนอราคาเรียบร้อยแล้ว");      
+    }
+   }
+
   public function list_car()
   {
     $list_car = ListCar::All();
