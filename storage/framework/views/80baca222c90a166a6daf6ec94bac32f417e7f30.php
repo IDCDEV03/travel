@@ -95,7 +95,6 @@ div {
                               </td>
                               <td>
                                 <h3>ใบจองแพ็คเกจ </h3>
-
                                 </p>
                               </td>                        
                             </tr>
@@ -105,7 +104,10 @@ div {
                                  โทร. 093-545-9009</span>
                               <br>
                              <p> ที่อยู่ : 8/4 ม.1 ถ.หน้าสนามบินนานาชาติอุดรธานี <br>อ.เมือง จ.อุดรธานี 41000
-                          </p>  
+                              <br>
+                              เลขประจำตัวผู้เสียภาษี : 0413550000339
+                          </p> 
+                         
                               </td>  
                               <td>
                                 <p>เลขที่: <span>
@@ -209,7 +211,7 @@ div {
                                             <p class="m-0">งวดที่ 2</p>
                                         </td>
                                         <td>
-                                            <label>ชำระส่วนที่เหลือ (ก่อนวันเดินทาง 3 วัน)</label>
+                                            <label>ชำระส่วนที่เหลือ (ก่อนวันเดินทาง 15 วัน)</label>
                                         </td>
                                         <td>
                                             <p class="itemtext">
@@ -245,14 +247,17 @@ div {
                                 <p class="legal"><strong>การชำระเงิน</strong>
                                   <ul>
                                       <li>โอนชำระผ่านบัญชี</li>
-                                      <li>ธนาคารออมสิน
-                                          <p>
-                                          เลขที่บัญชี : 0202-8621-4901 <br>
-                                          ชื่อบัญชี : นางสาวสวลี ศรีกุลวงษ์
-                                      <br>
-                                      สาขา : สาขาเทสโก้โลตัส นาดี อุดรธานี
-                                  </p>
+                                      <?php $__currentLoopData = $bank_data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                      <li><?php echo e($row->bank_name); ?>
+
+                                          /
+                                          เลขที่บัญชี : <?php echo e($row->account_nummber); ?> /                                 ชื่อบัญชี : <?php echo e($row->bank_account_name); ?> /
+                                  
+                                      <?php echo e($row->bank_branch); ?>
+
+                                       
                                       </li>
+          <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>  
                                   </ul>
                                   </p>
                               

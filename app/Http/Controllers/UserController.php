@@ -195,7 +195,9 @@ class UserController extends Controller
       ->join('users','member_booking_packages.member_id','=','users.id')
       ->where('booking_quotations.booking_id', '=', $id)
       ->get();
-    return view('userpages.user_invoice', compact('invoice'));
+      $bank_data = DB::table('sp_banks')
+      ->get();
+    return view('userpages.user_invoice', compact('invoice','bank_data'));
   }
 
   public function user_cancel_booking($id)

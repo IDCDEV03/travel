@@ -37,7 +37,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-md-6 "><span>ใบเสนอราคาที่ #{{ $item->quotation_id }}</span></div>
+                                    <div class="col-md-6 "><span>ใบจองที่ #{{ $item->quotation_id }}</span></div>
                                     <div class="col-md-6 "><span>จำนวนเงินมัดจำที่ต้องชำระ:
                                             @php
                                                 $deposit_price = number_format($item->price_deposit);
