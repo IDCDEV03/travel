@@ -514,7 +514,9 @@ class AdminController extends Controller
 
   public function bank()
   {
-    return view('admin.bank');
+    $data_bank = DB::table('sp_banks')
+    ->get();
+    return view('admin.bank',compact('data_bank'));
   }
 
   public function payment_chk($id)
