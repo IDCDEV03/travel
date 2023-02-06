@@ -186,15 +186,13 @@ echo $end;
                         <p class="legal"><strong>การชำระเงิน</strong>
                         <ul>
                             <li>โอนชำระผ่านบัญชี</li>
-@foreach ($bank_data as $row)
+                            @foreach ($bank_data as $row)
                             <li>{{$row->bank_name}}
                                 /
-                                เลขที่บัญชี : {{$row->account_nummber}} /                                 ชื่อบัญชี : {{$row->bank_account_name}} /
-                        
-                            {{$row->bank_branch}}
-                             
+                                เลขที่บัญชี : {{$row->account_nummber}} /                                 ชื่อบัญชี : {{$row->bank_account_name}} /                        
+                            {{$row->bank_branch}}                             
                             </li>
-@endforeach                    
+                            @endforeach                    
                         </ul>
                         </p>
                     </div>

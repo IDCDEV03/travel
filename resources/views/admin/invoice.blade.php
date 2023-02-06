@@ -207,7 +207,8 @@ div {
                                         </td>
                                         <td>
                                             <p class="itemtext">
-                                                @php
+                                             
+                                                @php                                              
                                                     $result = $item->total_price - $item->price_deposit;
                                                     echo number_format($result);
                                                 @endphp</p>
@@ -217,7 +218,11 @@ div {
                                         <td></td>
                         
                                         <td align="right">
-                                            <h6 class="mb-0 p-2">จำนวนชำระค่ามัดจำงวดที่ 1 รวมทั้งสิ้น </h6>
+                                            <h6 class="mb-0 p-2">จำนวนชำระค่ามัดจำงวดที่ 1 รวมทั้งสิ้น (
+                                            @php
+                                            echo num2wordsThai($deposit_price);
+                                            @endphp บาทถ้วน )
+                                            </h6>
                                         </td>
                                         <td class="payment">
                                             <h6 class="mb-0 p-2">
