@@ -12,7 +12,10 @@ class HomeController extends Controller
 
     public function home()
     {
-        return view('home.index');
+        $data = DB::table('package_tours')
+        ->where('package_status' , '=', '1')
+        ->get();
+        return view('home.index',compact('data'));
     }
 
     public function about_us()
@@ -34,8 +37,12 @@ class HomeController extends Controller
         return view('userpages.home');
     }
 
-    public function adminHome() 
+    public function tour_detail($id)
     {
-        return view('admin.list_package');
+        $package_tours = DB::table('package_tours')
+        ->where('package_id','=', $id)
+        ->get();
+        return view('home.tour-details',compact('package_tours'));
     }
+
 }

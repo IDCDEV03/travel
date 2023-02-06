@@ -120,6 +120,7 @@ Route::POST('/user/change_password', $controller_path . '\UserController@update_
 Route::get('/about-us', $controller_path . '\HomeController@about_us')->name('about_us.show');
 Route::get('/contact', $controller_path . '\HomeController@contact')->name('contact.show');
 Route::get('/service', $controller_path . '\HomeController@service')->name('service.show');
+Route::get('/detail/{id}', $controller_path . '\HomeController@tour_detail')->name('detail.show');
 
 //Route Register&Login
 Route::group(['namespace' => 'App\Http\Controllers'], function()

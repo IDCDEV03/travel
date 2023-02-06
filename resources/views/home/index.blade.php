@@ -59,6 +59,39 @@
         </div>
     </section>
 
+     <!--Promotional Tours Area -->
+     <section id="promotional_tours" class="section_padding_top">
+        <div class="container">
+            <!-- Section Heading -->
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="section_heading_center">
+                        <h2>โปรแกรมทัวร์ของเรา</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="promotional_tour_slider owl-theme owl-carousel dot_style">
+                        @foreach ($data as $item) 
+                        <div class="theme_common_box_two img_hover">
+                            <div class="theme_two_box_img">
+                                <a href="{{route('detail.show', ['id' => $item->package_id])}}"><img src="{{asset($item->package_cover)}}" alt="img"></a>
+                                <p><i class="fas fa-map-marker-alt"></i>{{$item->package_place}}</p>
+                            </div>
+                            <div class="theme_two_box_content">
+                                <h4><a href="{{route('detail.show', ['id' => $item->package_id])}}">{{$item->package_name}}</a></h4>
+                           
+                                <h3>{{number_format($item->package_price)}}.- <span>/ คน</span></h3>
+                            </div>
+                        </div>           
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Top Service And Tour Area-->
     <section id="top_service_andtour" class="section_padding_top">
         <div class="container">
