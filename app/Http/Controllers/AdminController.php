@@ -59,6 +59,7 @@ class AdminController extends Controller
   {
     $package_tour = DB::table('member_booking_packages')
       ->join('package_tours', 'member_booking_packages.package_id', '=', 'package_tours.package_id')
+      ->whereNotIn('booking_status', [5])
       ->orderBy('member_booking_packages.created_at', 'desc')
       ->get();
 

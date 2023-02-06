@@ -9,7 +9,7 @@
 @endsection
 
 @section('breadcrumb-title')
-    <h3>รายการใบสั่งจอง</h3>
+    <h3>รายการใบสั่งจอง (ดำเนินการเรียบร้อยแล้ว)</h3>
 @endsection
 
 @section('content')
