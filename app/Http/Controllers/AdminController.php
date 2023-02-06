@@ -519,6 +519,49 @@ class AdminController extends Controller
     return view('admin.bank',compact('data_bank'));
   }
 
+  public function insert_bank(Request $request)
+  {
+    DB::table('sp_banks')
+    ->insert([
+      'bank_name' => $request->bank_name,
+      'bank_account_name' => $request->bank_account_name,
+      'account_nummber' => $request->account_nummber,
+      'bank_branch' => $request->bank_branch,  
+      'created_at' => Carbon::now()
+    ]);
+    return redirect()->route('bank')->with('success', "เพิ่มข้อมูลเรียบร้อยแล้ว");
+  }
+
+  public function data_update_bank($id)
+  {
+    $data_bank =  DB::table('sp_banks')
+    ->where('id','=', $id)
+    ->get();
+    return view('admin.bank_edit',compact('data_bank'));
+  }
+
+  public function update_bank(Request $request,$id)
+  {
+    DB::table('sp_banks')
+    ->where('id','=', $id)
+    ->update([
+      'bank_name' => $request->bank_name,
+      'bank_account_name' => $request->bank_account_name,
+      'account_nummber' => $request->account_nummber,
+      'bank_branch' => $request->bank_branch,  
+      'updated_at' => Carbon::now()
+    ]);
+    return redirect()->route('bank')->with('success', "แก้ไขข้อมูลเรียบร้อยแล้ว");
+  }
+
+  public function delete_bank($id)
+  {
+    DB::table('sp_banks')
+    ->where('id', '=', $id)
+    ->delete();
+    return redirect()->back()->with('success', "ลบข้อมูลเรียบร้อยแล้ว");
+  }
+
   public function payment_chk($id)
   {
     $user_payment = DB::table('user_payments')

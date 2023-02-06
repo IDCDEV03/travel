@@ -187,19 +187,22 @@ echo $end;
 </div>
                                         <!-- End Table-->
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-12">
                     <div>
                         <p class="legal"><strong>การชำระเงิน</strong>
                         <ul>
                             <li>โอนชำระผ่านบัญชี</li>
-                            <li>ธนาคารออมสิน
-                                <p>
-                                เลขที่บัญชี : 0202-8621-4901 <br>
-                                ชื่อบัญชี : นางสาวสวลี ศรีกุลวงษ์
-                            <br>
-                            สาขา : สาขาเทสโก้โลตัส นาดี อุดรธานี
-                                </p>
+<?php $__currentLoopData = $bank_data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <li><?php echo e($row->bank_name); ?>
+
+                                /
+                                เลขที่บัญชี : <?php echo e($row->account_nummber); ?> /                                 ชื่อบัญชี : <?php echo e($row->bank_account_name); ?> /
+                        
+                            <?php echo e($row->bank_branch); ?>
+
+                             
                             </li>
+<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>                    
                         </ul>
                         </p>
                     </div>

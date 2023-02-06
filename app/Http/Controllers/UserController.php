@@ -110,11 +110,18 @@ class UserController extends Controller
       ->join('users','member_booking_packages.member_id','=','users.id')
       ->where('member_booking_packages.booking_id', '=', $id)
       ->get();
-    return view('userpages.booking_quotation', compact('user_quotation'));
+
+      $bank_data = DB::table('sp_banks')
+      ->get();
+    return view('userpages.booking_quotation', compact('user_quotation','bank_data'));
   }
 
   public function user_payment($id,$type)
   {
+
+    $bank_data = DB::table('sp_banks')
+    ->get(); 
+
     $payment = DB::table('booking_quotations')
       ->where('booking_quotations.quotation_id', '=', $id)
       ->get();
@@ -122,7 +129,7 @@ class UserController extends Controller
     $payment_private = DB::table('booking_quotation_privates')
     ->where('booking_quotation_privates.quotation_id', '=', $id)
     ->get();
-    return view('userpages.user_payment', compact('payment','payment_private'));
+    return view('userpages.user_payment', compact('payment','payment_private','bank_data'));
   }
 
   public function add_payment(Request $request)

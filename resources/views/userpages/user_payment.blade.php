@@ -24,10 +24,12 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-md-2"><span>ธนาคารออมสิน</span></div>
-                                    <div class="col-md-4"><span>ชื่อบัญชี : นางสาวสวลี ศรีกุลวงษ์</span></div>
-                                    <div class="col-md-6"><span>0202-8621-4901 สาขา : สาขาเทสโก้โลตัส นาดี อุดรธานี</span>
+                                    @foreach ($bank_data as $row)
+                                    <div class="col-md-2"><span>{{$row->bank_name}}</span></div>
+                                    <div class="col-md-4"><span>ชื่อบัญชี : {{$row->bank_account_name}}</span></div>
+                                    <div class="col-md-6"><span>{{$row->account_nummber}} {{$row->bank_branch}}</span>
                                     </div>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
@@ -76,19 +78,13 @@
                                         <h6>ธนาคารที่โอนชำระ</h6>
                                     </div>
                                     <div class="col">
-                                        <div class="m-t-15 m-checkbox-inline custom-radio-ml">
-                                            <div class="form-check form-check-inline radio radio-primary">
-                                                <input class="form-check-input" id="radioinline1" type="radio"
-                                                    name="payment_bank" value="ธนาคารออมสิน">
-                                                <label class="form-check-label mb-0 "
-                                                    for="radioinline1">ธนาคารออมสิน</label>
-                                            </div>
-                                            @error('payment_bank')
-                                                <span class="text-danger my-2">
-                                                    << {{ $message }}>>
-                                                </span>
-                                            @enderror
-                                        </div>
+                                        <select class="form-select digits">
+                                            <option selected disabled value="">เลือก..</option>
+                                            @foreach ($bank_data as $row)
+                        
+                                            <option value="{{$row->bank_name}}">{{$row->bank_name}}</option>
+                                            @endforeach
+                                          </select>
                                     </div>
                                     <hr>
                                     <div class="row">
@@ -123,9 +119,13 @@
 <div class="card">
     <div class="card-body">
         <div class="row">
-            <div class="col-md-2"><span>ธนาคารออมสิน</span></div>
-            <div class="col-md-4"><span>ชื่อบัญชี : นางสาวสวลี ศรีกุลวงษ์</span></div>
-            <div class="col-md-6"><span>0202-8621-4901 สาขา : สาขาเทสโก้โลตัส นาดี อุดรธานี</span>
+
+            @foreach ($bank_data as $row)
+                                    <div class="col-md-2"><span>{{$row->bank_name}}</span></div>
+                                    <div class="col-md-4"><span>ชื่อบัญชี : {{$row->bank_account_name}}</span></div>
+                                    <div class="col-md-6"><span>{{$row->account_nummber}} {{$row->bank_branch}}</span>
+                                    </div>
+                                    @endforeach
             </div>
         </div>
     </div>
@@ -174,20 +174,20 @@
             <div class="col-sm-12">
                 <h6>ธนาคารที่โอนชำระ</h6>
             </div>
-            <div class="col">
-                <div class="m-t-15 m-checkbox-inline custom-radio-ml">
-                    <div class="form-check form-check-inline radio radio-primary">
-                        <input class="form-check-input" id="radioinline1" type="radio"
-                            name="payment_bank" value="ธนาคารออมสิน">
-                        <label class="form-check-label mb-0 "
-                            for="radioinline1">ธนาคารออมสิน</label>
-                    </div>
+            <div class="col">               
+                <select class="form-select digits">
+                    <option selected disabled value="">เลือก..</option>
+                    @foreach ($bank_data as $row)
+
+                    <option value="{{$row->bank_name}}">{{$row->bank_name}}</option>
+                    @endforeach
+                  </select>
                     @error('payment_bank')
                         <span class="text-danger my-2">
                             << {{ $message }}>>
                         </span>
                     @enderror
-                </div>
+                
             </div>
             <hr>
             <div class="row">

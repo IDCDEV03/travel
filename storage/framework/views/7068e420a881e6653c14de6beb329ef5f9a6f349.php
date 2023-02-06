@@ -24,10 +24,12 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-md-2"><span>ธนาคารออมสิน</span></div>
-                                    <div class="col-md-4"><span>ชื่อบัญชี : นางสาวสวลี ศรีกุลวงษ์</span></div>
-                                    <div class="col-md-6"><span>0202-8621-4901 สาขา : สาขาเทสโก้โลตัส นาดี อุดรธานี</span>
+                                    <?php $__currentLoopData = $bank_data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <div class="col-md-2"><span><?php echo e($row->bank_name); ?></span></div>
+                                    <div class="col-md-4"><span>ชื่อบัญชี : <?php echo e($row->bank_account_name); ?></span></div>
+                                    <div class="col-md-6"><span><?php echo e($row->account_nummber); ?> <?php echo e($row->bank_branch); ?></span>
                                     </div>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </div>
                             </div>
                         </div>
@@ -83,26 +85,13 @@ unset($__errorArgs, $__bag); ?>
                                         <h6>ธนาคารที่โอนชำระ</h6>
                                     </div>
                                     <div class="col">
-                                        <div class="m-t-15 m-checkbox-inline custom-radio-ml">
-                                            <div class="form-check form-check-inline radio radio-primary">
-                                                <input class="form-check-input" id="radioinline1" type="radio"
-                                                    name="payment_bank" value="ธนาคารออมสิน">
-                                                <label class="form-check-label mb-0 "
-                                                    for="radioinline1">ธนาคารออมสิน</label>
-                                            </div>
-                                            <?php $__errorArgs = ['payment_bank'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                                                <span class="text-danger my-2">
-                                                    << <?php echo e($message); ?>>>
-                                                </span>
-                                            <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
-                                        </div>
+                                        <select class="form-select digits">
+                                            <option selected disabled value="">เลือก..</option>
+                                            <?php $__currentLoopData = $bank_data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        
+                                            <option value="<?php echo e($row->bank_name); ?>"><?php echo e($row->bank_name); ?></option>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                          </select>
                                     </div>
                                     <hr>
                                     <div class="row">
@@ -144,9 +133,13 @@ unset($__errorArgs, $__bag); ?>
 <div class="card">
     <div class="card-body">
         <div class="row">
-            <div class="col-md-2"><span>ธนาคารออมสิน</span></div>
-            <div class="col-md-4"><span>ชื่อบัญชี : นางสาวสวลี ศรีกุลวงษ์</span></div>
-            <div class="col-md-6"><span>0202-8621-4901 สาขา : สาขาเทสโก้โลตัส นาดี อุดรธานี</span>
+
+            <?php $__currentLoopData = $bank_data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <div class="col-md-2"><span><?php echo e($row->bank_name); ?></span></div>
+                                    <div class="col-md-4"><span>ชื่อบัญชี : <?php echo e($row->bank_account_name); ?></span></div>
+                                    <div class="col-md-6"><span><?php echo e($row->account_nummber); ?> <?php echo e($row->bank_branch); ?></span>
+                                    </div>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </div>
         </div>
     </div>
@@ -202,14 +195,14 @@ unset($__errorArgs, $__bag); ?>
             <div class="col-sm-12">
                 <h6>ธนาคารที่โอนชำระ</h6>
             </div>
-            <div class="col">
-                <div class="m-t-15 m-checkbox-inline custom-radio-ml">
-                    <div class="form-check form-check-inline radio radio-primary">
-                        <input class="form-check-input" id="radioinline1" type="radio"
-                            name="payment_bank" value="ธนาคารออมสิน">
-                        <label class="form-check-label mb-0 "
-                            for="radioinline1">ธนาคารออมสิน</label>
-                    </div>
+            <div class="col">               
+                <select class="form-select digits">
+                    <option selected disabled value="">เลือก..</option>
+                    <?php $__currentLoopData = $bank_data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+
+                    <option value="<?php echo e($row->bank_name); ?>"><?php echo e($row->bank_name); ?></option>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                  </select>
                     <?php $__errorArgs = ['payment_bank'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -222,7 +215,7 @@ $message = $__bag->first($__errorArgs[0]); ?>
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
-                </div>
+                
             </div>
             <hr>
             <div class="row">

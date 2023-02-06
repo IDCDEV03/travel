@@ -181,19 +181,20 @@ echo $end;
 </div>
                                         <!-- End Table-->
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-12">
                     <div>
                         <p class="legal"><strong>การชำระเงิน</strong>
                         <ul>
                             <li>โอนชำระผ่านบัญชี</li>
-                            <li>ธนาคารออมสิน
-                                <p>
-                                เลขที่บัญชี : 0202-8621-4901 <br>
-                                ชื่อบัญชี : นางสาวสวลี ศรีกุลวงษ์
-                            <br>
-                            สาขา : สาขาเทสโก้โลตัส นาดี อุดรธานี
-                                </p>
+@foreach ($bank_data as $row)
+                            <li>{{$row->bank_name}}
+                                /
+                                เลขที่บัญชี : {{$row->account_nummber}} /                                 ชื่อบัญชี : {{$row->bank_account_name}} /
+                        
+                            {{$row->bank_branch}}
+                             
                             </li>
+@endforeach                    
                         </ul>
                         </p>
                     </div>

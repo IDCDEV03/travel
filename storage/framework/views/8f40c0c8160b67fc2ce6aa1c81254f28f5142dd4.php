@@ -16,6 +16,12 @@
         <div class="row">
             <div class="col-sm-12">
 
+                <?php if(session('success')): ?>
+                <div class="alert alert-success" role="alert">
+                    <b><?php echo e(session('success')); ?></b>
+                </div>
+                <?php endif; ?>
+
                 <div class="card">          
                     <div class="card-header">  
                     <button class="btn btn-secondary" type="button" data-bs-toggle="modal" data-original-title="test" data-bs-target="#exampleModal">เพิ่มบัญชีธนาคาร</button>
@@ -43,9 +49,9 @@
                                             <td><?php echo e($row->bank_branch); ?></td>
                                             <td>
                                             
-                                                    <a href="#" class="btn btn-info" >
-                                                        <i class="fa fa-edit"></i> แก้ไข</a>
-                                                    <a href="#" class="btn btn-danger" ><i class="fa fa-trash-o"></i> ลบ</a>
+                                                <a class="btn btn-info" href="<?php echo e(route('data_update_bank', ['id' => $row->id])); ?>"><i class="fa fa-edit"></i> แก้ไข</a>
+  
+                                                    <a href="<?php echo e(route('admin.delete_bank', ['id' => $row->id])); ?>" class="btn btn-danger" onclick="return confirm('ต้องการลบ ใช่หรือไม่?');"><i class="fa fa-trash-o"></i> ลบ</a>
                                                 
                                             </td>
                                         </tr>
@@ -69,7 +75,8 @@
           <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">.
-            <form action="" method="post">
+            <form action="<?php echo e(route('admin.insert_bank')); ?>" method="post">
+                <?php echo csrf_field(); ?>
                 <div class="row">
                     <div class="col">
                       <div class="mb-3">
@@ -101,13 +108,13 @@
                         <input class="form-control" type="text" name="bank_branch">
                       </div>
                     </div>
-                </div>
-            </form>
-        </div>
+                </div>            
+             </div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="submit">บันทึกข้อมูล</button>
           <button class="btn btn-primary" type="button" data-bs-dismiss="modal">ปิด</button>
         </div>
+        </form>
       </div>
     </div>
   </div>

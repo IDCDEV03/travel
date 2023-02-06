@@ -27,7 +27,6 @@ Route::get('/admin/add_car', $controller_path . '\AdminController@add_car')->nam
 Route::post('/admin/add_listcar', $controller_path . '\AdminController@add_listcar')->name('add_listcar');
 Route::get('/admin/edit_car/{id}', $controller_path . '\AdminController@edit_car')->name('edit_car');
 Route::post('/admin/update_car/{id}', $controller_path . '\AdminController@update_car')->name('update_car');
-Route::get('/admin/bank', $controller_path . '\AdminController@bank')->name('bank');
 
 Route::get('/admin/index', $controller_path . '\AdminController@home')->name('admin_index');
 Route::get('/admin/booking_chk', $controller_path . '\AdminController@booking_chk')->name('booking_chk');
@@ -74,8 +73,13 @@ Route::get('/admin/user_delete/{id}', $controller_path . '\AdminController@admin
 //admin_list_invoice
 Route::get('/admin/list_invoice', $controller_path . '\AdminController@list_invoice')->name('admin.list_invoice');
 
-
+//admin_bank
+Route::get('/admin/bank', $controller_path . '\AdminController@bank')->name('bank');
+Route::post('/admin/insert_bank', $controller_path . '\AdminController@insert_bank')->name('admin.insert_bank');
+Route::get('/admin/delete_bank/{id}', $controller_path . '\AdminController@delete_bank')->name('admin.delete_bank');
 });
+Route::get('/admin/data_update_bank/{id}', $controller_path . '\AdminController@data_update_bank')->name('data_update_bank');
+Route::post('/admin/update_bank/{id}', $controller_path . '\AdminController@update_bank')->name('admin.update_bank');
 
 //User
 Route::get('/userpages/book_package/{id}/package/{pkid}', $controller_path . '\UserController@book_package')->name('book_package');
