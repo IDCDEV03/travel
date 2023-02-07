@@ -116,6 +116,30 @@ class UserController extends Controller
     return view('userpages.booking_quotation', compact('user_quotation','bank_data'));
   }
 
+  public function user_quotation_pre($id)
+  {
+    $user_quotation = DB::table('member_booking_packages')
+      ->join('booking_quotations', 'member_booking_packages.booking_id', '=', 'booking_quotations.booking_id')
+      ->join(
+        'package_tours',
+        'member_booking_packages.package_id',
+        '=',
+        'package_tours.package_id'
+      )
+      ->join('users','member_booking_packages.member_id','=','users.id')
+      ->where('member_booking_packages.booking_id', '=', $id)
+      ->get();
+      
+      $user_quotation2 = DB::table('member_booking_packages')
+      ->where('member_booking_packages.booking_id', '=', $id)
+      ->get();
+
+      $bank_data = DB::table('sp_banks')
+      ->get();
+    
+    return view('userpages.booking_quotation_pre', compact('user_quotation','user_quotation2','bank_data'));
+  }
+
   public function user_payment($id,$type)
   {
 
@@ -187,7 +211,7 @@ class UserController extends Controller
   }
 
 
-  public function user_invoice($id)
+  public function user_invoice($id,$com)
   {
     $invoice = DB::table('booking_quotations')
       ->join('member_booking_packages', 'booking_quotations.booking_id', '=', 'member_booking_packages.booking_id')
@@ -195,9 +219,14 @@ class UserController extends Controller
       ->join('users','member_booking_packages.member_id','=','users.id')
       ->where('booking_quotations.booking_id', '=', $id)
       ->get();
+
+      $invoice2 = DB::table('member_booking_packages')
+      ->where('member_booking_packages.booking_id', '=', $id)
+      ->get();
+
       $bank_data = DB::table('sp_banks')
       ->get();
-    return view('userpages.user_invoice', compact('invoice','bank_data'));
+    return view('userpages.user_invoice', compact('invoice','bank_data','invoice2'));
   }
 
   public function user_cancel_booking($id)

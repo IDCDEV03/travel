@@ -42,8 +42,9 @@ div {
 }
 
 .product-details {
-  margin-top: 13px;
+  margin-top: 10px;
 }
+
     </style>
     <style type="text/css">
         @media print {
@@ -83,67 +84,57 @@ div {
                     <div class="invoice">
                       <div>
 
-                        <table class="table table-borderless">
-                        
+                 
+                        <table class="table table-borderless">                        
                           <tbody>
                             <tr>                          
-                              <td>
+                              <td style="width: 20%" class="text-center">
                                 <img class="media-object img-60"
-                            src="{{ asset('assets/images/logo/logo-big.png') }}"
-                            alt="" width="200px"><br>
-                             <span class="fs-18"><strong>เอส แอนด์ พี อินเตอร์ทัวร์</strong> </span>
+                            src="{{ asset('assets/images/sp-logo-200.png') }}"
+                            alt="" width="180px"><br>
+                              </span>
                               </td>
-                              <td>
-                                <h3>ใบจองแพ็คเกจ </h3>
-
-                                </p>
+                              <td style="width: 60%">
+                                <span class="fs-16"><strong>ห้างหุ้นส่วนจำกัด เอส แอนด์ พี อินเตอร์เนชั่นแนลเซอร์วิส</strong><br>
+                                  <span>
+                                    โทร. 093-545-9009</span>
+                                 <br>
+                                <p> ที่อยู่ : 8/4 ม.1 ถ.หน้าสนามบินนานาชาติอุดรธานี อ.เมือง จ.อุดรธานี 41000
+                                 <br>
+                                 เลขประจำตัวผู้เสียภาษี : 0413550000339
+                             </p>  
                               </td>                        
                             </tr>
-                            <tr>                        
-                              <td>
-                                <span>
-                                 โทร. 093-545-9009</span>
-                              <br>
-                             <p> ที่อยู่ : 8/4 ม.1 ถ.หน้าสนามบินนานาชาติอุดรธานี <br>อ.เมือง จ.อุดรธานี 41000
-                          </p>  
-                              </td>  
-                              <td>
-                                <p>เลขที่: <span>
-                                  {{ $item->quotation_id }}
-                              </span>
-                              <br>
-                                วันที่: <span>
-                                  {{ Carbon\Carbon::parse($item->created_at)->format('d/m/Y') }}
-      
-                              </span><br> ใช้ได้ถึง:
-                              <span>
-                                  @php
-      $end = Carbon::parse($item->created_at)->addDays(15)->format('d/m/Y');
-      echo $end;
-      @endphp
-      
-                              </span>
-                                </td>                         
-                            </tr>
-                            
                           </tbody>
                         </table>
+                    
+                        <p class="fs-20">ใบจองแพ็คเกจ</p>
+                        <table class="table table-bordered border-dark">
+                          <tbody>
+                            <tr>
+                              <td style="width: 50%" colspan="2">ชื่อ : {{ auth()->user()->member_name }}</td>                            
+                    
+                              <td style="width: 20%" colspan="2">เลขที่ : {{ $item->quotation_id }}</td>
+                                                  
+                            </tr>
+                            <tr>
+                              <td style="width: 50%" colspan="2">ที่อยู่ :</td>
                         
-                        <hr >
-                        <!-- End InvoiceTop-->
-                        <div class="row">
-                          <div class="col-md-4">
-                            <div class="media">                             
-                              <div class="media-body m-l-20">
-                                <p>ลูกค้า</p>
-                                <h4 class="media-heading">{{ auth()->user()->member_name }}</h4>
-                                <p>
-                                    {{$item->member_email}} 
-                                    <br><span>{{$item->user_phone}}</span></p>
-                              </div>
-                            </div>
-                          </div>                      
-                        </div>
+                              <td style="width: 20%" colspan="2">วันที่ : {{ Carbon\Carbon::parse($item->created_at)->format('d/m/Y') }}</td>
+                       
+                            </tr>
+                            <tr>
+                              <td style="width: 50%" colspan="2">อีเมล : {{$item->member_email}}</td>                          
+                              <td style="width: 50%" colspan="2">ใช้ได้ถึง:  {{ Carbon\Carbon::parse($item->date_start)->format('d/m/Y') }}</td>
+                              
+                            </tr>
+                            <tr>
+                              <td style="width: 50%" colspan="2">โทร : {{$item->user_phone}}</td> 
+                     <td></td>
+                            </tr>
+                          </tbody>
+                        </table>
+
                         <!-- End Invoice Mid-->
                         <div>
                           <div class="table-responsive invoice-table" id="table">
@@ -187,7 +178,9 @@ div {
                                             <p class="m-0">งวดที่ 1</p>
                                         </td>
                                         <td class="txt-secondary">
-                                            <label>มัดจำ50%</label>
+                                            <label>มัดจำ 50% (กรุณาชำระภายในวันที่
+                                              {{Carbon::parse($item->created_at)->addDays(5)->format('d/m/Y')}})
+                                            </label>
                                         </td>
                         
                                         <td class="txt-secondary"> 
@@ -203,12 +196,12 @@ div {
                                             <p class="m-0">งวดที่ 2</p>
                                         </td>
                                         <td>
-                                            <label>ชำระส่วนที่เหลือ (ก่อนวันเดินทาง 3 วัน)</label>
+                                            <label>ชำระส่วนที่เหลือ (ก่อนวันเดินทาง 15 วัน)</label>
                                         </td>
                                         <td>
                                             <p class="itemtext">
                                              
-                                                @php                                              
+                                                @php  
                                                     $result = $item->total_price - $item->price_deposit;
                                                     echo number_format($result);
                                                 @endphp</p>
@@ -218,10 +211,7 @@ div {
                                         <td></td>
                         
                                         <td align="right">
-                                            <h6 class="mb-0 p-2">จำนวนชำระค่ามัดจำงวดที่ 1 รวมทั้งสิ้น (
-                                            @php
-                                            echo num2wordsThai($deposit_price);
-                                            @endphp บาทถ้วน )
+                                            <h6 class="mb-0 p-2">จำนวนชำระค่ามัดจำงวดที่ 1 รวมทั้งสิ้น
                                             </h6>
                                         </td>
                                         <td class="payment">
@@ -234,6 +224,14 @@ div {
                                                 บาท</h6>
                                         </td>
                                     </tr>
+                                    <tr>
+                                      <td >ตัวอักษร</td>
+                                      <td align="right"> 
+                                        ( @php
+                                        echo num2wordsThai($deposit_price).'บาทถ้วน'
+                                        ;
+                                        @endphp  )</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -244,14 +242,14 @@ div {
                                 <p class="legal"><strong>การชำระเงิน</strong>
                                   <ul>
                                       <li>โอนชำระผ่านบัญชี</li>
-                                      <li>ธนาคารออมสิน
-                                          <p>
-                                          เลขที่บัญชี : 0202-8621-4901 <br>
-                                          ชื่อบัญชี : นางสาวสวลี ศรีกุลวงษ์
-                                      <br>
-                                      สาขา : สาขาเทสโก้โลตัส นาดี อุดรธานี
-                                  </p>
+                                      @foreach ($data_bank as $row)
+                                      <li>{{$row->bank_name}}
+                                          /
+                                          เลขที่บัญชี : {{$row->account_nummber}} /                                 ชื่อบัญชี : {{$row->bank_account_name}} /                        
+                                      {{$row->bank_branch}}                             
                                       </li>
+                                      @endforeach   
+                                      
                                   </ul>
                                   </p>
                               

@@ -44,7 +44,7 @@
                             <th>ที่</th>
                             <th>แพ็คเกจ</th>
                             <th>ระหว่างวันที่</th>
-                            <th>จำนวนที่นั่ง</th>
+                         
                             <th>สถานะ</th>
                             <th>ตั้งค่า</th>
                         </tr>
@@ -65,27 +65,33 @@
                                         </li>
                                     </ul>
                                     </td>
-                                <td><?php echo e($row->number_of_travel); ?></td>
+                             
                                 <td>
 
                                     <?php if($row->booking_status == '0'): ?>
-                                    <span class="badge bg-secondary">รอตรวจสอบ</span>
+                                    <span class="txt-secondary">รอตรวจสอบ</span>
                                     <?php elseif($row->booking_status == '1'): ?>
-                                    <span class="badge bg-info">
-                                        ส่งใบเสนอราคาแล้ว
+                                    <span class="txt-info">
+                                        ส่งใบจองแล้ว
                                     </span>
                                     <?php elseif($row->booking_status == '2'): ?>
-                                    <span class="badge bg-danger">
+                                    <span class="txt-danger">
                                         ยกเลิกการจอง
                                     </span>
                                     <?php elseif($row->booking_status == '4'): ?>
-                                    <span class="badge bg-secondary">
+                                    <span class="txt-secondary">
                                         แจ้งชำระเงินแล้ว<br> รอตรวจสอบ
                                     </span>
                                     <?php elseif($row->booking_status == '5'): ?>
-                                    <span class="badge bg-success">
-                                       ตรวจสอบการชำระเงินเรียบร้อย
-                                    </span>
+                                    <span class="txt-success">
+                                      ชำระเงินมัดจำงวดที่ 1 แล้ว </span> <br>
+                                      <span class="txt-danger">
+                                     ( ชำระงวดที่ 2 ภายในวันที่ 
+                                    <?php echo e(Carbon::parse($row->date_start)->addDays(-15)->format('d/m/Y')); ?>
+
+                                     
+                                        )</span>
+                                   
                                     <?php endif; ?>
 
                                 </td>

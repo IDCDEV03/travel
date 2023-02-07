@@ -101,6 +101,7 @@ Route::get('/user/booking_detail/{id}', $controller_path . '\UserController@book
 Route::get('/user/quotation_private/{id}', $controller_path . '\UserController@private_quotation')->name('private_quotation');
 
 Route::get('/user/quotation/{id}', $controller_path . '\UserController@user_quotation')->name('user_quotation');
+Route::get('/user/quotation_pre/{id}', $controller_path . '\UserController@user_quotation_pre')->name('user_quotation_pre');
 
 Route::get('/user/payment/{id}/{type}', $controller_path . '\UserController@user_payment')->name('user_payment');
 
@@ -109,7 +110,7 @@ Route::post('/user/add_payment', $controller_path . '\UserController@add_payment
 Route::get('/user/all_packages', $controller_path . '\UserController@all_packages')->name('user.all_packages');
 
 //user_invoice
-Route::get('/user/invoice/{id}', $controller_path . '\UserController@user_invoice')->name('user_invoice');
+Route::get('/user/invoice/{id}/{com}', $controller_path . '\UserController@user_invoice')->name('user_invoice');
 
 //user_ยกเลิกการของ
 Route::get('/user/cancel_booking/{id}', $controller_path . '\UserController@user_cancel_booking')->name('cancel_booking');

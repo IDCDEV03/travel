@@ -200,7 +200,7 @@ echo $end;
                 </div>
                 <div class="col-md-4">
                     @if($item->quotation_status == '2')
-                   <span class="txt-success">หมายเหตุ : ชำระมัดจำงวดที่ 1 แล้ว </span>
+                   <span class="txt-danger">หมายเหตุ : ชำระมัดจำงวดที่ 1 แล้ว </span>
                     @endif
                 </div>
             </div>

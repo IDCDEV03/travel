@@ -73,7 +73,10 @@ div {
     <div id="printable">
         @foreach($invoice as $item)
 <!---- start ----->
-
+@php
+$c1 = request()->com == 'c1';
+$none = request()->com == 'none';
+@endphp
           <!-- Container-fluid starts-->
           <div class="container">
             <div class="row">
@@ -83,69 +86,58 @@ div {
                     <div class="invoice">
                       <div>
 
-                        <table class="table table-borderless">
-                        
+                        <table class="table table-borderless">                        
                           <tbody>
                             <tr>                          
-                              <td>
+                              <td style="width: 20%" class="text-center">
                                 <img class="media-object img-60"
-                            src="{{ asset('assets/images/logo/logo-big.png') }}"
-                            alt="" width="200px"><br>
-                             <span class="fs-18"><strong>เอส แอนด์ พี อินเตอร์ทัวร์</strong> </span>
+                            src="{{ asset('assets/images/sp-logo-200.png') }}"
+                            alt="" width="180px"><br>
+                              </span>
                               </td>
-                              <td>
-                                <h3>ใบจองแพ็คเกจ </h3>
-                                </p>
+                              <td style="width: 60%">
+                                <span class="fs-16"><strong>ห้างหุ้นส่วนจำกัด เอส แอนด์ พี อินเตอร์เนชั่นแนลเซอร์วิส</strong><br>
+                                  <span>
+                                    โทร. 093-545-9009</span>
+                                 <br>
+                                <p class="fs-14"> ที่อยู่ : 8/4 ม.1 ถ.หน้าสนามบินนานาชาติอุดรธานี อ.เมือง จ.อุดรธานี 41000
+                                 <br>
+                                 เลขประจำตัวผู้เสียภาษี : 0413550000339
+                             </p>  
                               </td>                        
                             </tr>
-                            <tr>                        
-                              <td>
-                                <span>
-                                 โทร. 093-545-9009</span>
-                              <br>
-                             <p> ที่อยู่ : 8/4 ม.1 ถ.หน้าสนามบินนานาชาติอุดรธานี <br>อ.เมือง จ.อุดรธานี 41000
-                              <br>
-                              เลขประจำตัวผู้เสียภาษี : 0413550000339
-                          </p> 
-                         
-                              </td>  
-                              <td>
-                                <p>เลขที่: <span>
-                                  {{ $item->quotation_id }}
-                              </span>
-                              <br>
-                                วันที่: <span>
-                                  {{ Carbon\Carbon::parse($item->created_at)->format('d/m/Y') }}
-      
-                              </span><br> ใช้ได้ถึง:
-                              <span>
-                                  @php
-      $end = Carbon::parse($item->created_at)->addDays(15)->format('d/m/Y');
-      echo $end;
-      @endphp
-      
-                              </span>
-                                </td>                         
-                            </tr>
-                            
                           </tbody>
                         </table>
                         
                         <hr >
                         <!-- End InvoiceTop-->
-                        <div class="row">
-                          <div class="col-md-4">
-                            <div class="media">                             
-                              <div class="media-body m-l-20">
-                                <p>ลูกค้า</p>
-                                <h4 class="media-heading">{{ auth()->user()->member_name }}</h4>
-                                <p>
-                                    {{$item->member_email}} 
-                                    <br><span>{{$item->user_phone}}</span></p>
-                              </div>
-                            </div>
-                          </div>                      
-                        </div>
+                        <p class="fs-20">ใบจองแพ็คเกจ</p>
+                        <table class="table table-bordered border-dark">
+                          <tbody>
+                            <tr>
+                              <td style="width: 50%" colspan="2">ชื่อ : {{ auth()->user()->member_name }}</td>                            
+                    
+                              <td style="width: 20%" colspan="2">เลขที่ : {{ $item->quotation_id }}</td>
+                                                  
+                            </tr>
+                            <tr>
+                              <td style="width: 50%" colspan="2">ที่อยู่ :</td>
+                              <td style="width: 20%" colspan="2">วันที่ :
+                                @foreach ($invoice2 as $row)
+                                {{ Carbon\Carbon::parse($row->created_at)->format('d/m/Y') }}</td>
+                                @endforeach
+                            </tr>
+                            <tr>
+                              <td style="width: 50%" colspan="2">อีเมล : {{$item->member_email}}</td>                          
+                              <td style="width: 50%" colspan="2">ใช้ได้ถึง:  {{ Carbon\Carbon::parse($item->date_start)->format('d/m/Y') }}</td>
+                              
+                            </tr>
+                            <tr>
+                              <td style="width: 50%" colspan="2">โทร : {{$item->user_phone}}</td> 
+                     <td></td>
+                            </tr>
+                          </tbody>
+                        </table>
                         <!-- End Invoice Mid-->
                         <div>
                           <div class="table-responsive invoice-table" id="table">
@@ -189,7 +181,15 @@ div {
                                             <p class="m-0">งวดที่ 1</p>
                                         </td>
                                         <td class="txt-secondary">
-                                            <label>มัดจำ50%</label>
+                                            <label>มัดจำ 50% 
+                                              ( กรุณาชำระภายในวันที่
+                                              @foreach ($invoice2 as $row)
+                                              {{Carbon::parse($row->created_at)->addDays(5)->format('d/m/Y')}} )
+                                              @endforeach
+                                              @if($item->quotation_status == '2')
+                                                (ชำระเรียบร้อยแล้ว)
+                                              @endif
+                                            </label>
                                         </td>
                         
                                         <td class="txt-secondary"> 
@@ -205,14 +205,20 @@ div {
                                             <p class="m-0">งวดที่ 2</p>
                                         </td>
                                         <td>
-                                            <label>ชำระส่วนที่เหลือ (ก่อนวันเดินทาง 15 วัน)</label>
+                                            <label>ชำระส่วนที่เหลือ ( ก่อนวันเดินทาง 15 วัน ภายในวันที่
+                                              @php
+                                              $end_date = Carbon::parse($item->date_start)->addDays(-15)->format('d/m/Y');
+                                              echo $end_date;
+                                                @endphp
+                                          )</label>
                                         </td>
                                         <td>
                                             <p class="itemtext">
                                                 @php
                                                     $result = $item->total_price - $item->price_deposit;
                                                     echo number_format($result);
-                                                @endphp</p>
+                                                @endphp
+                                           </p>
                                         </td>
                                     </tr>
                                     <tr>
@@ -230,6 +236,14 @@ div {
                                                 @endphp
                                                 บาท</h6>
                                         </td>
+                                    </tr>
+                                    <tr>
+                                      <td >ตัวอักษร</td>
+                                      <td align="right"> 
+                                        ( @php
+                                        echo num2wordsThai($deposit_price).'บาทถ้วน'
+                                        ;
+                                        @endphp  )</td>
                                     </tr>
                                 </tbody>
                             </table>

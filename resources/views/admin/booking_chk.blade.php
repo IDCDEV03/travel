@@ -66,7 +66,7 @@
                                 <span class="badge bg-warning  txt-dark">รอเสนอราคา</span>
                                 @elseif ($row->booking_status == '1')
                                 <span class="badge bg-info">
-                                    ส่งใบเสนอราคาแล้ว
+                                    ส่งใบจองแล้ว
                                 </span>
                                 @elseif ($row->booking_status == '2')
                                 <span class="badge bg-danger f-w-100">
@@ -74,7 +74,7 @@
                                 </span>
                                 @elseif ($row->booking_status == '3')
                                 <span class="badge bg-danger">
-                                    ยกเลิกใบเสนอราคา
+                                    ยกเลิกใบจอง
                                 </span>
                                 @elseif ($row->booking_status == '4')
                                 <span class="f-w-300 badge bg-secondary">
@@ -82,7 +82,7 @@
                                 </span>
                                 @elseif ($row->booking_status == '5')
                                 <span class="badge bg-success f-w-100">
-                                    ดำเนินการเรียบร้อย
+                                    ชำระมัดจำงวดที่ 1 แล้ว
                                 </span>
                                 @endif
                                                  
@@ -125,7 +125,7 @@
                                                 <span class="badge bg-warning  txt-dark">รอเสนอราคา</span>
                                                 @elseif ($item->booking_status == '1')
                                                 <span class="badge bg-info">
-                                                    ส่งใบเสนอราคาแล้ว
+                                                    ส่งใบจองแล้ว
                                                 </span>
                                                 @elseif ($item->booking_status == '2')
                                                 <span class="badge bg-danger f-w-100">
@@ -133,7 +133,7 @@
                                                 </span>
                                                 @elseif ($item->booking_status == '3')
                                                 <span class="badge bg-danger">
-                                                    ยกเลิกใบเสนอราคา
+                                                    ยกเลิกใบจอง
                                                 </span>
                                                 @elseif ($item->booking_status == '4')
                                                 <span class="f-w-300 badge bg-secondary">

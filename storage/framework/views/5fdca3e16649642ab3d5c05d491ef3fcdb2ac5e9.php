@@ -48,19 +48,26 @@
 รอเจ้าหน้าที่ตรวจสอบรายละเอียด
 </span>                       
 <?php elseif($item->booking_status == 1): ?>
-<span class="badge bg-info">
-ส่งใบเสนอราคาแล้ว
+<span class="badge bg-info f-w-100">
+ส่งใบจองแล้ว
 </span>       
 <span class="txt-secondary">
-    <a href="<?php echo e(url('/user/quotation/'.$item->booking_id)); ?>" class="txt-secondary"> คลิกที่นี่ </a>เพื่อตรวจสอบใบเสนอราคา</span>   
+    <a href="<?php echo e(url('/user/quotation_pre/'.$item->booking_id)); ?>" class="txt-secondary"> คลิกที่นี่ </a>เพื่อตรวจสอบใบจองแพ็คเกจ</span>   
     <?php elseif($item->booking_status == '4'): ?>
-    <span class="badge bg-secondary">
+    <span class="badge bg-secondary f-w-100">
         แจ้งชำระเงินแล้ว รอตรวจสอบ
     </span> 
     <?php elseif($item->booking_status == '5'): ?>
-    <span class="badge bg-success f-w-100">
-    ตรวจสอบการชำระเงินเรียบร้อย
+    <span class="txt-success">
+    ชำระเงินมัดจำงวดที่ 1 เรียบร้อยแล้ว
     </span>    
+    <span class="txt-danger">
+        ( ชำระงวดที่ 2 ภายในวันที่ 
+        <?php echo e(Carbon::parse($item->date_start)->addDays(-15)->format('d/m/Y')); ?>
+
+        )
+    </span>
+    <hr>
     <a href="<?php echo e(url('/user/quotation/'.$item->booking_id)); ?>" class="txt-secondary"> คลิกที่นี่ </a>เพื่อตรวจสอบใบจองแพ็คเกจ</span>
     <?php elseif($item->booking_status == '2'): ?>
     <span class="badge bg-danger f-w-100">

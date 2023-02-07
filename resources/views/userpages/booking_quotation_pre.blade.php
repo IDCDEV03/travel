@@ -46,7 +46,9 @@
                                 093-545-9009</span>
                             <br>
                             <i class="fa fa-briefcase"></i> ที่อยู่ : 8/4 ม.1 ถ.หน้าสนามบินนานาชาติอุดรธานี อ.เมือง จ.อุดรธานี 41000
-                        </p>
+                            <br>
+                            เลขประจำตัวผู้เสียภาษี : 0413550000339       
+                        </p>                      
                     </div>
                 </div>
                 <!-- End Info-->
@@ -59,15 +61,12 @@
                         </span>
                         <br>
                         วันที่: <span>
-                            {{ Carbon\Carbon::parse($item->created_at)->format('d/m/Y') }}
-
+                            @foreach ($user_quotation2 as $row)
+                            {{ Carbon\Carbon::parse($row->created_at)->format('d/m/Y') }}
+                            @endforeach
                         </span><br> ใช้ได้ถึง:
-                        <span>
-                            @php
-$end = Carbon::parse($item->created_at)->addDays(15)->format('d/m/Y');
-echo $end;
-@endphp
-
+                        <span>                          
+                        {{Carbon::parse($item->date_start)->format('d/m/Y')}}
                         </span>
                     </p>
                 </div>
@@ -134,13 +133,15 @@ echo $end;
                     <p class="m-0">งวดที่ 1</p>
                 </td>
                 <td class="txt-secondary">
-                    <label>มัดจำ 50%    
-                        @if($item->quotation_status == '2')
-                        <span class="txt-secondary">(ชำระแล้ว)</span>
-                        @endif
-                    </label>
+                    <label>มัดจำ 50% ( กรุณาชำระภายในวันที่
+                        @foreach ($user_quotation2 as $row)
+                        @php
+                      $end_date = Carbon::parse($row->created_at)->addDays(5)->format('d/m/Y');
+                      echo $end_date;
+                        @endphp
+                        )
+                    @endforeach</label>
                 </td>
-
                 <td class="txt-secondary"> 
                     <p class="itemtext">
                         @php
@@ -148,24 +149,16 @@ echo $end;
                             echo $deposit_price;
                         @endphp</p>
                 </td>
-            </tr>
-            <tr>
+                    </tr>
+                    <tr>
                 <td>
                     <p class="m-0">งวดที่ 2</p>
                 </td>
                 <td>
-                    <label>ชำระส่วนที่เหลือ ( ก่อนวันเดินทาง 15 วัน ภายในวันที่
-                        @php
-                        $end_date = Carbon::parse($item->date_start)->addDays(-15)->format('d/m/Y');
-                        echo $end_date;
-                          @endphp
-                    )
-                    </label>
+                    <label>ชำระส่วนที่เหลือ ( ก่อนวันเดินทาง 15 วัน )</label>
                 </td>
                 <td>
                     <p class="itemtext">
-
-                      
                         @php
                             $result = $item->total_price - $item->price_deposit;
                             echo number_format($result);
@@ -176,13 +169,14 @@ echo $end;
                 <td></td>
 
                 <td align="right">
-                    <h6 class="mb-0 p-2">จำนวนชำระค่ามัดจำงวดที่ 2 รวมทั้งสิ้น </h6>
+                    <h6 class="mb-0 p-2">จำนวนชำระค่ามัดจำงวดที่ 1 รวมทั้งสิ้น </h6>
                 </td>
                 <td class="payment">
                     <h6 class="mb-0 p-2">
                         @php
-                       $result = $item->total_price - $item->price_deposit;
-                            echo number_format($result);
+                        $deposit_price = number_format($item->price_deposit);
+                            echo
+                        $deposit_price;
                         @endphp
                         บาท</h6>
                 </td>
@@ -190,28 +184,34 @@ echo $end;
         </tbody>
     </table>
 </div>
-                                        <!-- End Table-->
+@php
+$date_today = Carbon::now()->format('d/m/Y');
+@endphp
+                                      <!-- End Table-->
             <div class="row">
                 <div class="col-md-12">
                     <div>
                         <p class="legal"><strong>การชำระเงิน</strong>
                         <ul>
+                            
+                            @if ($date_today <= $end_date)
                             <li>โอนชำระผ่านบัญชี</li>
-                            @foreach ($bank_data as $row)
-                            <li>{{$row->bank_name}}
-                                /
-                                เลขที่บัญชี : {{$row->account_nummber}} /                                 ชื่อบัญชี : {{$row->bank_account_name}} /                        
-                            {{$row->bank_branch}}                             
-                            </li>
-                            @endforeach                    
+                              
+                            @elseif ($date_today >= $end_date)
+                            <li class="txt-danger">เกินกำหนดชำระ</li>
+                            @endif
                         </ul>
                         </p>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    @if($item->quotation_status == '2')
-                   <span class="txt-danger">หมายเหตุ : ชำระมัดจำงวดที่ 1 แล้ว </span>
-                    @endif
+                <div class="col-md-12">
+                    @foreach ($bank_data as $row)
+                    <li>{{$row->bank_name}}
+                        /
+                        เลขที่บัญชี : {{$row->account_nummber}} /                                 ชื่อบัญชี : {{$row->bank_account_name}} /                        
+                    {{$row->bank_branch}}                             
+                    </li>
+                    @endforeach   
                 </div>
             </div>
                                     </div>
@@ -219,9 +219,16 @@ echo $end;
                                 </div>
                                 <div id="non-printable">
                                     <div class="col-sm-12 text-center mt-3">
-                                    @if($item->quotation_status == '2')
-                                    <a href="{{url('/user/invoice/'.$item->booking_id
-                                    .'/c1')}}" class="btn btn btn-primary me-2" type="button"
+                                    @if($item->quotation_status == '0')
+                                    
+                                        @if ($date_today <= $end_date)
+                                        <a href="{{url('/user/payment/'.$item->quotation_id.'/normal')}}" class="btn btn-secondary">แจ้งชำระเงิน</a>
+                                        @elseif ($date_today >= $end_date)
+                                        <a href="#" class="btn btn-light disabled" >เกินกำหนดชำระ</a>
+                                        @endif                                 
+                                    @endif
+                                    @if ($date_today <= $end_date)
+                                    <a href="{{url('/user/invoice/'.$item->booking_id.'/none')}}" class="btn btn btn-primary me-2" type="button"
                                     >พิมพ์</a>
                                     @endif
                                 </div>

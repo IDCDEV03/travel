@@ -16,11 +16,8 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
-
-                <div class="card">                       
-             
-                    <div class="card-body"> 
-                        
+                <div class="card">
+                    <div class="card-body">                        
                         <div class="table-responsive">
                             <table class="display" id="basic-1">
                                 <thead>
@@ -34,26 +31,22 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @php
+                                        @php
                                          $i = '1';   
                                         @endphp
                                         @foreach($list_invoice as $row)
                                     <tr>
-                                        
                                         <td>{{ $i++; }}</td>      
                                         <td>{{$row->code_tour}}</td>    
                                         <td>{{$row->package_name}}</td>               
                                         <td>{{$row->member_name}}</td>
-                                        <td class="txt-success">ดำเนินการเรียบร้อย</td>
+                                        <td class="txt-success">ชำระมัดจำแล้ว</td>
                                         <td><a href="{{ route('admin.invoice', ['id' => $row->booking_id]) }}" class="btn btn-info">ใบสั่งจอง</a></td>
-                                    
                                     </tr>
                                     @endforeach
                                 </tbody>
                             </table>
-                        </div>
-       
- 
+                        </div> 
                     </div>
                 </div>
             </div>
