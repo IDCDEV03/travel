@@ -176,7 +176,7 @@ echo $end;
                 <td></td>
 
                 <td align="right">
-                    <h6 class="mb-0 p-2">จำนวนชำระค่ามัดจำงวดที่ 2 รวมทั้งสิ้น </h6>
+                    <h6 class="mb-0 p-2">คงเหลือชำระค่ามัดจำงวดที่ 2 รวมทั้งสิ้น </h6>
                 </td>
                 <td class="payment">
                     <h6 class="mb-0 p-2">
@@ -184,11 +184,15 @@ echo $end;
                        $result = $item->total_price - $item->price_deposit;
                             echo number_format($result);
                         @endphp
-                        บาท</h6>
+                    บาท</h6>
                 </td>
             </tr>
         </tbody>
     </table>
+    <br>
+    @if($item->quotation_status == '2')
+    <span class="txt-danger">หมายเหตุ : ชำระมัดจำงวดที่ 1 แล้ว </span>
+     @endif
 </div>
                                         <!-- End Table-->
             <div class="row">
@@ -197,21 +201,20 @@ echo $end;
                         <p class="legal"><strong>การชำระเงิน</strong>
                         <ul>
                             <li>โอนชำระผ่านบัญชี</li>
-                            @foreach ($bank_data as $row)
-                            <li>{{$row->bank_name}}
-                                /
-                                เลขที่บัญชี : {{$row->account_nummber}} /                                 ชื่อบัญชี : {{$row->bank_account_name}} /                        
-                            {{$row->bank_branch}}                             
-                            </li>
-                            @endforeach                    
+                                              
                         </ul>
                         </p>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    @if($item->quotation_status == '2')
-                   <span class="txt-danger">หมายเหตุ : ชำระมัดจำงวดที่ 1 แล้ว </span>
-                    @endif
+                <div class="col-md-12">
+                    @foreach ($bank_data as $row)
+                    <li>{{$row->bank_name}}
+                        /
+                        เลขที่บัญชี : {{$row->account_nummber}} /                                 ชื่อบัญชี : {{$row->bank_account_name}} /                        
+                    {{$row->bank_branch}}                             
+                    </li>
+                    @endforeach 
+               
                 </div>
             </div>
                                     </div>

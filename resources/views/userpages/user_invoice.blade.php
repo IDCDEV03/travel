@@ -74,8 +74,7 @@ div {
         @foreach($invoice as $item)
 <!---- start ----->
 @php
-$c1 = request()->com == 'c1';
-$none = request()->com == 'none';
+$c_pay = request()->com;
 @endphp
           <!-- Container-fluid starts-->
           <div class="container">
@@ -182,12 +181,14 @@ $none = request()->com == 'none';
                                         </td>
                                         <td class="txt-secondary">
                                             <label>มัดจำ 50% 
-                                              ( กรุณาชำระภายในวันที่
-                                              @foreach ($invoice2 as $row)
-                                              {{Carbon::parse($row->created_at)->addDays(5)->format('d/m/Y')}} )
-                                              @endforeach
+                                           
                                               @if($item->quotation_status == '2')
                                                 (ชำระเรียบร้อยแล้ว)
+                                                @elseif ($item->quotation_status == '0')
+                                                ( กรุณาชำระภายในวันที่
+                                                @foreach ($invoice2 as $row)
+                                                {{Carbon::parse($row->created_at)->addDays(5)->format('d/m/Y')}} )
+                                                @endforeach
                                               @endif
                                             </label>
                                         </td>
@@ -221,30 +222,55 @@ $none = request()->com == 'none';
                                            </p>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td></td>
-                        
-                                        <td align="right">
-                                            <h6 class="mb-0 p-2">จำนวนชำระค่ามัดจำงวดที่ 1 รวมทั้งสิ้น </h6>
+                                    @if ($c_pay == 'c1')
+                                    <tr>                                                           
+                                        <td colspan="2" align="right">
+                                            <h6 class="mb-0 p-2">คงเหลือชำระค่ามัดจำงวดที่ 2 รวมทั้งสิ้น </h6>
                                         </td>
                                         <td class="payment">
                                             <h6 class="mb-0 p-2">
-                                                @php
-                                                $deposit_price = number_format($item->price_deposit);
-                                                    echo
-                                                $deposit_price;
-                                                @endphp
+                                              @php
+                                              $result = $item->total_price - $item->price_deposit;
+                                              echo number_format($result);
+                                          @endphp
                                                 บาท</h6>
-                                        </td>
+                                        </td>                       
                                     </tr>
                                     <tr>
                                       <td >ตัวอักษร</td>
                                       <td align="right"> 
                                         ( @php
-                                        echo num2wordsThai($deposit_price).'บาทถ้วน'
+                                        echo num2wordsThai($result).'บาทถ้วน'
                                         ;
                                         @endphp  )</td>
                                     </tr>
+                                    @elseif ($c_pay == 'none')
+                                    <tr>
+                                      <td></td>
+                      
+                                      <td align="right">
+                                          <h6 class="mb-0 p-2">จำนวนชำระค่ามัดจำงวดที่ 1 รวมทั้งสิ้น
+                                          </h6>
+                                      </td>
+                                      <td class="payment">
+                                          <h6 class="mb-0 p-2">
+                                              @php
+                                              $deposit_price = number_format($item->price_deposit);
+                                                  echo
+                                              $deposit_price;
+                                              @endphp
+                                              บาท</h6>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                    <td >ตัวอักษร</td>
+                                    <td align="right"> 
+                                      ( @php
+                                      echo num2wordsThai($deposit_price).'บาทถ้วน'
+                                      ;
+                                      @endphp  )</td>
+                                  </tr>
+                                    @endif
                                 </tbody>
                             </table>
                         </div>

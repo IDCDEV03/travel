@@ -182,7 +182,7 @@ echo $end;
                 <td></td>
 
                 <td align="right">
-                    <h6 class="mb-0 p-2">จำนวนชำระค่ามัดจำงวดที่ 2 รวมทั้งสิ้น </h6>
+                    <h6 class="mb-0 p-2">คงเหลือชำระค่ามัดจำงวดที่ 2 รวมทั้งสิ้น </h6>
                 </td>
                 <td class="payment">
                     <h6 class="mb-0 p-2">
@@ -195,6 +195,10 @@ echo $end;
             </tr>
         </tbody>
     </table>
+    <br>
+    <?php if($item->quotation_status == '2'): ?>
+    <span class="txt-danger">หมายเหตุ : ชำระมัดจำงวดที่ 1 แล้ว </span>
+     <?php endif; ?>
 </div>
                                         <!-- End Table-->
             <div class="row">
@@ -203,22 +207,21 @@ echo $end;
                         <p class="legal"><strong>การชำระเงิน</strong>
                         <ul>
                             <li>โอนชำระผ่านบัญชี</li>
-                            <?php $__currentLoopData = $bank_data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            <li><?php echo e($row->bank_name); ?>
-
-                                /
-                                เลขที่บัญชี : <?php echo e($row->account_nummber); ?> /                                 ชื่อบัญชี : <?php echo e($row->bank_account_name); ?> /                        
-                            <?php echo e($row->bank_branch); ?>                             
-                            </li>
-                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>                    
+                                              
                         </ul>
                         </p>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <?php if($item->quotation_status == '2'): ?>
-                   <span class="txt-danger">หมายเหตุ : ชำระมัดจำงวดที่ 1 แล้ว </span>
-                    <?php endif; ?>
+                <div class="col-md-12">
+                    <?php $__currentLoopData = $bank_data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <li><?php echo e($row->bank_name); ?>
+
+                        /
+                        เลขที่บัญชี : <?php echo e($row->account_nummber); ?> /                                 ชื่อบัญชี : <?php echo e($row->bank_account_name); ?> /                        
+                    <?php echo e($row->bank_branch); ?>                             
+                    </li>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> 
+               
                 </div>
             </div>
                                     </div>
