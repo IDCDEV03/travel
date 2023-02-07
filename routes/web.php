@@ -103,7 +103,7 @@ Route::get('/user/quotation_private/{id}', $controller_path . '\UserController@p
 Route::get('/user/quotation/{id}', $controller_path . '\UserController@user_quotation')->name('user_quotation');
 Route::get('/user/quotation_pre/{id}', $controller_path . '\UserController@user_quotation_pre')->name('user_quotation_pre');
 
-Route::get('/user/payment/{id}/{type}', $controller_path . '\UserController@user_payment')->name('user_payment');
+Route::get('/user/payment/{id}/{type}/{complete}', $controller_path . '\UserController@user_payment')->name('user_payment');
 
 Route::post('/user/add_payment', $controller_path . '\UserController@add_payment')->name('user_payment');
 //User_ลิสต์แพ็คเกจ

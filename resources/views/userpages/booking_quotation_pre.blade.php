@@ -222,7 +222,7 @@ $date_today = Carbon::now()->format('d/m/Y');
                                     @if($item->quotation_status == '0')
                                     
                                         @if ($date_today <= $end_date)
-                                        <a href="{{url('/user/payment/'.$item->quotation_id.'/normal')}}" class="btn btn-secondary">แจ้งชำระเงิน</a>
+                                        <a href="{{url('/user/payment/'.$item->quotation_id.'/normal/pay1')}}" class="btn btn-secondary">แจ้งชำระเงิน</a>
                                         @elseif ($date_today >= $end_date)
                                         <a href="#" class="btn btn-light disabled" >เกินกำหนดชำระ</a>
                                         @endif                                 

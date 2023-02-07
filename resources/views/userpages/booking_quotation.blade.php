@@ -26,13 +26,14 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                
+                @php
+                $date_today = Carbon::now()->format('d/m/Y');
+                @endphp             
                 <div class="card">
                     <div class="card-body">
                         @foreach ($user_quotation as $item)
                             <div class="invoice">
-<div id="printable">
-    <div>
+                                <div>
         <div class="row">
             <div class="col-sm-6">
                 <div class="media">
@@ -213,8 +214,7 @@ echo $end;
                         เลขที่บัญชี : {{$row->account_nummber}} /                                 ชื่อบัญชี : {{$row->bank_account_name}} /                        
                     {{$row->bank_branch}}                             
                     </li>
-                    @endforeach 
-               
+                    @endforeach                
                 </div>
             </div>
                                     </div>
@@ -222,6 +222,13 @@ echo $end;
                                 </div>
                                 <div id="non-printable">
                                     <div class="col-sm-12 text-center mt-3">
+                                     @if($item->quotation_status == '2')
+                                        @if ($date_today <= $end_date)
+                                        <a href="{{url('/user/payment/'.$item->quotation_id.'/normal/pay2')}}" class="btn btn-secondary">แจ้งชำระเงิน</a>
+                                        @elseif ($date_today >= $end_date)
+                                        <a href="#" class="btn btn-light disabled" >เกินกำหนดชำระ</a>
+                                        @endif     
+                                    @endif
                                     @if($item->quotation_status == '2')
                                     <a href="{{url('/user/invoice/'.$item->booking_id
                                     .'/c1')}}" class="btn btn btn-primary me-2" type="button"
@@ -238,7 +245,6 @@ echo $end;
                
             </div>
         </div>
-    </div>
     @endforeach
 @endsection
 

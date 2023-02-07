@@ -129,6 +129,9 @@ unset($__errorArgs, $__bag); ?>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
    
 <?php elseif(request()->type == 'normal'): ?>
+<?php
+$pay_type = request()->complete;
+?>
 <?php $__currentLoopData = $payment; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 <div class="card">
     <div class="card-body">
@@ -148,13 +151,21 @@ unset($__errorArgs, $__bag); ?>
 <div class="card">
     <div class="card-body">
         <div class="row">
-            <div class="col-md-6 "><span>ใบเสนอราคาที่ #<?php echo e($item->quotation_id); ?></span></div>
+            <div class="col-md-6 "><span>ใบจองแพ็คเกจที่ #<?php echo e($item->quotation_id); ?></span></div>
             <div class="col-md-6 "><span>จำนวนเงินมัดจำที่ต้องชำระ:
+                <?php if($pay_type == 'pay1'): ?>
                     <?php
                         $deposit_price = number_format($item->price_deposit);
                         echo $deposit_price;
                     ?>
                     บาท
+                <?php elseif($pay_type == 'pay2'): ?>
+                <?php
+                $result = $item->total_price - $item->price_deposit;
+                     echo number_format($result);
+                 ?>
+                 บาท
+                <?php endif; ?>
                 </span></div>
         </div>
     </div>
@@ -200,7 +211,8 @@ unset($__errorArgs, $__bag); ?>
                     <option selected disabled value="">เลือก..</option>
                     <?php $__currentLoopData = $bank_data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
-                    <option value="<?php echo e($row->bank_name); ?>"><?php echo e($row->bank_name); ?></option>
+                    <option value="<?php echo e($row->bank_name); ?>"><?php echo e($row->bank_name); ?> /
+                        <?php echo e($row->account_nummber); ?></option>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                   </select>
                     <?php $__errorArgs = ['payment_bank'];
@@ -216,6 +228,13 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
                 
+            </div>   
+            <br> 
+            <div class="row g-3">
+                <div class="col-md-12">
+                    <label class="form-label">ที่อยู่ (เพื่อออกใบจอง)</label>
+                    <input class="form-control" type="text" name="address_payment">
+                </div>
             </div>
             <hr>
             <div class="row">
@@ -241,6 +260,8 @@ unset($__errorArgs, $__bag); ?>
                     </div>
                 </div>
             </div>
+
+            
 
             <div class="card-footer text-end">
                 <button class="btn btn-primary" type="submit">บันทึกข้อมูล</button>

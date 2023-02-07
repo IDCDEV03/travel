@@ -26,13 +26,14 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                
+                <?php
+                $date_today = Carbon::now()->format('d/m/Y');
+                ?>             
                 <div class="card">
                     <div class="card-body">
                         <?php $__currentLoopData = $user_quotation; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <div class="invoice">
-<div id="printable">
-    <div>
+                                <div>
         <div class="row">
             <div class="col-sm-6">
                 <div class="media">
@@ -190,7 +191,7 @@ echo $end;
                        $result = $item->total_price - $item->price_deposit;
                             echo number_format($result);
                         ?>
-                        บาท</h6>
+                    บาท</h6>
                 </td>
             </tr>
         </tbody>
@@ -220,8 +221,7 @@ echo $end;
                         เลขที่บัญชี : <?php echo e($row->account_nummber); ?> /                                 ชื่อบัญชี : <?php echo e($row->bank_account_name); ?> /                        
                     <?php echo e($row->bank_branch); ?>                             
                     </li>
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> 
-               
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>                
                 </div>
             </div>
                                     </div>
@@ -229,6 +229,13 @@ echo $end;
                                 </div>
                                 <div id="non-printable">
                                     <div class="col-sm-12 text-center mt-3">
+                                     <?php if($item->quotation_status == '2'): ?>
+                                        <?php if($date_today <= $end_date): ?>
+                                        <a href="<?php echo e(url('/user/payment/'.$item->quotation_id.'/normal/pay2')); ?>" class="btn btn-secondary">แจ้งชำระเงิน</a>
+                                        <?php elseif($date_today >= $end_date): ?>
+                                        <a href="#" class="btn btn-light disabled" >เกินกำหนดชำระ</a>
+                                        <?php endif; ?>     
+                                    <?php endif; ?>
                                     <?php if($item->quotation_status == '2'): ?>
                                     <a href="<?php echo e(url('/user/invoice/'.$item->booking_id
                                     .'/c1')); ?>" class="btn btn btn-primary me-2" type="button"
@@ -245,7 +252,6 @@ echo $end;
                
             </div>
         </div>
-    </div>
     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 <?php $__env->stopSection(); ?>
 

@@ -230,7 +230,7 @@ $date_today = Carbon::now()->format('d/m/Y');
                                     <?php if($item->quotation_status == '0'): ?>
                                     
                                         <?php if($date_today <= $end_date): ?>
-                                        <a href="<?php echo e(url('/user/payment/'.$item->quotation_id.'/normal')); ?>" class="btn btn-secondary">แจ้งชำระเงิน</a>
+                                        <a href="<?php echo e(url('/user/payment/'.$item->quotation_id.'/normal/pay1')); ?>" class="btn btn-secondary">แจ้งชำระเงิน</a>
                                         <?php elseif($date_today >= $end_date): ?>
                                         <a href="#" class="btn btn-light disabled" >เกินกำหนดชำระ</a>
                                         <?php endif; ?>                                 

@@ -115,6 +115,9 @@
                         @endforeach
    
 @elseif (request()->type == 'normal')
+@php
+$pay_type = request()->complete;
+@endphp
 @foreach ($payment as $item)
 <div class="card">
     <div class="card-body">
@@ -134,13 +137,21 @@
 <div class="card">
     <div class="card-body">
         <div class="row">
-            <div class="col-md-6 "><span>ใบเสนอราคาที่ #{{ $item->quotation_id }}</span></div>
+            <div class="col-md-6 "><span>ใบจองแพ็คเกจที่ #{{ $item->quotation_id }}</span></div>
             <div class="col-md-6 "><span>จำนวนเงินมัดจำที่ต้องชำระ:
+                @if ($pay_type == 'pay1')
                     @php
                         $deposit_price = number_format($item->price_deposit);
                         echo $deposit_price;
                     @endphp
                     บาท
+                @elseif ($pay_type == 'pay2')
+                @php
+                $result = $item->total_price - $item->price_deposit;
+                     echo number_format($result);
+                 @endphp
+                 บาท
+                @endif
                 </span></div>
         </div>
     </div>
@@ -179,7 +190,8 @@
                     <option selected disabled value="">เลือก..</option>
                     @foreach ($bank_data as $row)
 
-                    <option value="{{$row->bank_name}}">{{$row->bank_name}}</option>
+                    <option value="{{$row->bank_name}}">{{$row->bank_name}} /
+                        {{$row->account_nummber}}</option>
                     @endforeach
                   </select>
                     @error('payment_bank')
@@ -188,6 +200,13 @@
                         </span>
                     @enderror
                 
+            </div>   
+            <br> 
+            <div class="row g-3">
+                <div class="col-md-12">
+                    <label class="form-label">ที่อยู่ (เพื่อออกใบจอง)</label>
+                    <input class="form-control" type="text" name="address_payment">
+                </div>
             </div>
             <hr>
             <div class="row">
@@ -206,6 +225,8 @@
                     </div>
                 </div>
             </div>
+
+            
 
             <div class="card-footer text-end">
                 <button class="btn btn-primary" type="submit">บันทึกข้อมูล</button>

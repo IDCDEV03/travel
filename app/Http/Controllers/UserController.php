@@ -140,7 +140,7 @@ class UserController extends Controller
     return view('userpages.booking_quotation_pre', compact('user_quotation','user_quotation2','bank_data'));
   }
 
-  public function user_payment($id,$type)
+  public function user_payment($id,$type,$complete)
   {
 
     $bank_data = DB::table('sp_banks')
@@ -188,6 +188,7 @@ class UserController extends Controller
         'payment_bank' => $request->payment_bank,
         'payment_slip' => $full_path,
         'payment_status' => '1',
+        'address_payment' => $request->address_payment,
         'created_at' => Carbon::now()
       ]
     );
