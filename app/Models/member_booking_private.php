@@ -14,7 +14,7 @@ class member_booking_private extends Model
         'booking_id',
         'member_id',
         'member_name',
-        'member_email',
+        'member_email',       
         'place_name',
         'number_of_travel',
         'date_start',

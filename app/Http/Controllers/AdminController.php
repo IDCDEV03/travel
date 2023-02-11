@@ -9,6 +9,7 @@ use App\Models\package_img;
 use App\Models\package_tour;
 use App\Models\ListCar;
 use App\Models\User;
+use App\Models\UserPayment;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Illuminate\Console\View\Components\Alert as ComponentsAlert;
@@ -50,7 +51,7 @@ class AdminController extends Controller
     $list_invoice = DB::table('member_booking_packages')
     ->join('package_tours','package_tours.package_id','=','member_booking_packages.package_id')
     ->join('booking_quotations','booking_quotations.booking_id','=','member_booking_packages.booking_id')
-    ->where('member_booking_packages.booking_status','=','5')
+    ->where('member_booking_packages.booking_status','=','6')
     ->get();
     return view('admin.list_invoice',compact('list_invoice'));
   }
@@ -58,15 +59,20 @@ class AdminController extends Controller
   public function booking_chk()
   {
     $package_tour = DB::table('member_booking_packages')
-      ->join('package_tours', 'member_booking_packages.package_id', '=', 'package_tours.package_id')
-      ->whereNotIn('booking_status', [5])
+      ->join('package_tours', 'member_booking_packages.package_id', '=', 'package_tours.package_id')    
       ->orderBy('member_booking_packages.created_at', 'desc')
-      ->get();
+      ->get([
+        'member_booking_packages.member_name',
+        'member_booking_packages.booking_id',
+        'member_booking_packages.created_at',
+        'member_booking_packages.package_id as package_id',
+        'member_booking_packages.booking_status',
+        'member_booking_packages.number_of_travel',
+        'package_tours.package_name',
+        'package_tours.code_tour'
+      ]);
 
-      $private_tour = DB::table('member_booking_privates')
-      ->orderBy('member_booking_privates.created_at', 'desc')
-      ->get();
-    return view('admin.booking_chk', compact('package_tour','private_tour'));
+    return view('admin.booking_chk', compact('package_tour'));
   }
 
   public function booking_cf($id)
@@ -566,11 +572,24 @@ class AdminController extends Controller
   public function payment_chk($id)
   {
     $user_payment = DB::table('user_payments')
-      ->leftjoin('booking_quotations', 'user_payments.quotation_id', '=', 'booking_quotations.quotation_id')
-      ->leftjoin('package_tours', 'booking_quotations.package_id', '=', 'package_tours.package_id')
-      ->leftjoin('member_booking_packages', 'booking_quotations.booking_id', '=', 'member_booking_packages.booking_id')
-      ->where('booking_quotations.booking_id', '=', $id)
-      ->get();
+      ->leftjoin('booking_quotations', 'user_payments.quotation_id', '=', 'booking_quotations.quotation_id')  
+      ->where('booking_quotations.booking_id', '=', $id )  
+      ->groupBy('user_payments.id')   
+      ->get([
+        'user_payments.id',
+        'user_payments.quotation_id as quotation_id',
+        'user_payments.payment_price',
+        'user_payments.payment_bank',
+        'user_payments.payment_slip',
+        'user_payments.created_at',
+        'user_payments.payment_status',
+        'user_payments.pay_installment',
+        'booking_quotations.quotation_id as booking_quotation',
+        'booking_quotations.booking_id as booking_id',
+        'booking_quotations.package_id',
+        'booking_quotations.total_price',
+        'booking_quotations.price_deposit',
+      ]);
     return view('admin.payment_chk', compact('user_payment'));
   }
 
@@ -592,6 +611,29 @@ class AdminController extends Controller
       ->where('booking_id', '=', $bkid)
       ->update([
         'booking_status' => '5',
+        'updated_at' => Carbon::now()
+      ]);
+    return redirect()->route('booking_chk')->with('success', "ตรวจสอบยอดชำระเรียบร้อยแล้ว");
+  }
+
+  public function update_payment_pay2($id, $bkid)
+  {
+    DB::table('user_payments')
+      ->where('quotation_id', '=', $id)
+      ->update([
+        'payment_status' => '5',
+        'updated_at' => Carbon::now()
+      ]);
+    DB::table('booking_quotations')
+      ->where('quotation_id', '=', $id)
+      ->update([
+        'quotation_status' => '6',
+        'updated_at' => Carbon::now()
+      ]);
+    DB::table('member_booking_packages')
+      ->where('booking_id', '=', $bkid)
+      ->update([
+        'booking_status' => '6',
         'updated_at' => Carbon::now()
       ]);
     return redirect()->route('booking_chk')->with('success', "ตรวจสอบยอดชำระเรียบร้อยแล้ว");
@@ -657,17 +699,22 @@ class AdminController extends Controller
     return redirect()->route('admin_setting')->with('success', "เปลี่ยนรหัสผ่านเรียบร้อยแล้ว");
   }
 
-  public function admin_invoice($id)
+  public function admin_invoice($id,$quotation)
   {
-    $invoice = DB::table('booking_quotations')
+      $invoice = DB::table('booking_quotations')
       ->join('member_booking_packages', 'booking_quotations.booking_id', '=', 'member_booking_packages.booking_id')
       ->join('package_tours', 'booking_quotations.package_id', '=', 'package_tours.package_id')     
       ->join('users','member_booking_packages.member_id','=','users.id')
       ->where('booking_quotations.booking_id', '=', $id)
+      ->get();   
+
+      $payment_status = DB::table('user_payments')
+      ->where('id','=', $quotation)      
       ->get();
+
       $data_bank =  DB::table('sp_banks')  
       ->get();
-    return view('admin.invoice', compact('invoice','data_bank'));
+    return view('admin.invoice', compact('invoice','data_bank','payment_status'));
   }
  
   public function admin_user_delete($id)

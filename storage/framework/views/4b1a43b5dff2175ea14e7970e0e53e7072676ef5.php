@@ -17,16 +17,32 @@
             <div class="col-sm-12">
 
                 <?php $__currentLoopData = $user_payment; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+<?php
+$payment_status = $row->payment_status;
+$pay_ins = $row->pay_installment;
+$bk_id = request()->id;
+?>
+
                     <div class="col-sm-12 col-xl-12">
                         <div class="card shadow-none border">
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-md-6"><span class="h5">ใบจองแพ็คเกจ</span>
-                                        <a class="btn btn-warning txt-dark" type="button" href="<?php echo e(route('admin.invoice', ['id' => request()->id])); ?>" >#<?php echo e($row->quotation_id); ?></a>
+                            <div class="col-md-6"><span class="h5">ใบจองแพ็คเกจ</span>
+                                        <?php if($payment_status != '2'): ?>
+                                            <a class="btn btn-warning txt-dark" type="button" 
+                                            href="<?php echo e(url('/admin/invoice/'.$bk_id.'/'.$row->id)); ?>">
+                                            #<?php echo e($row->quotation_id); ?></a>
+                                        <?php endif; ?>
                                     </div>
                                     <div class="col-md-6">
-                                        <span class="h5">ยอดชำระมัดจำงวดที่ 1 :
+                                        <?php if($payment_status == '1'): ?>
+                                        <span class="h5">ยอดชำระมัดจำ :
                                             <?php echo e(number_format($row->price_deposit)); ?> บาท</span>
+                                        <?php elseif($payment_status == '2'): ?>
+                                        <span class="h5">ชำระมัดจำแล้ว </span>
+                                            
+                                        <?php endif; ?>
+                                       
                                     </div>
                                 </div>
                                 <hr>
@@ -46,17 +62,28 @@
                                         </ul>
                                         <hr>
                                         <span class="txt-secondary">
-                                            คงเหลือยอดชำระ :
+                                            <?php if($pay_ins == 'pay1'): ?>
+                                            คงเหลือยอดชำระงวดที่ 2 :
                                             <?php
                                                 $result = $row->total_price - $row->price_deposit;
                                                 echo number_format($result);
                                             ?>
                                             บาท </span>
-                                        <hr>
+                                            <hr>
+                                            <?php endif; ?>                                      
+                                        <?php if($payment_status == '1'): ?>
                                         <a href="<?php echo e(url('/admin/update_payment/' . $row->quotation_id . '/' . request()->id)); ?>"
                                             class="btn btn-lg btn-primary" type="button"
                                             onclick="alert('ต้องการยืนยันยอดชำระใช่หรือไม่')">ยืนยันการชำระเงิน</a>
                                         <button class="btn btn-lg btn-danger" type="button">ยอดชำระไม่ถูกต้อง</button>
+                                        <?php elseif($payment_status == '2'): ?>
+                                        <span class="h5">ชำระแล้ว</span>
+                                        <?php elseif($payment_status == '4'): ?>
+                                        <a href="<?php echo e(url('/admin/update_payment_pay2/' . $row->quotation_id . '/' . request()->id)); ?>"
+                                            class="btn btn-lg btn-primary" type="button"
+                                            onclick="alert('ต้องการยืนยันยอดชำระใช่หรือไม่')">ยืนยันการชำระเงิน</a>
+                                        <button class="btn btn-lg btn-danger" type="button">ยอดชำระไม่ถูกต้อง</button>
+                                        <?php endif; ?>
                                         <hr>
                                     </div>
 

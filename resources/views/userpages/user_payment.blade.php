@@ -170,6 +170,7 @@ $pay_type = request()->complete;
             <input type="hidden" value="{{ Auth::user()->id }}" name="user_id">
             <input type="hidden" value="{{ $item->quotation_id }}" name="quotation_id">
             <input type="hidden" value="{{ $item->booking_id }}" name="booking_id">
+            <input type="hidden" value="{{ request()->complete }}" name="pay_installment">
             <div class="row g-3">
                 <div class="col-md-12">
                     <label class="form-label">จำนวนเงินที่โอน</label>
@@ -186,10 +187,9 @@ $pay_type = request()->complete;
                 <h6>ธนาคารที่โอนชำระ</h6>
             </div>
             <div class="col">               
-                <select class="form-select digits">
+                <select class="form-select digits" name="payment_bank">
                     <option selected disabled value="">เลือก..</option>
                     @foreach ($bank_data as $row)
-
                     <option value="{{$row->bank_name}}">{{$row->bank_name}} /
                         {{$row->account_nummber}}</option>
                     @endforeach
@@ -202,12 +202,7 @@ $pay_type = request()->complete;
                 
             </div>   
             <br> 
-            <div class="row g-3">
-                <div class="col-md-12">
-                    <label class="form-label">ที่อยู่ (เพื่อออกใบจอง)</label>
-                    <input class="form-control" type="text" name="address_payment">
-                </div>
-            </div>
+        
             <hr>
             <div class="row">
                 <div class="col">
@@ -215,7 +210,7 @@ $pay_type = request()->complete;
                         <label class="col-sm-3 col-form-label">สลิปการโอนเงิน</label>
                         <div class="col-sm-9">
                             <input class="form-control" type="file" name="payment_slip"
-                                accept="image/*">
+                                accept="image/*" required>
                         </div>
                         @error('payment_slip')
                             <span class="text-danger my-2">

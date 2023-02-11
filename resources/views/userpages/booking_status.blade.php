@@ -80,7 +80,7 @@
                                     </span>
                                     @elseif ($row->booking_status == '4')
                                     <span class="txt-secondary">
-                                        แจ้งชำระเงินแล้ว<br> รอตรวจสอบ
+                                        แจ้งชำระเงินแล้ว รอตรวจสอบ
                                     </span>
                                     @elseif ($row->booking_status == '5')
                                     <span class="txt-success">
@@ -88,9 +88,10 @@
                                       <span class="txt-danger">
                                      ( ชำระงวดที่ 2 ภายในวันที่ 
                                     {{ Carbon::parse($row->date_start)->addDays(-15)->format('d/m/Y')}}
-                                     
-                                        )</span>
-                                   
+                                     )</span>
+                                     @elseif ($row->booking_status == '6')
+                                     <span class="txt-success">
+                                        ชำระเงินครบแล้ว </span> 
                                     @endif
 
                                 </td>

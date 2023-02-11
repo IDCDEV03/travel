@@ -184,6 +184,7 @@ $pay_type = request()->complete;
             <input type="hidden" value="<?php echo e(Auth::user()->id); ?>" name="user_id">
             <input type="hidden" value="<?php echo e($item->quotation_id); ?>" name="quotation_id">
             <input type="hidden" value="<?php echo e($item->booking_id); ?>" name="booking_id">
+            <input type="hidden" value="<?php echo e(request()->complete); ?>" name="pay_installment">
             <div class="row g-3">
                 <div class="col-md-12">
                     <label class="form-label">จำนวนเงินที่โอน</label>
@@ -207,10 +208,9 @@ unset($__errorArgs, $__bag); ?>
                 <h6>ธนาคารที่โอนชำระ</h6>
             </div>
             <div class="col">               
-                <select class="form-select digits">
+                <select class="form-select digits" name="payment_bank">
                     <option selected disabled value="">เลือก..</option>
                     <?php $__currentLoopData = $bank_data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-
                     <option value="<?php echo e($row->bank_name); ?>"><?php echo e($row->bank_name); ?> /
                         <?php echo e($row->account_nummber); ?></option>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -230,12 +230,7 @@ unset($__errorArgs, $__bag); ?>
                 
             </div>   
             <br> 
-            <div class="row g-3">
-                <div class="col-md-12">
-                    <label class="form-label">ที่อยู่ (เพื่อออกใบจอง)</label>
-                    <input class="form-control" type="text" name="address_payment">
-                </div>
-            </div>
+        
             <hr>
             <div class="row">
                 <div class="col">
@@ -243,7 +238,7 @@ unset($__errorArgs, $__bag); ?>
                         <label class="col-sm-3 col-form-label">สลิปการโอนเงิน</label>
                         <div class="col-sm-9">
                             <input class="form-control" type="file" name="payment_slip"
-                                accept="image/*">
+                                accept="image/*" required>
                         </div>
                         <?php $__errorArgs = ['payment_slip'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');

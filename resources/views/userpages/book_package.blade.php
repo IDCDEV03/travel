@@ -48,11 +48,34 @@
                     </label>
                     <input class="form-control" type="email" 
                     placeholder="กรุณาระบุอีเมลสำหรับการติดต่อรับใบเสนอราคา"
-                    name="member_email" value="{{ $row->email }}" readonly>
+                    name="member_email" value="{{ $row->email }}">
                   </div>
                 </div>
               </div>
 @endforeach
+
+<div class="row">
+  <div class="col">
+    <div class="mb-3">
+      <label class="form-label">ที่อยู่
+        <span class="text-danger">*</span> 
+      </label>
+      <input class="form-control"  name="member_address" type="text" required>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <div class="mb-3">
+      <label class="form-label">เบอร์โทรศัพท์
+        <span class="text-danger">*</span> 
+      </label>
+      <input class="form-control"  name="member_phone" type="text" value="{{Auth::user()->user_phone}}" required>
+    </div>
+  </div>
+</div>
+
 @foreach ($package_all as $item)
               <div class="row">
                 <div class="col">

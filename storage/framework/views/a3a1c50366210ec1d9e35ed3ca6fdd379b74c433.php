@@ -103,7 +103,11 @@
                         </span></h5>
                         <?php elseif($item->booking_status == '5'): ?>
                         <h5><span class="badge bg-success f-w-100">
-                            ตรวจสอบการชำระเงินเรียบร้อยแล้ว
+                            ชำระเงินมัดจำงวดที่ 1 แล้ว
+                        </span></h5>
+                        <?php elseif($item->booking_status == '6'): ?>
+                        <h5><span class="badge bg-success f-w-100">
+                            ชำระเงินครบแล้ว
                         </span></h5>
                         <?php endif; ?>
 
@@ -128,17 +132,22 @@
                                     <div class="col-sm-9">
                                         <div class="form-control-static">
                                             <?php echo e($item->code_tour); ?> |
-                                            <?php echo e($item->package_name); ?>
-
+                                            <?php echo e($item->package_name); ?> | ราคา
+                                            <?php echo e($item->package_price); ?> บาท/คน
                                         </div>
                                     </div>
                                 </div>
+<?php
+$pk_deposit = $item->package_deposit;
+$total_price = $item->package_price*$item->number_of_travel;
+$price_deposit = ($total_price*$pk_deposit)/100;
+?>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label class="form-label">ราคารวม
                                         </label>
                                         <input class="form-control" name="total_price" type="number"
-                                            placeholder="ใส่เฉพาะตัวเลข ไม่ต้องใส่เครื่องหมายคั่นหลัก" required>
+                                            placeholder="ใส่เฉพาะตัวเลข ไม่ต้องใส่เครื่องหมายคั่นหลัก" value="<?php echo e($total_price); ?>" required>
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">อัพโหลดเอกสารโปรแกรมทัวร์
@@ -154,7 +163,7 @@
                                         <label class="form-label txt-secondary">ราคามัดจำ
                                         </label>
                                         <input type="number" class="form-control" name="price_deposit"
-                                            placeholder="ใส่เฉพาะตัวเลข ไม่ต้องใส่เครื่องหมายคั่นหลัก" required>
+                                            placeholder="ใส่เฉพาะตัวเลข ไม่ต้องใส่เครื่องหมายคั่นหลัก" value="<?php echo e($price_deposit); ?>" required>
                                     </div>
                                 </div>
                                 <br>

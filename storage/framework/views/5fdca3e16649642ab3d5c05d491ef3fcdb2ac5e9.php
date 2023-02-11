@@ -54,7 +54,7 @@
 <span class="txt-secondary">
     <a href="<?php echo e(url('/user/quotation_pre/'.$item->booking_id)); ?>" class="txt-secondary"> คลิกที่นี่ </a>เพื่อตรวจสอบใบจองแพ็คเกจ</span>   
     <?php elseif($item->booking_status == '4'): ?>
-    <span class="badge bg-secondary f-w-100">
+    <span class="txt-secondary f-w-200">
         แจ้งชำระเงินแล้ว รอตรวจสอบ
     </span> 
     <?php elseif($item->booking_status == '5'): ?>
@@ -68,11 +68,15 @@
         )
     </span>
     <hr>
-    <a href="<?php echo e(url('/user/quotation/'.$item->booking_id)); ?>" class="txt-secondary"> คลิกที่นี่ </a>เพื่อตรวจสอบใบจองแพ็คเกจ</span>
+    <a href="<?php echo e(url('/user/quotation/'.$item->booking_id)); ?>" class="txt-secondary"> >> คลิกที่นี่ </a>เพื่อตรวจสอบใบจองแพ็คเกจ
     <?php elseif($item->booking_status == '2'): ?>
     <span class="badge bg-danger f-w-100">
         ยกเลิกการจอง
-        </span>     
+        </span> 
+        <?php elseif($item->booking_status == '6'): ?>
+        <span class="txt-success">
+           ชำระเงินครบแล้ว </span>      
+           <a href="<?php echo e(url('/user/invoice_comp/'.$item->booking_id)); ?>" class="txt-secondary"> >> คลิกที่นี่ </a>เพื่อตรวจสอบใบจองแพ็คเกจ   
 <?php endif; ?> 
 </p>
 <hr>

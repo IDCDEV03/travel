@@ -15,5 +15,6 @@ class UserPayment extends Model
         'payment_bank',
         'payment_slip',
         'payment_status',
+        'pay_installment',
     ];
 }

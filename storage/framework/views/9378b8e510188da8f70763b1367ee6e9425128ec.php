@@ -47,11 +47,34 @@
                     </label>
                     <input class="form-control" type="email" 
                     placeholder="กรุณาระบุอีเมลสำหรับการติดต่อรับใบเสนอราคา"
-                    name="member_email" value="<?php echo e($row->email); ?>" readonly>
+                    name="member_email" value="<?php echo e($row->email); ?>">
                   </div>
                 </div>
               </div>
 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+<div class="row">
+  <div class="col">
+    <div class="mb-3">
+      <label class="form-label">ที่อยู่
+        <span class="text-danger">*</span> 
+      </label>
+      <input class="form-control"  name="member_address" type="text" required>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <div class="mb-3">
+      <label class="form-label">เบอร์โทรศัพท์
+        <span class="text-danger">*</span> 
+      </label>
+      <input class="form-control"  name="member_phone" type="text" value="<?php echo e(Auth::user()->user_phone); ?>" required>
+    </div>
+  </div>
+</div>
+
 <?php $__currentLoopData = $package_all; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
               <div class="row">
                 <div class="col">

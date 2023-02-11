@@ -60,12 +60,13 @@ Route::POST('/admin/update_password', $controller_path . '\AdminController@admin
 Route::get('/admin/payment_chk/{id}', $controller_path . '\AdminController@payment_chk')->name('admin.payment_chk');
 //admin_บันทึกยอดโอนชำระ
 Route::get('/admin/update_payment/{id}/{bkid}', $controller_path . '\AdminController@update_payment')->name('admin.update_payment');
+Route::get('/admin/update_payment_pay2/{id}/{bkid}', $controller_path . '\AdminController@update_payment_pay2')->name('admin.update_payment_pay2');
 //admin_userdata
 Route::get('/admin/userdata', $controller_path . '\AdminController@user_data')->name('admin.user_data');
 Route::get('/admin/userbooking/{id}', $controller_path . '\AdminController@user_data_booking')->name('admin.user_data_booking');
 
 //admin_invoice
-Route::get('/admin/invoice/{id}', $controller_path . '\AdminController@admin_invoice')->name('admin.invoice');
+Route::get('/admin/invoice/{id}/{quotation}', $controller_path . '\AdminController@admin_invoice')->name('admin.invoice');
 
 //admin_user_delete
 Route::get('/admin/user_delete/{id}', $controller_path . '\AdminController@admin_user_delete')->name('admin.user_delete');
@@ -111,6 +112,8 @@ Route::get('/user/all_packages', $controller_path . '\UserController@all_package
 
 //user_invoice
 Route::get('/user/invoice/{id}/{com}', $controller_path . '\UserController@user_invoice')->name('user_invoice');
+
+Route::get('/user/invoice_comp/{id}', $controller_path . '\UserController@user_invoice_comp')->name('user_invoice_comp');
 
 //user_ยกเลิกการของ
 Route::get('/user/cancel_booking/{id}', $controller_path . '\UserController@user_cancel_booking')->name('cancel_booking');

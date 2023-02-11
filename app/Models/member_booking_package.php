@@ -14,6 +14,8 @@ class member_booking_package extends Model
         'member_id',
         'member_name',
         'member_email',
+        'member_address',
+        'member_phone',
         'package_id',
         'number_of_travel',
         'date_start',

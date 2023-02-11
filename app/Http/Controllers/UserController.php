@@ -52,6 +52,8 @@ class UserController extends Controller
       'member_id' => $request->member_id,
       'member_name' => $request->member_name,
       'member_email' => $request->member_email,
+      'member_address' => $request->member_address,
+      'member_phone' => $request->member_phone,
       'package_id' => $request->package_id,
       'number_of_travel' => $request->number_of_travel,
       'date_start' => $request->date_start,
@@ -180,6 +182,15 @@ class UserController extends Controller
     $upload_location = 'public/package_file/';
     $full_path = $upload_location . $payment_slip_name;
 
+    $pay_ins = $request->pay_installment;
+    if ($pay_ins == 'pay1')
+    {
+      $pay_status = '1';
+    }elseif ($pay_ins == 'pay2')
+    {
+      $pay_status = '4';
+    }
+          
     DB::table('user_payments')->insert(
       [
         'user_id' => $request->user_id,
@@ -187,8 +198,8 @@ class UserController extends Controller
         'payment_price' => $request->payment_price,
         'payment_bank' => $request->payment_bank,
         'payment_slip' => $full_path,
-        'payment_status' => '1',
-        'address_payment' => $request->address_payment,
+        'payment_status' => $pay_status,
+        'pay_installment' => $request->pay_installment,
         'created_at' => Carbon::now()
       ]
     );
@@ -228,6 +239,24 @@ class UserController extends Controller
       $bank_data = DB::table('sp_banks')
       ->get();
     return view('userpages.user_invoice', compact('invoice','bank_data','invoice2'));
+  }
+
+  public function user_invoice_comp($id)
+  {
+    $invoice = DB::table('booking_quotations')
+      ->join('member_booking_packages', 'booking_quotations.booking_id', '=', 'member_booking_packages.booking_id')
+      ->join('package_tours', 'booking_quotations.package_id', '=', 'package_tours.package_id')
+      ->join('users','member_booking_packages.member_id','=','users.id')
+      ->where('booking_quotations.booking_id', '=', $id)
+      ->get();
+
+      $invoice2 = DB::table('member_booking_packages')
+      ->where('member_booking_packages.booking_id', '=', $id)
+      ->get();
+
+      $bank_data = DB::table('sp_banks')
+      ->get();
+    return view('userpages.user_invoice_comp', compact('invoice','bank_data','invoice2'));
   }
 
   public function user_cancel_booking($id)

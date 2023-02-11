@@ -16,11 +16,8 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
-
-                <div class="card">                       
-             
-                    <div class="card-body"> 
-                        
+                <div class="card">
+                    <div class="card-body">                        
                         <div class="table-responsive">
                             <table class="display" id="basic-1">
                                 <thead>
@@ -34,26 +31,25 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php
+                                        <?php
                                          $i = '1';   
                                         ?>
                                         <?php $__currentLoopData = $list_invoice; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+<?php
+$bk_id = $row->booking_id;
+?>
                                     <tr>
-                                        
                                         <td><?php echo e($i++); ?></td>      
                                         <td><?php echo e($row->code_tour); ?></td>    
                                         <td><?php echo e($row->package_name); ?></td>               
                                         <td><?php echo e($row->member_name); ?></td>
-                                        <td class="txt-success">ชำระมัดจำแล้ว</td>
-                                        <td><a href="<?php echo e(route('admin.invoice', ['id' => $row->booking_id])); ?>" class="btn btn-info">ใบสั่งจอง</a></td>
-                                    
+                                        <td class="txt-success">ดำเนินการเรียบร้อยแล้ว</td>
+                                        <td><a href="<?php echo e(url('/admin/invoice/'.$bk_id.'/comp')); ?>" class="btn btn-info">ใบสั่งจอง</a></td>
                                     </tr>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </tbody>
                             </table>
-                        </div>
-       
- 
+                        </div> 
                     </div>
                 </div>
             </div>

@@ -35,13 +35,16 @@
                                          $i = '1';   
                                         @endphp
                                         @foreach($list_invoice as $row)
+@php
+$bk_id = $row->booking_id;
+@endphp
                                     <tr>
                                         <td>{{ $i++; }}</td>      
                                         <td>{{$row->code_tour}}</td>    
                                         <td>{{$row->package_name}}</td>               
                                         <td>{{$row->member_name}}</td>
-                                        <td class="txt-success">ชำระมัดจำแล้ว</td>
-                                        <td><a href="{{ route('admin.invoice', ['id' => $row->booking_id]) }}" class="btn btn-info">ใบสั่งจอง</a></td>
+                                        <td class="txt-success">ดำเนินการเรียบร้อยแล้ว</td>
+                                        <td><a href="{{url('/admin/invoice/'.$bk_id.'/comp')}}" class="btn btn-info">ใบสั่งจอง</a></td>
                                     </tr>
                                     @endforeach
                                 </tbody>

@@ -42,12 +42,11 @@ div {
 }
 
 .product-details {
-  margin-top: 10px;
+  margin-top: 13px;
 }
-
     </style>
     <style type="text/css">
-        @media  print {
+        @media print {
             #non-printable {
                 display: none;
             }
@@ -65,18 +64,16 @@ div {
     <div id="non-printable">
         <div class="card">
             <div class="card-body">
-                <a href="<?php echo e(URL::previous()); ?>" class="btn btn-secondary">ย้อนกลับ</a>
+                <a href="{{ url()->previous() }}" class="btn btn-secondary">ย้อนกลับ</a>
                 <button class="btn btn-primary" onclick="window.print()">พิมพ์</button>
             </div>
         </div>
     </div>
 
     <div id="printable">
-        <?php $__currentLoopData = $invoice; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        @foreach($invoice as $item)
 <!---- start ----->
-<?php
-$comp = request()->quotation;
-?>
+
           <!-- Container-fluid starts-->
           <div class="container">
             <div class="row">
@@ -86,13 +83,12 @@ $comp = request()->quotation;
                     <div class="invoice">
                       <div>
 
-                 
                         <table class="table table-borderless">                        
                           <tbody>
                             <tr>                          
                               <td style="width: 20%" class="text-center">
                                 <img class="media-object img-60"
-                            src="<?php echo e(asset('assets/images/sp-logo-200.png')); ?>"
+                            src="{{ asset('assets/images/sp-logo-200.png') }}"
                             alt="" width="180px"><br>
                               </span>
                               </td>
@@ -101,7 +97,7 @@ $comp = request()->quotation;
                                   <span>
                                     โทร. 093-545-9009</span>
                                  <br>
-                                <p> ที่อยู่ : 8/4 ม.1 ถ.หน้าสนามบินนานาชาติอุดรธานี อ.เมือง จ.อุดรธานี 41000
+                                <p class="fs-14"> ที่อยู่ : 8/4 ม.1 ถ.หน้าสนามบินนานาชาติอุดรธานี อ.เมือง จ.อุดรธานี 41000
                                  <br>
                                  เลขประจำตัวผู้เสียภาษี : 0413550000339
                              </p>  
@@ -109,34 +105,36 @@ $comp = request()->quotation;
                             </tr>
                           </tbody>
                         </table>
-                    
+                        
+                        <hr >
+                        <!-- End InvoiceTop-->
                         <p class="fs-20">ใบจองแพ็คเกจ</p>
                         <table class="table table-bordered border-dark">
                           <tbody>
                             <tr>
-                              <td style="width: 50%" colspan="2">ชื่อ : <?php echo e(auth()->user()->member_name); ?></td>                            
+                              <td style="width: 50%" colspan="2">ชื่อ : {{ auth()->user()->member_name }}</td>                            
                     
-                              <td style="width: 20%" colspan="2">เลขที่ : <?php echo e($item->quotation_id); ?></td>
+                              <td style="width: 20%" colspan="2">เลขที่ : {{ $item->quotation_id }}</td>
                                                   
                             </tr>
                             <tr>
-                              <td style="width: 50%" colspan="2">ที่อยู่ :</td>
-                        
-                              <td style="width: 20%" colspan="2">วันที่ : <?php echo e(Carbon\Carbon::parse($item->created_at)->format('d/m/Y')); ?></td>
-                       
+                              <td style="width: 50%" colspan="2">ที่อยู่ : {{$item->member_address}}</td>
+                              <td style="width: 20%" colspan="2">วันที่ :
+                                @foreach ($invoice2 as $row)
+                                {{ Carbon\Carbon::parse($row->created_at)->format('d/m/Y') }}</td>
+                                @endforeach
                             </tr>
                             <tr>
-                              <td style="width: 50%" colspan="2">อีเมล : <?php echo e($item->member_email); ?></td>                          
-                              <td style="width: 50%" colspan="2">ใช้ได้ถึง:  <?php echo e(Carbon\Carbon::parse($item->date_start)->format('d/m/Y')); ?></td>
+                              <td style="width: 50%" colspan="2">อีเมล : {{$item->member_email}}</td>                          
+                              <td style="width: 50%" colspan="2">ใช้ได้ถึง:  {{ Carbon\Carbon::parse($item->date_start)->format('d/m/Y') }}</td>
                               
                             </tr>
                             <tr>
-                              <td style="width: 50%" colspan="2">โทร : <?php echo e($item->user_phone); ?></td> 
+                              <td style="width: 50%" colspan="2">โทร : {{$item->user_phone}}</td> 
                      <td></td>
                             </tr>
                           </tbody>
                         </table>
-
                         <!-- End Invoice Mid-->
                         <div>
                           <div class="table-responsive invoice-table" id="table">
@@ -153,30 +151,26 @@ $comp = request()->quotation;
                                     </tr>
                                     <tr>
                                         <td>
-                                            <p class="m-0"><?php echo e($item->code_tour); ?></p>
+                                            <p class="m-0">{{ $item->code_tour }}</p>
                                         </td>
                                         <td>
-                                            <label><?php echo e($item->package_name); ?>
-
+                                            <label>{{ $item->package_name }}
                                                 <br>
-                                                จำนวนที่นั่ง : <?php echo e($item->number_of_travel); ?>
-
+                                                จำนวนที่นั่ง : {{ $item->number_of_travel }}
                                                 <br>
                                                 วันที่เดินทางไป-กลับ :
-                                                <?php echo e(Carbon\Carbon::parse($item->date_start)->format('d/m/Y')); ?>
-
+                                                {{ Carbon\Carbon::parse($item->date_start)->format('d/m/Y') }}
                                                 -
-                                                <?php echo e(Carbon\Carbon::parse($item->date_end)->format('d/m/Y')); ?>
-
+                                                {{ Carbon\Carbon::parse($item->date_end)->format('d/m/Y') }}
                                             </label>
                                         </td>
                         
                                         <td>
                                             <p class="itemtext">
-                                                <?php
+                                                @php
                                                     $total_price = number_format($item->total_price);
                                                     echo $total_price;
-                                                ?></p>
+                                                @endphp</p>
                                         </td>
                                     </tr>
                                     <tr >
@@ -185,24 +179,16 @@ $comp = request()->quotation;
                                         </td>
                                         <td class="txt-secondary">
                                             <label>มัดจำ 50% 
-                                            <?php $__currentLoopData = $payment_status; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                <?php if($row->payment_status == '4'): ?>
-                                                    (ชำระเงินแล้ว)
-                                                <?php else: ?>
-                                                กรุณาชำระภายในวันที่
-                                                <?php echo e(Carbon::parse($item->created_at)->addDays(5)->format('d/m/Y')); ?>
-
-                                                <?php endif; ?>
-                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                ( ชำระเงินแล้ว )
                                             </label>
                                         </td>
                         
                                         <td class="txt-secondary"> 
                                             <p class="itemtext">
-                                                <?php
+                                                @php
                                                     $deposit_price = number_format($item->price_deposit);
                                                     echo $deposit_price;
-                                                ?></p>
+                                                @endphp</p>
                                         </td>
                                     </tr>
                                     <tr>
@@ -210,66 +196,38 @@ $comp = request()->quotation;
                                             <p class="m-0">งวดที่ 2</p>
                                         </td>
                                         <td>
-                                            <label>ชำระส่วนที่เหลือ (ก่อนวันเดินทาง 15 วัน)</label>
+                                            <label>ชำระส่วนที่เหลือ ( ชำระเงินแล้ว
+                                          )</label>
                                         </td>
                                         <td>
                                             <p class="itemtext">
-                                             
-                                                <?php  
+                                                @php
                                                     $result = $item->total_price - $item->price_deposit;
                                                     echo number_format($result);
-                                                ?></p>
+                                                @endphp
+                                           </p>
                                         </td>
                                     </tr>
-                           <?php if($comp == 'comp'): ?>
+                                  
+                                    <tr>                                                           
+                                        <td colspan="2" align="right">
+                                            <h6 class="mb-0 p-2">ยอดชำระรวมทั้งสิ้น</h6>
+                                        </td>
+                                        <td class="payment">
+                                            <h6 class="mb-0 p-2">
+                                            {{number_format($item->total_price)}}
+                                           บาท</h6>
+                                        </td>                       
+                                    </tr>
                                     <tr>
-                                      <td></td>                        
-                                      <td align="right">
-                                          <h6 class="mb-0 p-2">ยอดชำระรวมทั้งสิ้น 
-                                          </h6>
-                                      </td>
-                                      <td class="payment">
-                                          <h6 class="mb-0 p-2">
-                                              <?php echo e(number_format($item->total_price)); ?>
-
-                                              บาท</h6>
-                                      </td>
-                                  </tr>
-                                  <tr>
-                                    <td >ตัวอักษร</td>
-                                    <td align="right"> 
-                                      ( <?php
-                                      echo num2wordsThai($item->total_price).'บาทถ้วน'
-                                      ;
-                                      ?>  )</td>
-                                  </tr>
-                           <?php else: ?>
-                                  <tr>
-                                    <td></td>                        
-                                    <td align="right">
-                                        <h6 class="mb-0 p-2">จำนวนชำระค่ามัดจำงวดที่ 1 รวมทั้งสิ้น
-                                        </h6>
-                                    </td>
-                                    <td class="payment">
-                                        <h6 class="mb-0 p-2">
-                                            <?php
-                                            $deposit_price = number_format($item->price_deposit);
-                                                echo
-                                            $deposit_price;
-                                            ?>
-                                            บาท</h6>
-                                    </td>
-                                </tr>
-                                <tr>
-                                  <td >ตัวอักษร</td>
-                                  <td align="right"> 
-                                    ( <?php
-                                    echo num2wordsThai($deposit_price).'บาทถ้วน'
-                                    ;
-                                    ?>  )</td>
-                                </tr>
-                                  <?php endif; ?>
-                                    
+                                      <td >ตัวอักษร</td>
+                                      <td align="right"> 
+                                        ( @php
+                                        echo num2wordsThai($item->total_price).'บาทถ้วน'
+                                        ;
+                                        @endphp  )</td>
+                                    </tr>
+                                
                                 </tbody>
                             </table>
                         </div>
@@ -280,33 +238,26 @@ $comp = request()->quotation;
                                 <p class="legal"><strong>การชำระเงิน</strong>
                                   <ul>
                                       <li>โอนชำระผ่านบัญชี</li>
-                                      <?php $__currentLoopData = $data_bank; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                      <li><?php echo e($row->bank_name); ?>
-
+                                      @foreach ($bank_data as $row)
+                                      <li>{{$row->bank_name}}
                                           /
-                                          เลขที่บัญชี : <?php echo e($row->account_nummber); ?> /                                 ชื่อบัญชี : <?php echo e($row->bank_account_name); ?> /                        
-                                      <?php echo e($row->bank_branch); ?>                             
+                                          เลขที่บัญชี : {{$row->account_nummber}} /                                 ชื่อบัญชี : {{$row->bank_account_name}} /
+                                  
+                                      {{$row->bank_branch}}
+                                       
                                       </li>
-                                      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>   
-                                      
+          @endforeach  
                                   </ul>
                                   </p>
                               
                               </div>
                             </div>
                             <div class="col-md-4">
-                              <?php $__currentLoopData = $payment_status; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <?php if($row->payment_status == '4'): ?>
-                                <span class="txt-success">
-                                <strong>หมายเหตุ : ดำเนินการชำระมัดจำงวดที่ 1 แล้ว 
-                                </strong>
-                                </span>
-                                <?php endif; ?>
-                              <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-
-                              <?php if($comp == 'comp'): ?>
-                            <strong>หมายเหตุ : ชำระเงินเรียบร้อยแล้ว </strong>
-                              <?php endif; ?>
+                       
+                              <span class="txt-success">
+                                <strong>หมายเหตุ : ชำระเงินเรียบร้อยแล้ว </strong>
+                               </span>
+                           
                             </div>
                           </div>
                         </div>
@@ -319,8 +270,11 @@ $comp = request()->quotation;
 
 
 
-<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+@endforeach
     </div>
+
+
+
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
@@ -328,4 +282,3 @@ $comp = request()->quotation;
 </body>
 
 </html>
-<?php /**PATH C:\xampp\htdocs\travel\resources\views/admin/invoice.blade.php ENDPATH**/ ?>
