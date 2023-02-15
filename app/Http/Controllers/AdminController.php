@@ -306,6 +306,7 @@ class AdminController extends Controller
       'package_period_start' => $request->package_period_start,
       'package_period_end' => $request->package_period_end,
       'package_price' => $request->package_price,
+      'pay_before' => $request->pay_before,
       'package_file' => $full_path,
       'package_deposit' => $request->package_deposit,
       'highlight_tour' => $request->highlight_tour,

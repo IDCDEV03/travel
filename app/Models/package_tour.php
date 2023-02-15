@@ -22,6 +22,7 @@ class package_tour extends Model
         'package_period_start',
         'package_period_end',
         'package_price',
+        'pay_before',
         'package_file',
         'package_deposit',
         'highlight_tour',

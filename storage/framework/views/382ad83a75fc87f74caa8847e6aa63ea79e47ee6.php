@@ -145,6 +145,14 @@ unset($__errorArgs, $__bag); ?>
                                 </div>
                             </div>
 <br>
+<div class="row">
+    <div class="col">
+        <div class="mb-3">
+            <label class="form-label" >ระบุวันสำหรับระยะเวลาการชำระเงิน </label>
+            <input class="form-control" type="number" name="pay_before" placeholder="ใส่เฉพาะตัวเลข เช่น ชำระภายใน 15 วันก่อนเดินทาง ให้กรอก 15" maxlength="2" required>
+        </div>
+    </div>
+</div>
                             <div class="row">
                                 <div class="col">
                                     <div class="mb-3">
