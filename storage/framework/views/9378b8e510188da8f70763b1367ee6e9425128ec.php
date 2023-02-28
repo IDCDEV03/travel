@@ -18,6 +18,14 @@
     </div>
   </div>
 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+<?php $__currentLoopData = $package_all; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+<div class="card">
+  <div class="card-body">
+    <a href="<?php echo e(asset($item->package_file)); ?>" class="txt-primary h3"><u>ดาวน์โหลดโปรแกรมทัวร์</u></a>
+  </div>
+</div>
+<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+	
 	
 	<div class="card">
         <div class="card-header">

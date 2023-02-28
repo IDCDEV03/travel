@@ -81,11 +81,7 @@
                                 </div>
 
                                 <div class="form-group mb-0">
-                                    <div class="checkbox p-0">
-                                        <input id="checkbox1" type="checkbox">
-                                        <label class="text-muted" for="checkbox1">Agree with<a class="ms-2"
-                                                href="#">Privacy Policy</a></label>
-                                    </div>
+                                
                                     <button class="btn btn-primary btn-block" type="submit">สมัครสมาชิก</button>
                                 </div>
                             </form>

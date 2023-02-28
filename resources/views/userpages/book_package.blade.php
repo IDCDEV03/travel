@@ -19,6 +19,14 @@
     </div>
   </div>
 @endforeach
+@foreach ($package_all as $item)
+<div class="card">
+  <div class="card-body">
+    <a href="{{ asset($item->package_file) }}" class="txt-primary h3"><u>ดาวน์โหลดโปรแกรมทัวร์</u></a>
+  </div>
+</div>
+@endforeach
+	
 	
 	<div class="card">
         <div class="card-header">

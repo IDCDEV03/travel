@@ -19,6 +19,24 @@ use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
+//Line_Alert
+  public function LineAlert($msg)
+  {
+    $sToken = "7TNq5qLJOm7BgMbJUtGAcNPzBvdzv8XTBbpk5JvX725";
+    $sMessage = $msg; 
+    
+    $chOne = curl_init(); 
+    curl_setopt( $chOne, CURLOPT_URL, "https://notify-api.line.me/api/notify"); 
+    curl_setopt( $chOne, CURLOPT_SSL_VERIFYHOST, 0); 
+    curl_setopt( $chOne, CURLOPT_SSL_VERIFYPEER, 0); 
+    curl_setopt( $chOne, CURLOPT_POST, 1); 
+    curl_setopt( $chOne, CURLOPT_POSTFIELDS, "message=".$sMessage); 
+    $headers = array( 'Content-type: application/x-www-form-urlencoded', 'Authorization: Bearer '.$sToken.'', );
+    curl_setopt($chOne, CURLOPT_HTTPHEADER, $headers); 
+    curl_setopt( $chOne, CURLOPT_RETURNTRANSFER, 1); 
+    $result = curl_exec( $chOne ); 
+  }
+
   public function book_package($id,$pkid)
   {
     $users = DB::table('users')
@@ -64,8 +82,11 @@ class UserController extends Controller
       'created_at' => Carbon::now()
     ]);
 
-    $this->booking_mail($request->member_id);
+   //Line_Alert
+    $msg_alrert = "มีรายการสั่งจองแพ็คเกจทัวร์";    
+    $this->LineAlert($msg_alrert);
 
+    $this->booking_mail($request->member_id);
     return redirect()->route('userPages.home')->with('success', "บันทึกข้อมูลการสั่งจองเรียบร้อยแล้ว กรุณารอเจ้าหน้าที่ตรวจสอบ");
   }
 
@@ -75,8 +96,6 @@ class UserController extends Controller
     $email = $user_email->email; 
     Mail::to($email)->send(new BookingConfirm($user_email));
   }
-
-  
 
   public function booking_status()
   {
@@ -217,6 +236,10 @@ class UserController extends Controller
         'booking_status' => '4',
         'updated_at' => Carbon::now()
       ]);
+
+    //Line_Alert
+    $msg_alrert = "มีการแจ้งโอนเงินแพ็คเกจทัวร์";
+    $this->LineAlert($msg_alrert);
 
     $payment_slip->move($upload_location, $payment_slip_name);
     return redirect()->route('booking_status')->with('success', "บันทึกข้อมูลเรียบร้อยแล้ว");

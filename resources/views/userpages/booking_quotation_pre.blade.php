@@ -136,7 +136,7 @@
                     <label>มัดจำ 50% ( กรุณาชำระภายในวันที่
                         @foreach ($user_quotation2 as $row)
                         @php
-                      $end_date = Carbon::parse($row->created_at)->addDays(5)->format('d/m/Y');
+                      $end_date = Carbon::parse($row->created_at)->addDays(7)->format('d/m/Y');
                       echo $end_date;
                         @endphp
                         )
@@ -185,7 +185,8 @@
     </table>
 </div>
 @php
-$date_today = Carbon::now()->format('d/m/Y');
+$date_today = Carbon::now()->format('Y-m-d');
+$end_day = Carbon::parse($row->created_at)->addDays(7)->format('Y-m-d');
 @endphp
                                       <!-- End Table-->
             <div class="row">
@@ -194,10 +195,10 @@ $date_today = Carbon::now()->format('d/m/Y');
                         <p class="legal"><strong>การชำระเงิน</strong>
                         <ul>
                             
-                            @if ($date_today <= $end_date)
+                            @if ($date_today <= $end_day)
                             <li>โอนชำระผ่านบัญชี</li>
                               
-                            @elseif ($date_today >= $end_date)
+                            @elseif ($date_today >= $end_day)
                             <li class="txt-danger">เกินกำหนดชำระ</li>
                             @endif
                         </ul>
@@ -221,9 +222,9 @@ $date_today = Carbon::now()->format('d/m/Y');
                                     <div class="col-sm-12 text-center mt-3">
                                     @if($item->quotation_status == '0')
                                     
-                                        @if ($date_today <= $end_date)
+                                        @if ($date_today <= $end_day)
                                         <a href="{{url('/user/payment/'.$item->quotation_id.'/normal/pay1')}}" class="btn btn-secondary">แจ้งชำระเงิน</a>
-                                        @elseif ($date_today >= $end_date)
+                                        @elseif ($date_today >= $end_day)
                                         <a href="#" class="btn btn-light disabled" >เกินกำหนดชำระ</a>
                                         @endif                                 
                                     @endif

@@ -7,9 +7,6 @@
                     <div class="col-lg-6 col-md-6">
                         <ul class="topbar-list">
                             <li>
-                                <a href="#!"><i class="fab fa-facebook"></i></a>
-                            </li>
-                            <li>
                            <i class="fab fa-line"></i> K.Mori</li>
                             <li>โทร.
                             <span>
@@ -19,10 +16,16 @@
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <ul class="topbar-others-options">
+                            @guest
                             <li><a href="{{ route('login.show') }}">เข้าสู่ระบบ</a></li>
                             <li><a href="{{ route('register.show') }}">สมัครสมาชิก</a></li>
-                            <li>                               
-                            </li>                         
+                            @endguest
+
+                            @auth
+                            <li><a href="{{route('userPages.home')}}">{{auth()->user()->username}}</a></li> 
+                            <li><a href="{{ route('logout.perform') }}">ออกจากระบบ</a></li>                           
+                            @endauth                           
+                                                
                         </ul>
                     </div>
                 </div>
@@ -69,15 +72,24 @@
                                     <a href="{{ route('contact.show') }}" class="nav-link">ติดต่อเรา</a>
                                 </li>
                             </ul>
+
+                            @guest
                             <div class="others-options d-flex align-items-center">
-                                <div class="option-item">
-                                    <a href="#" class="search-box">
-                                        <i class="bi bi-search"></i></a>
-                                </div>
                                 <div class="option-item">
                                     <a href="{{ route('register.show') }}" class="btn  btn_navber">สมัครสมาชิก</a>
                                 </div>
                             </div>
+                            @endguest
+
+                            @auth
+                            <div class="others-options d-flex align-items-center">
+                                <div class="option-item">
+                                    <a href="{{ route('userPages.home') }}" class="btn  btn_navber">หน้าสมาชิก</a>
+                                </div>
+                            </div>
+                            @endauth
+                    
+
                         </div>
                     </nav>
                 </div>
@@ -93,38 +105,25 @@
                     </div>
                     <div class="container">
                         <div class="option-inner">
+                         
                             <div class="others-options d-flex align-items-center">
+                                @guest
                                 <div class="option-item">
                                     <a href="{{ route('login.show') }}" class="btn  btn_navber">เข้าสู่ระบบ</a>
                                 </div>
                                 <div class="option-item">
                                     <a href="{{ route('register.show') }}" class="btn  btn_navber">สมัครสมาชิก</a>
                                 </div>
+                                @endguest                                
+                            @auth
+                            <div class="option-item">
+                                <a href="{{ route('userPages.home') }}" class="btn  btn_navber">หน้าสมาชิก</a>
                             </div>
-                        </div>
+                            @endauth
+                            </div>
+                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </header>
-
-     <!-- search -->
-     <div class="search-overlay">
-        <div class="d-table">
-            <div class="d-table-cell">
-                <div class="search-overlay-layer"></div>
-                <div class="search-overlay-layer"></div>
-                <div class="search-overlay-layer"></div>
-                <div class="search-overlay-close">
-                    <span class="search-overlay-close-line"></span>
-                    <span class="search-overlay-close-line"></span>
-                </div>
-                <div class="search-overlay-form">
-                    <form>
-                        <input type="text" class="input-search" placeholder="Search here...">
-                        <button type="button"><i class="fas fa-search"></i></button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>

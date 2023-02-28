@@ -187,7 +187,7 @@ $c_pay = request()->com;
                                                 @elseif ($item->quotation_status == '0')
                                                 ( กรุณาชำระภายในวันที่
                                                 @foreach ($invoice2 as $row)
-                                                {{Carbon::parse($row->created_at)->addDays(5)->format('d/m/Y')}} )
+                                                {{Carbon::parse($row->created_at)->addDays(7)->format('d/m/Y')}} )
                                                 @endforeach
                                               @endif
                                             </label>

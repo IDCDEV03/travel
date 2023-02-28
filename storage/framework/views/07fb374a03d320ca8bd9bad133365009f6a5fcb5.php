@@ -7,7 +7,7 @@
 
 <?php $__env->startSection('style'); ?>
 <style>
-    @media  print
+    @media print
 {
 #non-printable { display: none; }
 #printable { display: block; }
@@ -27,7 +27,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <?php
-                $date_today = Carbon::now()->format('d/m/Y');
+                $date_today = Carbon::now()->format('Y-m-d');
                 ?>             
                 <div class="card">
                     <div class="card-body">
@@ -66,7 +66,7 @@
 
                         </span><br> ใช้ได้ถึง:
                         <span>
-                            <?php
+ <?php
 $end = Carbon::parse($item->created_at)->addDays(15)->format('d/m/Y');
 echo $end;
 ?>
@@ -165,6 +165,8 @@ echo $end;
                         <?php
                         $end_date = Carbon::parse($item->date_start)->addDays(-15)->format('d/m/Y');
                         echo $end_date;
+
+                        $end_today = Carbon::parse($item->date_start)->addDays(-15)->format('Y-m-d');
                           ?>
                     )
                     </label>
@@ -230,9 +232,9 @@ echo $end;
                                 <div id="non-printable">
                                     <div class="col-sm-12 text-center mt-3">
                                      <?php if($item->quotation_status == '2'): ?>
-                                        <?php if($date_today <= $end_date): ?>
+                                        <?php if($date_today <= $end_today): ?>
                                         <a href="<?php echo e(url('/user/payment/'.$item->quotation_id.'/normal/pay2')); ?>" class="btn btn-secondary">แจ้งชำระเงิน</a>
-                                        <?php elseif($date_today >= $end_date): ?>
+                                        <?php elseif($date_today >= $end_today): ?>
                                         <a href="#" class="btn btn-light disabled" >เกินกำหนดชำระ</a>
                                         <?php endif; ?>     
                                     <?php endif; ?>

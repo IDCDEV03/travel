@@ -19,6 +19,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Mail\QuotationSend;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\package_payment_mail1;
+use App\Mail\package_payment_mail2;
 
 class AdminController extends Controller
 {
@@ -614,6 +616,7 @@ class AdminController extends Controller
         'booking_status' => '5',
         'updated_at' => Carbon::now()
       ]);
+    $this->package_payment_mail1($bkid);
     return redirect()->route('booking_chk')->with('success', "ตรวจสอบยอดชำระเรียบร้อยแล้ว");
   }
 
@@ -637,6 +640,7 @@ class AdminController extends Controller
         'booking_status' => '6',
         'updated_at' => Carbon::now()
       ]);
+    $this->package_payment_mail2($bkid);
     return redirect()->route('booking_chk')->with('success', "ตรวจสอบยอดชำระเรียบร้อยแล้ว");
   }
 
@@ -729,6 +733,21 @@ class AdminController extends Controller
     ->delete();
 
     return redirect()->back()->with('success', "ลบข้อมูลเรียบร้อยแล้ว");
+  }
+
+//EMAIL
+  public function package_payment_mail1 ($id)
+  {
+    $user_email = member_booking_package::where('booking_id','=',$id)->firstOrFail();  
+    $email = $user_email->member_email; 
+    Mail::to($email)->send(new package_payment_mail1($user_email));
+  }
+
+  public function package_payment_mail2 ($id)
+  {
+    $user_email = member_booking_package::where('booking_id','=',$id)->firstOrFail();  
+    $email = $user_email->member_email; 
+    Mail::to($email)->send(new package_payment_mail2($user_email));
   }
 
 }

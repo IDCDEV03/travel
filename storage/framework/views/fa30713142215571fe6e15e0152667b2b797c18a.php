@@ -7,7 +7,7 @@
 
 <?php $__env->startSection('style'); ?>
 <style>
-    @media  print
+    @media print
 {
 #non-printable { display: none; }
 #printable { display: block; }
@@ -143,7 +143,7 @@
                     <label>มัดจำ 50% ( กรุณาชำระภายในวันที่
                         <?php $__currentLoopData = $user_quotation2; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $row): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <?php
-                      $end_date = Carbon::parse($row->created_at)->addDays(5)->format('d/m/Y');
+                      $end_date = Carbon::parse($row->created_at)->addDays(7)->format('d/m/Y');
                       echo $end_date;
                         ?>
                         )
@@ -192,7 +192,8 @@
     </table>
 </div>
 <?php
-$date_today = Carbon::now()->format('d/m/Y');
+$date_today = Carbon::now()->format('Y-m-d');
+$end_day = Carbon::parse($row->created_at)->addDays(7)->format('Y-m-d');
 ?>
                                       <!-- End Table-->
             <div class="row">
@@ -201,10 +202,10 @@ $date_today = Carbon::now()->format('d/m/Y');
                         <p class="legal"><strong>การชำระเงิน</strong>
                         <ul>
                             
-                            <?php if($date_today <= $end_date): ?>
+                            <?php if($date_today <= $end_day): ?>
                             <li>โอนชำระผ่านบัญชี</li>
                               
-                            <?php elseif($date_today >= $end_date): ?>
+                            <?php elseif($date_today >= $end_day): ?>
                             <li class="txt-danger">เกินกำหนดชำระ</li>
                             <?php endif; ?>
                         </ul>
@@ -229,9 +230,9 @@ $date_today = Carbon::now()->format('d/m/Y');
                                     <div class="col-sm-12 text-center mt-3">
                                     <?php if($item->quotation_status == '0'): ?>
                                     
-                                        <?php if($date_today <= $end_date): ?>
+                                        <?php if($date_today <= $end_day): ?>
                                         <a href="<?php echo e(url('/user/payment/'.$item->quotation_id.'/normal/pay1')); ?>" class="btn btn-secondary">แจ้งชำระเงิน</a>
-                                        <?php elseif($date_today >= $end_date): ?>
+                                        <?php elseif($date_today >= $end_day): ?>
                                         <a href="#" class="btn btn-light disabled" >เกินกำหนดชำระ</a>
                                         <?php endif; ?>                                 
                                     <?php endif; ?>
