@@ -65,27 +65,7 @@
     <?php echo $__env->make('home.menu', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
 
-    <!-- search -->
-    <div class="search-overlay">
-        <div class="d-table">
-            <div class="d-table-cell">
-                <div class="search-overlay-layer"></div>
-                <div class="search-overlay-layer"></div>
-                <div class="search-overlay-layer"></div>
-                <div class="search-overlay-close">
-                    <span class="search-overlay-close-line"></span>
-                    <span class="search-overlay-close-line"></span>
-                </div>
-                <div class="search-overlay-form">
-                    <form>
-                        <input type="text" class="input-search" placeholder="Search here...">
-                        <button type="button"><i class="fas fa-search"></i></button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
+  
     <!-- Common Banner Area -->
     <section id="common_banner">
         <div class="container">
@@ -224,9 +204,17 @@
                                     </div>
                                 </div>
                             </div>
+                            <?php if(auth()->guard()->check()): ?>
                             <div class="tour_select_offer_bar_bottom">
-                                <button class="btn btn_theme btn_md w-100" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">สนใจจองแพ็คเกจ</button>
+                                <a class="btn btn_theme btn_md w-100" 
+                                href="<?php echo e(url('/userpages/book_package/'. 
+                                Auth::user()->id.'/package/'.$item->package_id)); ?>">สนใจจองแพ็คเกจ</a>
                             </div>
+                            <?php endif; ?>
+                            <?php if(auth()->guard()->guest()): ?>
+                            <a href="<?php echo e(route('register.show')); ?>" class="btn btn_theme btn_md w-100" >สนใจจองแพ็คเกจ</a>
+                            <?php endif; ?> 
+                          
                         </div>                      
 
                     </div>
