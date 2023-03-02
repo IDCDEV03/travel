@@ -70,6 +70,8 @@ Route::get('/admin/invoice/{id}/{quotation}', $controller_path . '\AdminControll
 
 //admin_user_delete
 Route::get('/admin/user_delete/{id}', $controller_path . '\AdminController@admin_user_delete')->name('admin.user_delete');
+//admin_delete_package
+Route::get('/admin/delete_package/{id}', $controller_path . '\AdminController@delete_package')->name('admin.delete_package');
 
 //admin_list_invoice
 Route::get('/admin/list_invoice', $controller_path . '\AdminController@list_invoice')->name('admin.list_invoice');

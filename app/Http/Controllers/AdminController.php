@@ -21,6 +21,7 @@ use App\Mail\QuotationSend;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\package_payment_mail1;
 use App\Mail\package_payment_mail2;
+use Illuminate\Support\Facades\File; 
 
 class AdminController extends Controller
 {
@@ -748,6 +749,26 @@ class AdminController extends Controller
     $user_email = member_booking_package::where('booking_id','=',$id)->firstOrFail();  
     $email = $user_email->member_email; 
     Mail::to($email)->send(new package_payment_mail2($user_email));
+  }
+
+  public function delete_package($id)
+  {  
+    $delete_file_pk = DB::table('package_tours')
+    ->where('package_id','=', $id)
+    ->first();
+    $file1 = $delete_file_pk->package_cover;
+    $file2 = $delete_file_pk->package_file;
+    File::delete($file1,$file2);
+
+
+    DB::table('package_tours')
+    ->leftJoin('member_booking_packages','package_tours.package_id','=','member_booking_packages.package_id')
+    ->leftJoin('booking_quotations','package_tours.package_id','=','booking_quotations.package_id')
+    ->leftJoin('package_imgs','package_tours.package_id','=','package_imgs.package_id')
+    ->where('package_tours.package_id','=',$id)
+    ->delete();
+
+    return redirect()->back()->with('success', "ลบข้อมูลเรียบร้อยแล้ว");
   }
 
 }
