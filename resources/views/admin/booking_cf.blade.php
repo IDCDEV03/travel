@@ -85,7 +85,8 @@
                         <span class="badge bg-warning txt-dark">รอเสนอราคา</span></h5>
                         @elseif ($item->booking_status == '1')
                         <h5><span class="badge bg-info">
-                            ส่งใบเสนอราคาแล้ว
+                            ส่งใบเสนอราคาแล้ว 
+                            <a href=""> >> คลิกเพื่อตรวจสอบใบเสนอราคา</a>
                         </span></h5>
                         @elseif ($item->booking_status == '2')
                         <h5><span class="badge bg-danger f-w-100">
